@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <_PropertySheetDisplayName>Common Project Properties</_PropertySheetDisplayName>
+    <OutDir>..\build\$(PlatformName)\$(Configuration)\</OutDir>
+    <IntDir>..\build\$(PlatformName)\$(Configuration)\intermediate\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_USE_32BIT_TIME_T;GLEW_NO_GLU;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(SolutionDir)/libs/boehmgc/include;$(SolutionDir)/libs/curl/include;$(SolutionDir)/libs/dxsdk/include;$(SolutionDir)/libs/oggvorbis/ogg/include;$(SolutionDir)/libs/oggvorbis/vorbis/include;$(SolutionDir)/libs/openal/include;$(SolutionDir)/libs/glew/include;$(SolutionDir)/idlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)/libs/boehmgc/lib;$(SolutionDir)/libs/curl/lib;$(SolutionDir)/libs/dxsdk/lib;$(SolutionDir)/libs/oggvorbis/ogg/lib;$(SolutionDir)/libs/oggvorbis/vorbis/lib;$(SolutionDir)/libs/openal/lib;$(SolutionDir)/libs/glew/lib%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>gcmt-lib.lib;dinput8.lib;dsound.lib;dxguid.lib;DxErr.lib;libogg.lib;libvorbis.lib;libvorbisfile.lib;eaxguid.lib;glew32s.lib;curl_static.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+</Project>

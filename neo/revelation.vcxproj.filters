@@ -1,0 +1,1193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="CM">
+      <UniqueIdentifier>{0b350a6a-58d3-441e-bdcf-1115ff7edc1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{f5d345cb-9f26-4da2-9ef1-335e871dcce5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Async">
+      <UniqueIdentifier>{78d0b2e7-608c-46f4-8945-a3fbf061ccae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{19b363f5-76a7-4256-b7f0-7a6ec012d09d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{2b6b512d-2388-41b9-8880-402e156ec20b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sys">
+      <UniqueIdentifier>{8672dd57-2df1-454a-be5e-1ea2d6647cef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sys\RC">
+      <UniqueIdentifier>{c4397186-0c42-4057-82b4-17dea14c173f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sys\RC\res">
+      <UniqueIdentifier>{900f9550-2a58-4b22-82a9-298f01f6ac51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ui">
+      <UniqueIdentifier>{b3166d25-0562-49da-bc8d-961006fe1785}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sys\win32">
+      <UniqueIdentifier>{9548d039-a390-42c0-bf6d-d0c341f782a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Compilers">
+      <UniqueIdentifier>{5c0e0832-1b53-4db8-966b-57f9d7516af9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Compilers\Dmap">
+      <UniqueIdentifier>{a6972d59-f924-47cb-9f41-af07713bb3c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Compilers\Renderbump">
+      <UniqueIdentifier>{921ad176-1505-4512-b1a8-5f183da177f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Compilers\Roqvq">
+      <UniqueIdentifier>{1df5c5ae-b737-49e0-b43e-5f86eb443125}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Compilers\AAS">
+      <UniqueIdentifier>{598f7aa5-8c68-4adc-abcf-eb23721a6418}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editors">
+      <UniqueIdentifier>{644b9f2c-a02d-4cfc-89e4-5e8a7b7ad740}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Jpeg9a">
+      <UniqueIdentifier>{5cfc3a7c-a206-4a41-ab6b-c1f85f893f96}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cm\CollisionModel.h">
+      <Filter>CM</Filter>
+    </ClInclude>
+    <ClInclude Include="cm\CollisionModel_local.h">
+      <Filter>CM</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\BuildDefines.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\BuildVersion.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\CmdSystem.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Common.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Compressor.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Console.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\CVarSystem.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\DeclAF.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\DeclEntityDef.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\DeclFX.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\DeclManager.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\DeclParticle.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\DeclPDA.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\DeclSkin.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\DeclTable.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\DemoChecksum.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\DemoFile.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\EditField.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\EventLoop.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\File.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\FileSystem.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\KeyInput.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Licensee.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Session.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Session_local.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\Unzip.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\UsercmdGen.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\async\AsyncClient.h">
+      <Filter>Framework\Async</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\async\AsyncNetwork.h">
+      <Filter>Framework\Async</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\async\AsyncServer.h">
+      <Filter>Framework\Async</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\async\MsgChannel.h">
+      <Filter>Framework\Async</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\async\NetworkSystem.h">
+      <Filter>Framework\Async</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\async\ServerScan.h">
+      <Filter>Framework\Async</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\Cinematic.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\GuiModel.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\Image.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\Interaction.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\Material.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\MegaTexture.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\Model.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\Model_ase.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\Model_local.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\Model_lwo.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\Model_ma.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\Model_md3.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\ModelDecal.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\ModelManager.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\ModelOverlay.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\RenderSystem.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\RenderWorld.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\RenderWorld_local.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\simplex.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\tr_local.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\VertexCache.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="sound\snd_local.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="sound\sound.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="sys\sys_local.h">
+      <Filter>Sys</Filter>
+    </ClInclude>
+    <ClInclude Include="sys\sys_public.h">
+      <Filter>Sys</Filter>
+    </ClInclude>
+    <ClInclude Include="sys\win32\rc\doom_resource.h">
+      <Filter>Sys\RC</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\BindWindow.h">
+      <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\ChoiceWindow.h">
+      <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\DeviceContext.h">
+      <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\EditWindow.h">
+      <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\FieldWindow.h">
+      <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\GameBearShootWindow.h">
+      <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\GameBustOutWindow.h">
+      <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\GameSSDWindow.h">
+      <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\GuiScript.h">
+      <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\ListGUI.h">
+      <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\ListGUILocal.h">
+      <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\ListWindow.h">
+      <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\MarkerWindow.h">
+      <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\Rectangle.h">
+      <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\RegExp.h">
+      <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\RenderWindow.h">
+      <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\SimpleWindow.h">
+      <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\SliderWindow.h">
+      <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\UserInterface.h">
+      <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\UserInterfaceLocal.h">
+      <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\Window.h">
+      <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\Winvar.h">
+      <Filter>Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="sys\win32\win_local.h">
+      <Filter>Sys\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="sys\sys_defines.h">
+      <Filter>Sys</Filter>
+    </ClInclude>
+    <ClInclude Include="compilers\dmap\dmap.h">
+      <Filter>Compilers\Dmap</Filter>
+    </ClInclude>
+    <ClInclude Include="compilers\aas\Brush.h">
+      <Filter>Compilers\AAS</Filter>
+    </ClInclude>
+    <ClInclude Include="compilers\aas\BrushBSP.h">
+      <Filter>Compilers\AAS</Filter>
+    </ClInclude>
+    <ClInclude Include="compilers\aas\AASBuild_local.h">
+      <Filter>Compilers\AAS</Filter>
+    </ClInclude>
+    <ClInclude Include="compilers\aas\AASCluster.h">
+      <Filter>Compilers\AAS</Filter>
+    </ClInclude>
+    <ClInclude Include="compilers\aas\AASFile.h">
+      <Filter>Compilers\AAS</Filter>
+    </ClInclude>
+    <ClInclude Include="compilers\aas\AASFile_local.h">
+      <Filter>Compilers\AAS</Filter>
+    </ClInclude>
+    <ClInclude Include="compilers\aas\AASFileManager.h">
+      <Filter>Compilers\AAS</Filter>
+    </ClInclude>
+    <ClInclude Include="compilers\aas\AASReach.h">
+      <Filter>Compilers\AAS</Filter>
+    </ClInclude>
+    <ClInclude Include="compilers\roqvq\codec.h">
+      <Filter>Compilers\Roqvq</Filter>
+    </ClInclude>
+    <ClInclude Include="compilers\roqvq\gdefs.h">
+      <Filter>Compilers\Roqvq</Filter>
+    </ClInclude>
+    <ClInclude Include="compilers\roqvq\quaddefs.h">
+      <Filter>Compilers\Roqvq</Filter>
+    </ClInclude>
+    <ClInclude Include="compilers\roqvq\roq.h">
+      <Filter>Compilers\Roqvq</Filter>
+    </ClInclude>
+    <ClInclude Include="compilers\roqvq\roqParam.h">
+      <Filter>Compilers\Roqvq</Filter>
+    </ClInclude>
+    <ClInclude Include="editors\edit_public.h">
+      <Filter>Editors</Filter>
+    </ClInclude>
+    <ClInclude Include="sys\win32\win_nanoafx.h">
+      <Filter>Sys\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\jpeg9a\jconfig.h">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\jpeg9a\jdct.h">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\jpeg9a\jerror.h">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\jpeg9a\jinclude.h">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\jpeg9a\jmemsys.h">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\jpeg9a\jmorecfg.h">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\jpeg9a\jpegint.h">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\jpeg9a\jpeglib.h">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\jpeg9a\jversion.h">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClInclude>
+    <ClInclude Include="sys\win32\win_qgl.h">
+      <Filter>Sys\win32</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cm\CollisionModel_contacts.cpp">
+      <Filter>CM</Filter>
+    </ClCompile>
+    <ClCompile Include="cm\CollisionModel_contents.cpp">
+      <Filter>CM</Filter>
+    </ClCompile>
+    <ClCompile Include="cm\CollisionModel_debug.cpp">
+      <Filter>CM</Filter>
+    </ClCompile>
+    <ClCompile Include="cm\CollisionModel_files.cpp">
+      <Filter>CM</Filter>
+    </ClCompile>
+    <ClCompile Include="cm\CollisionModel_load.cpp">
+      <Filter>CM</Filter>
+    </ClCompile>
+    <ClCompile Include="cm\CollisionModel_rotate.cpp">
+      <Filter>CM</Filter>
+    </ClCompile>
+    <ClCompile Include="cm\CollisionModel_trace.cpp">
+      <Filter>CM</Filter>
+    </ClCompile>
+    <ClCompile Include="cm\CollisionModel_translate.cpp">
+      <Filter>CM</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\CmdSystem.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Common.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Compressor.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Console.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\CVarSystem.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\DeclAF.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\DeclEntityDef.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\DeclFX.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\DeclManager.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\DeclParticle.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\DeclPDA.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\DeclSkin.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\DeclTable.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\DemoFile.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\EditField.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\EventLoop.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\File.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\FileSystem.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\KeyInput.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Session.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Session_menu.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\Unzip.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\UsercmdGen.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\async\AsyncClient.cpp">
+      <Filter>Framework\Async</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\async\AsyncNetwork.cpp">
+      <Filter>Framework\Async</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\async\AsyncServer.cpp">
+      <Filter>Framework\Async</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\async\MsgChannel.cpp">
+      <Filter>Framework\Async</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\async\NetworkSystem.cpp">
+      <Filter>Framework\Async</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\async\ServerScan.cpp">
+      <Filter>Framework\Async</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\Cinematic.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\draw_common.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\GuiModel.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\Image_files.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\Image_init.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\Image_load.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\Image_process.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\Image_program.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\Interaction.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\Material.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\MegaTexture.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\Model.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\Model_ase.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\Model_beam.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\Model_liquid.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\Model_lwo.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\Model_ma.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\Model_md3.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\Model_md5.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\Model_prt.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\Model_sprite.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\ModelDecal.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\ModelManager.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\ModelOverlay.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\RenderEntity.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\RenderSystem.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\RenderSystem_init.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\RenderWorld.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\RenderWorld_demo.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\RenderWorld_load.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\RenderWorld_portals.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\tr_backend.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\tr_deform.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\tr_font.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\tr_guisurf.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\tr_light.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\tr_lightrun.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\tr_main.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\tr_polytope.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\tr_render.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\tr_rendertools.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\tr_shadowbounds.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\tr_stencilshadow.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\tr_subview.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\tr_trace.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\tr_trisurf.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\tr_turboshadow.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\VertexCache.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="sound\snd_cache.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="sound\snd_decoder.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="sound\snd_efxfile.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="sound\snd_emitter.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="sound\snd_shader.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="sound\snd_system.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="sound\snd_wavefile.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="sound\snd_world.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="sys\sys_local.cpp">
+      <Filter>Sys</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\BindWindow.cpp">
+      <Filter>Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\ChoiceWindow.cpp">
+      <Filter>Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\DeviceContext.cpp">
+      <Filter>Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\EditWindow.cpp">
+      <Filter>Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\FieldWindow.cpp">
+      <Filter>Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\GameBearShootWindow.cpp">
+      <Filter>Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\GameBustOutWindow.cpp">
+      <Filter>Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\GameSSDWindow.cpp">
+      <Filter>Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\GuiScript.cpp">
+      <Filter>Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\ListGUI.cpp">
+      <Filter>Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\ListWindow.cpp">
+      <Filter>Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\MarkerWindow.cpp">
+      <Filter>Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\RegExp.cpp">
+      <Filter>Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\RenderWindow.cpp">
+      <Filter>Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\SimpleWindow.cpp">
+      <Filter>Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\SliderWindow.cpp">
+      <Filter>Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\UserInterface.cpp">
+      <Filter>Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\Window.cpp">
+      <Filter>Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\Winvar.cpp">
+      <Filter>Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="idlib\precompiled.cpp" />
+    <ClCompile Include="sys\win32\win_cpu.cpp">
+      <Filter>Sys\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="sys\win32\win_glimp.cpp">
+      <Filter>Sys\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="sys\win32\win_input.cpp">
+      <Filter>Sys\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="sys\win32\win_main.cpp">
+      <Filter>Sys\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="sys\win32\win_net.cpp">
+      <Filter>Sys\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="sys\win32\win_qgl.cpp">
+      <Filter>Sys\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="sys\win32\win_shared.cpp">
+      <Filter>Sys\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="sys\win32\win_snd.cpp">
+      <Filter>Sys\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="sys\win32\win_syscon.cpp">
+      <Filter>Sys\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="sys\win32\win_taskkeyhook.cpp">
+      <Filter>Sys\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="sys\win32\win_wndproc.cpp">
+      <Filter>Sys\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\draw_backend.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\dmap\dmap.cpp">
+      <Filter>Compilers\Dmap</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\dmap\facebsp.cpp">
+      <Filter>Compilers\Dmap</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\dmap\gldraw.cpp">
+      <Filter>Compilers\Dmap</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\dmap\leakfile.cpp">
+      <Filter>Compilers\Dmap</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\dmap\map.cpp">
+      <Filter>Compilers\Dmap</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\dmap\optimize.cpp">
+      <Filter>Compilers\Dmap</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\dmap\output.cpp">
+      <Filter>Compilers\Dmap</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\dmap\portals.cpp">
+      <Filter>Compilers\Dmap</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\dmap\shadowopt.cpp">
+      <Filter>Compilers\Dmap</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\dmap\tritjunction.cpp">
+      <Filter>Compilers\Dmap</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\dmap\tritools.cpp">
+      <Filter>Compilers\Dmap</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\dmap\ubrush.cpp">
+      <Filter>Compilers\Dmap</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\dmap\usurface.cpp">
+      <Filter>Compilers\Dmap</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\aas\Brush.cpp">
+      <Filter>Compilers\AAS</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\aas\BrushBSP.cpp">
+      <Filter>Compilers\AAS</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\aas\AASBuild.cpp">
+      <Filter>Compilers\AAS</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\aas\AASBuild_file.cpp">
+      <Filter>Compilers\AAS</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\aas\AASBuild_gravity.cpp">
+      <Filter>Compilers\AAS</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\aas\AASBuild_ledge.cpp">
+      <Filter>Compilers\AAS</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\aas\AASBuild_merge.cpp">
+      <Filter>Compilers\AAS</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\aas\AASCluster.cpp">
+      <Filter>Compilers\AAS</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\aas\AASFile.cpp">
+      <Filter>Compilers\AAS</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\aas\AASFile_optimize.cpp">
+      <Filter>Compilers\AAS</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\aas\AASFile_sample.cpp">
+      <Filter>Compilers\AAS</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\aas\AASFileManager.cpp">
+      <Filter>Compilers\AAS</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\aas\AASReach.cpp">
+      <Filter>Compilers\AAS</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\roqvq\codec.cpp">
+      <Filter>Compilers\Roqvq</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\roqvq\NSBitmapImageRep.cpp">
+      <Filter>Compilers\Roqvq</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\roqvq\roq.cpp">
+      <Filter>Compilers\Roqvq</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\roqvq\roqParam.cpp">
+      <Filter>Compilers\Roqvq</Filter>
+    </ClCompile>
+    <ClCompile Include="compilers\renderbump\renderbump.cpp">
+      <Filter>Compilers\Renderbump</Filter>
+    </ClCompile>
+    <ClCompile Include="editors\edit_stub.cpp">
+      <Filter>Editors</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jaricom.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jcapimin.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jcapistd.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jcarith.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jccoefct.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jccolor.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jcdctmgr.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jchuff.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jcinit.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jcmainct.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jcmarker.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jcmaster.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jcomapi.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jcparam.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jcprepct.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jcsample.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jctrans.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jdapimin.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jdapistd.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jdarith.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jdatadst.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jdatasrc.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jdcoefct.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jdcolor.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jddctmgr.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jdhuff.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jdinput.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jdmainct.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jdmarker.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jdmaster.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jdmerge.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jdpostct.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jdsample.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jdtrans.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jerror.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jfdctflt.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jfdctfst.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jfdctint.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jidctflt.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jidctfst.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jidctint.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jmemmgr.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jmemnobs.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jquant1.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jquant2.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\jpeg9a\jutils.cpp">
+      <Filter>Renderer\Jpeg9a</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sys\win32\rc\res\BEVEL.BMP">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\BITMAP2.BMP">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\BMP00001.BMP">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\bmp00002.bmp">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\bmp00003.bmp">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\bmp00004.bmp">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\bmp00005.bmp">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\BMP0002.BMP">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\cchsb.bmp">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\ccrgb.bmp">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\dbg_back.bmp">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\dbg_breakpoint.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\dbg_current.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\dbg_currentline.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\dbg_empty.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\dbg_open.bmp">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\dbg_toolbar.bmp">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\DEFTEX.WAL">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\doom.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\ENDCAP.BMP">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\fpoint.cur">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\fxed_link.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\fxed_toolbar.bmp">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\fxeditor.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\GetString.htm">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\guied.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\guied_collapse.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\guied_expand.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\guied_hand.cur">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\guied_nav_visible.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\guied_nav_visibledisabled.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\guied_scripts.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\guied_scripts_white.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\guied_viewer_toolbar.bmp">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\IBEVEL.BMP">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\icon2.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\IENDCAP.BMP">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\logo_sm3dfx.bmp">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\matedtree.bmp">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\MaterialEditor.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\me_disabled_icon.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\me_enabled.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\me_off_icon.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\me_on_icon.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\MEFileToolbar.bmp">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\MEtoolbar.bmp">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\PropTree.rc2">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\Q.BMP">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\qe3.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\Radiant.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\RADIANT3.GIF">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\RadiantDoc.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\shaderbar.bmp">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\shaderdoc.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\shaderframe.ico">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\spliter.cur">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\Toolbar.bmp">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\TOOLBAR1.BMP">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\TOOLBAR2.BMP">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\VIEWDEFA.BMP">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+    <None Include="sys\win32\rc\res\VIEWOPPO.BMP">
+      <Filter>Sys\RC\res</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="sys\win32\rc\doom.rc">
+      <Filter>Sys\RC</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
