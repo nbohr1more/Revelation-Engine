@@ -2078,11 +2078,12 @@ bool idMaterial::Parse(const char *text, const int textLength) {
 			sort = SS_OPAQUE;
 		}
 	}
-	// anything that references _currentRender or _currentDepth will automatically get sort = SS_POST_PROCESS
+	// anything that references _currentRender will automatically get sort = SS_POST_PROCESS
 	// and coverage = MC_TRANSLUCENT
 	for (i = 0; i < numStages; i++) {
 		shaderStage_t	*pStage = &pd->parseStages[i];
-		if (pStage->texture.image == globalImages->currentRenderImage) {
+		if (pStage->texture.image == globalImages->currentRenderImage ||
+			pStage->texture.image == globalImages->currentDepthImage) {
 			if (sort != SS_PORTAL_SKY) {
 				sort = SS_POST_PROCESS;
 				coverage = MC_TRANSLUCENT;
@@ -2091,7 +2092,8 @@ bool idMaterial::Parse(const char *text, const int textLength) {
 		}
 		if (pStage->newStage) {
 			for (int j = 0; j < pStage->newStage->numFragmentProgramImages; j++) {
-				if (pStage->newStage->fragmentProgramImages[j] == globalImages->currentRenderImage) {
+				if (pStage->newStage->fragmentProgramImages[j] == globalImages->currentRenderImage ||
+					pStage->newStage->fragmentProgramImages[j] == globalImages->currentDepthImage) {
 					if (sort != SS_PORTAL_SKY) {
 						sort = SS_POST_PROCESS;
 						coverage = MC_TRANSLUCENT;

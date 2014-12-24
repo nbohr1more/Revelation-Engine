@@ -256,7 +256,6 @@ void	idRenderWorldLocal::WriteLoadMap() {
 /*
 ================
 WriteVisibleDefs
-
 ================
 */
 void	idRenderWorldLocal::WriteVisibleDefs(const viewDef_t *viewDef) {

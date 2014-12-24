@@ -135,7 +135,6 @@ idWeapon::~idWeapon() {
 	delete worldModel.GetEntity();
 }
 
-
 /*
 ================
 idWeapon::Spawn
@@ -1051,7 +1050,6 @@ void idWeapon::SetPushVelocity( const idVec3 &pushVelocity ) {
 	this->pushVelocity = pushVelocity;
 }
 
-
 /***********************************************************************
 
 	State control/player interface
@@ -1374,7 +1372,6 @@ void idWeapon::SetState( const char *statename, int blendFrames ) {
 	idealState = "";
 }
 
-
 /***********************************************************************
 
 	Particles/Effects
@@ -1431,7 +1428,6 @@ void idWeapon::UpdateNozzleFx( void ) {
 	gameRenderWorld->UpdateLightDef( nozzleGlowHandle, &nozzleGlow );
 }
 
-
 /*
 ================
 idWeapon::BloodSplat
@@ -1472,7 +1468,6 @@ bool idWeapon::BloodSplat( float size ) {
 	gameRenderWorld->ProjectOverlay( modelDefHandle, localPlane, mtr );
 	return true;
 }
-
 
 /***********************************************************************
 
@@ -1829,7 +1824,6 @@ void idWeapon::GetWeaponTimeOffsets( float *time, float *scale ) {
 	*time = weaponOffsetTime;
 	*scale = weaponOffsetScale;
 }
-
 
 /***********************************************************************
 
@@ -2973,19 +2967,6 @@ void idWeapon::Event_Melee( void ) {
 		}
 		idThread::ReturnInt( hit );
 		owner->WeaponFireFeedback( &weaponDef->dict );
-		// sikk---> Blood Spray Screen Effect
-		/*
-		if ( g_showBloodSpray.GetBool() ) {
-			if ( GetOwner()->GetCurrentWeapon() == 10 && ( gameLocal.random.RandomFloat() * 0.99999f ) < g_bloodSprayFrequency.GetFloat() && hit )
-				GetOwner()->playerView.AddBloodSpray( g_bloodSprayTime.GetFloat() );
-		}
-		*/
-		// <---sikk
-		////grimm --> adjusted bloodspray stuff for Grimm weaponry
-		//		if ( g_showBloodSpray.GetBool() && spawnArgs.GetBool("ismeleeweapon", false) && hit ) {
-		//				GetOwner()->playerView.AddBloodSpray( g_bloodSprayTime.GetFloat() );
-		//		}
-		////<-- grimm
 		return;
 	}
 	idThread::ReturnInt( 0 );

@@ -290,7 +290,6 @@ void idActivator::Event_Activate( idEntity *activator ) {
 	}
 }
 
-
 /*
 ===============================================================================
 
@@ -516,7 +515,6 @@ void idDamagable::Event_RestoreDamagable( void ) {
 	Show();
 }
 
-
 /*
 ===============================================================================
 
@@ -560,7 +558,6 @@ void idExplodable::Event_Explode( idEntity *activator ) {
 	PostEventMS( &EV_Remove, 2000 );
 	ActivateTargets( activator );
 }
-
 
 /*
 ===============================================================================
@@ -782,7 +779,6 @@ void idForceField::Event_FindTargets( void ) {
 		forceField.Uniform( targets[0].GetEntity()->GetPhysics()->GetOrigin() - GetPhysics()->GetOrigin() );
 	}
 }
-
 
 /*
 ===============================================================================
@@ -1186,7 +1182,6 @@ void idAnimated::Event_LaunchMissiles( const char *projectilename, const char *s
 	ProcessEvent( &EV_LaunchMissilesUpdate, launch, target, numshots - 1, framedelay );
 }
 
-
 /*
 ===============================================================================
 
@@ -1246,7 +1241,6 @@ void idStaticEntity::Restore( idRestoreGame *savefile ) {
 	savefile->ReadInt( fadeStart );
 	savefile->ReadInt( fadeEnd );
 	savefile->ReadBool( runGui );
-	//savefile->ReadSoundShader( sndHum );
 	// grimm --> if this is a spray entity, re-apply the spray
 	if( spawnArgs.GetBool( "SprayObject" ) ) {
 		Spray();
@@ -1291,19 +1285,6 @@ void idStaticEntity::Spawn( void ) {
 	}
 	solid = spawnArgs.GetBool( "solid" );
 	hidden = spawnArgs.GetBool( "hide" );
-	// grim --> used for torches
-	// grimm --> i'm a dumbass, could've just used s_shader
-	/*
-	idStr	snd_idle = spawnArgs.GetString("snd_torchidle");
-	if ( snd_idle.Length() && s_useEnvironmentalSounds.GetBool() ) {
-		sndHum = declManager->FindSound( snd_idle.c_str() );
-
-		if ( sndHum && !hidden ) {
-			StartSoundShader( sndHum, SND_CHANNEL_ANY, 0, false, NULL );
-		}
-	}
-	*/
-	// <-- grimm
 	if( solid && !hidden ) {
 		GetPhysics()->SetContents( CONTENTS_SOLID );
 	} else {
@@ -1417,13 +1398,6 @@ void idStaticEntity::Show( void ) {
 	if( spawnArgs.GetBool( "solid" ) ) {
 		GetPhysics()->SetContents( CONTENTS_SOLID );
 	}
-	// grimm --> if an idle sound was set then use it.
-	/*
-	if ( sndHum ) {
-		StartSoundShader( sndHum, SND_CHANNEL_ANY, 0, false, NULL );
-	}
-	*/
-	// grimm --> if an idle sound was set then use it.
 }
 
 /*
@@ -1489,7 +1463,6 @@ void idStaticEntity::ReadFromSnapshot( const idBitMsgDelta &msg ) {
 	}
 }
 
-
 /*
 ===============================================================================
 
@@ -1497,7 +1470,6 @@ idFuncEmitter
 
 ===============================================================================
 */
-
 
 CLASS_DECLARATION( idStaticEntity, idFuncEmitter )
 EVENT( EV_Activate,				idFuncEmitter::Event_Activate )
@@ -1587,7 +1559,6 @@ void idFuncEmitter::ReadFromSnapshot( const idBitMsgDelta &msg ) {
 	}
 }
 
-
 /*
 ===============================================================================
 
@@ -1595,7 +1566,6 @@ idFuncSplat
 
 ===============================================================================
 */
-
 
 const idEventDef EV_Splat( "<Splat>" );
 CLASS_DECLARATION( idFuncEmitter, idFuncSplat )
@@ -1756,7 +1726,6 @@ void idFuncSmoke::Think( void ) {
 	}
 }
 
-
 /*
 ===============================================================================
 
@@ -1821,7 +1790,6 @@ void idTextEntity::Think( void ) {
 	}
 }
 
-
 /*
 ===============================================================================
 
@@ -1835,7 +1803,6 @@ void idTextEntity::Think( void ) {
 CLASS_DECLARATION( idEntity, idVacuumSeparatorEntity )
 EVENT( EV_Activate,		idVacuumSeparatorEntity::Event_Activate )
 END_CLASS
-
 
 /*
 ================
@@ -1896,7 +1863,6 @@ void idVacuumSeparatorEntity::Event_Activate( idEntity *activator ) {
 	gameLocal.SetPortalState( portal, PS_BLOCK_NONE );
 }
 
-
 /*
 ===============================================================================
 
@@ -1922,7 +1888,6 @@ void idLocationSeparatorEntity::Spawn() {
 	}
 	gameLocal.SetPortalState( portal, PS_BLOCK_LOCATION );
 }
-
 
 /*
 ===============================================================================
@@ -1950,7 +1915,6 @@ void idVacuumEntity::Spawn() {
 	idVec3 org = spawnArgs.GetVector( "origin" );
 	gameLocal.vacuumAreaNum = gameRenderWorld->PointInArea( org );
 }
-
 
 /*
 ===============================================================================
@@ -2176,7 +2140,6 @@ void idBeam::ReadFromSnapshot( const idBitMsgDelta &msg ) {
 	}
 }
 
-
 /*
 ===============================================================================
 
@@ -2238,7 +2201,6 @@ void idLiquid::Event_Touch( idEntity *other, trace_t *trace ) {
 		model->IntersectBounds( other->GetPhysics()->GetBounds().Translate( pos ), -10.0f );
 	*/
 }
-
 
 /*
 ===============================================================================
@@ -2461,7 +2423,6 @@ void idEarthQuake::Event_Activate( idEntity *activator ) {
 	}
 }
 
-
 /*
 ===============
 idEarthQuake::Think
@@ -2670,8 +2631,6 @@ void idFuncAASObstacle::Event_Activate( idEntity *activator ) {
 	gameLocal.SetAASAreaState( GetPhysics()->GetAbsBounds(), AREACONTENTS_OBSTACLE, state );
 }
 
-
-
 /*
 ===============================================================================
 
@@ -2681,7 +2640,6 @@ idFuncRadioChatter
 */
 
 const idEventDef EV_ResetRadioHud( "<resetradiohud>", "e" );
-
 
 CLASS_DECLARATION( idEntity, idFuncRadioChatter )
 EVENT( EV_Activate,				idFuncRadioChatter::Event_Activate )
@@ -2761,7 +2719,6 @@ void idFuncRadioChatter::Event_ResetRadioHud( idEntity *activator ) {
 	player->hud->HandleNamedEvent( "radioChatterDown" );
 	ActivateTargets( activator );
 }
-
 
 /*
 ===============================================================================

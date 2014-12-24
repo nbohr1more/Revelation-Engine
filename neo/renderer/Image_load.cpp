@@ -508,8 +508,6 @@ void idImage::GenerateImage(const byte *pic, int width, int height, textureFilte
 		memcpy(scaledBuffer, pic, width * height * 4);
 	}
 	else {
-		// resample down as needed (FIXME: this doesn't seem like it resamples anymore!)
-		// scaledBuffer = R_ResampleTexture( pic, width, height, width >>= 1, height >>= 1 );
 		scaledBuffer = R_MipMap(pic, width, height, preserveBorder);
 		width >>= 1;
 		height >>= 1;
@@ -1610,7 +1608,7 @@ void idImage::CopyFramebuffer(int x, int y, int imageWidth, int imageHeight, boo
 			byte *imageBuffer;
 			// we need to create a dummy image with power of two dimensions,
 			// then do a glCopyTexSubImage2D of the data we want
-			// this might be a 16+ meg allocation, which could fail on _alloca8
+			// this might be a 16+ meg allocation, which could fail on _alloca
 			imageBuffer = (byte *)Mem_Alloc(potWidth * potHeight * 4);
 			memset(imageBuffer, 0, potWidth * potHeight * 4);		//!@#
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, potWidth, potHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageBuffer);
@@ -1619,7 +1617,7 @@ void idImage::CopyFramebuffer(int x, int y, int imageWidth, int imageHeight, boo
 		}
 	}
 	else {
-		// otherwise, just subimage upload it so that drivers can tell we are going to be changing
+		// otherwise, just subimage upload it so that drivers can tell if we are going to be changing
 		// it and don't try and do a texture compression or some other silliness
 		glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, x, y, imageWidth, imageHeight);
 	}
@@ -1648,8 +1646,6 @@ void idImage::CopyDepthbuffer(int x, int y, int imageWidth, int imageHeight, boo
 	int	potWidth, potHeight;
 	IMAGE_ROUND_POWER2(imageWidth, potWidth);
 	IMAGE_ROUND_POWER2(imageHeight, potHeight);
-	GetDownsize(imageWidth, imageHeight);
-	GetDownsize(potWidth, potHeight);
 	// Ensure we are reading from the back buffer
 	glReadBuffer(GL_BACK);
 	// only resize if the current dimensions can't hold it at all,
@@ -1657,29 +1653,25 @@ void idImage::CopyDepthbuffer(int x, int y, int imageWidth, int imageHeight, boo
 	if ((useOversizedBuffer && (uploadWidth < potWidth || uploadHeight < potHeight)) || (!useOversizedBuffer && (uploadWidth != potWidth || uploadHeight != potHeight))) {
 		uploadWidth = potWidth;
 		uploadHeight = potHeight;
-		// This bit runs once only at map start, because it tests whether the image is too small to hold the screen.
-		// It resizes the texture to a power of two that can hold the screen,
-		// and then subsequent captures to the texture put the depth component into the RGB channels: (steveL)
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24_ARB, potWidth, potHeight, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
-		glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, x, y, imageWidth, imageHeight);
+		if (potWidth == imageWidth && potHeight == imageHeight) {
+			glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, x, y, imageWidth, imageHeight, NULL);
+		} else {
+			// This bit runs once only at map start, because it tests whether the image is too small to hold the screen.
+			// It resizes the texture to a power of two that can hold the screen,
+			// and then subsequent captures to the texture put the depth component into the RGB channels: (steveL)
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24_ARB, potWidth, potHeight, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
+			glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, x, y, imageWidth, imageHeight);
+		}
 	}
 	else {
-		// otherwise, just subimage upload it so that drivers can tell we are going to be changing
+		// otherwise, just subimage upload it so that drivers can tell if we are going to be changing
 		// it and don't try and do a texture compression or some other silliness.
 		glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, x, y, imageWidth, imageHeight);
 	}
-	// if the image isn't a full power of two, duplicate an extra row and/or column to fix bilerps
-	if (imageWidth != potWidth) {
-		glCopyTexSubImage2D(GL_TEXTURE_2D, 0, imageWidth, 0, x + imageWidth - 1, y, 1, imageHeight);
-	}
-	if (imageHeight != potHeight) {
-		glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, imageHeight, x, y + imageHeight - 1, imageWidth, 1);
-	}
-	// since this is grayscale no need to use linear.
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	backEnd.c_copyDepthBuffer++;
 }
 

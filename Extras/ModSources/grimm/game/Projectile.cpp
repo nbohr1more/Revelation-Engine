@@ -14,7 +14,6 @@
 ===============================================================================
 */
 
-
 static const int BFG_DAMAGE_FREQUENCY			= 333;
 static const float BOUNCE_SOUND_MIN_VELOCITY	= 200.0f;
 static const float BOUNCE_SOUND_MAX_VELOCITY	= 400.0f;
@@ -409,8 +408,6 @@ idProjectile::Collide
 bool idProjectile::Collide( const trace_t &collision, const idVec3 &velocity ) {
 	idEntity	*ent;
 	idEntity	*ignore;
-	// grimm --> moved to entity scope.
-	// const char	*damageDefName;
 	idVec3		dir;
 	float		push;
 	float		damageScale;
@@ -1190,7 +1187,6 @@ void idGuidedProjectile::Restore( idRestoreGame *savefile ) {
 	savefile->ReadFloat( burstVelocity );
 }
 
-
 /*
 ================
 idGuidedProjectile::GetSeekPos
@@ -1310,7 +1306,6 @@ void idGuidedProjectile::Launch( const idVec3 &start, const idVec3 &dir, const i
 	burstVelocity = spawnArgs.GetFloat( "burstVelocity", "1.25" );
 	UpdateVisuals();
 }
-
 
 /*
 ===============================================================================
@@ -1477,7 +1472,6 @@ void idSoulCubeMissile::GetSeekPos( idVec3 &out ) {
 	idGuidedProjectile::GetSeekPos( out );
 }
 
-
 /*
 ================
 idSoulCubeMissile::Event_ReturnToOwner
@@ -1489,7 +1483,6 @@ void idSoulCubeMissile::ReturnToOwner() {
 	returnPhase = true;
 	smokeFlyTime = 0;
 }
-
 
 /*
 =================
@@ -1524,7 +1517,6 @@ void idSoulCubeMissile::Launch( const idVec3 &start, const idVec3 &dir, const id
 	}
 }
 
-
 /*
 ===============================================================================
 
@@ -1537,7 +1529,6 @@ const idEventDef EV_RemoveBeams( "<removeBeams>", NULL );
 CLASS_DECLARATION( idProjectile, idBFGProjectile )
 EVENT( EV_RemoveBeams,		idBFGProjectile::Event_RemoveBeams )
 END_CLASS
-
 
 /*
 =================
@@ -1871,7 +1862,6 @@ void idBFGProjectile::Explode( const trace_t &collision, idEntity *ignore ) {
 	return idProjectile::Explode( collision, ignore );
 }
 
-
 /*
 ===============================================================================
 
@@ -2132,7 +2122,6 @@ bool idDebris::Collide( const trace_t &collision, const idVec3 &velocity ) {
 	// <-- grimm
 	return false;
 }
-
 
 /*
 ================

@@ -178,6 +178,36 @@ FILL DEPTH BUFFER
 */
 
 /*
+=====================
+RB_T_CopyDepthBuffer
+
+Create a depth copy of the entire map.
+=====================
+*/
+static void RB_T_CopyDepthBuffer(const viewDef_t *viewDef) {
+	// Wooh mama this is sooooooooooo sloooooooooow mblgrblrblr.
+	for (viewEntity_t *viewEnt = viewDef->viewEntitys; viewEnt; viewEnt = viewEnt->next) {
+		idRenderEntityLocal *ent = viewEnt->entityDef;
+		// copy once update on change.
+		if (backEnd.currentDepthCopied) {
+			continue;
+		}
+		// check if depth view is suppressed -8 in case of sikkmod.
+		if (!ent->parms.suppressSurfaceInViewID && (ent->parms.suppressSurfaceInViewID != viewDef->renderView.viewID)) {
+			globalImages->currentDepthImage->CopyDepthbuffer(
+				backEnd.viewDef->viewport.x1,
+				backEnd.viewDef->viewport.y1,
+				backEnd.viewDef->viewport.x2 -
+				backEnd.viewDef->viewport.x1 + 1,
+				backEnd.viewDef->viewport.y2 -
+				backEnd.viewDef->viewport.y1 + 1, true);
+		}
+		// refresh status.
+		backEnd.currentDepthCopied = true;
+	}
+}
+
+/*
 ==================
 RB_T_FillDepthBuffer
 ==================
@@ -228,13 +258,15 @@ static void RB_T_FillDepthBuffer(const drawSurf_t *surf) {
 	if (stage == shader->GetNumStages()) {
 		return;
 	}
+	// Early copy off depth buffer.
+	RB_T_CopyDepthBuffer(backEnd.viewDef);
 	// set polygon offset if necessary
 	if (shader->TestMaterialFlag(MF_POLYGONOFFSET)) {
 		glEnable(GL_POLYGON_OFFSET_FILL);
 		glPolygonOffset(r_offsetFactor.GetFloat(), r_offsetUnits.GetFloat() * shader->GetPolygonOffset());
 	}
 	// subviews will just down-modulate the color buffer by overbright
-	float color[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+	float color[4];
 	if (shader->GetSort() == SS_SUBVIEW) {
 		GL_State(GLS_SRCBLEND_DST_COLOR | GLS_DSTBLEND_ZERO | GLS_DEPTHFUNC_LESS);
 		color[0] = (1.0f / backEnd.overBright);
@@ -345,17 +377,6 @@ static void RB_STD_FillDepthBuffer(drawSurf_t **drawSurfs, int numDrawSurfs) {
 	glEnable(GL_STENCIL_TEST);
 	glStencilFunc(GL_ALWAYS, 1, 255);
 	RB_RenderDrawSurfListWithFunction(drawSurfs, numDrawSurfs, RB_T_FillDepthBuffer);
-	// Make the early depth pass available to shaders. #3877
-	if(	backEnd.viewDef->renderView.viewID >= 0) {
-		globalImages->currentDepthImage->CopyDepthbuffer(
-		backEnd.viewDef->viewport.x1,
-		backEnd.viewDef->viewport.y1,
-		backEnd.viewDef->viewport.x2 -
-		backEnd.viewDef->viewport.x1 + 1,
-		backEnd.viewDef->viewport.y2 -
-		backEnd.viewDef->viewport.y1 + 1, true);
-		RB_SetProgramEnvironment();
-	}
 	if (backEnd.viewDef->numClipPlanes) {
 		GL_SelectTexture(1);
 		globalImages->BindNull();
@@ -404,23 +425,21 @@ void RB_SetProgramEnvironment(void) {
 	parm[2] = 0.0f;
 	parm[3] = 1.0f;
 	glProgramEnvParameter4fvARB(GL_FRAGMENT_PROGRAM_ARB, 1, parm);
-	// screen power of two correction factor, assuming the copy to _currentDepth
-	// also copied an extra row and column for the bilerp
-	int	 nw = backEnd.viewDef->viewport.x2 - backEnd.viewDef->viewport.x1 + 1;
-	npot = globalImages->currentDepthImage->uploadWidth;
-	parm[0] = (float)nw / pot;
-	int	 nh = backEnd.viewDef->viewport.y2 - backEnd.viewDef->viewport.y1 + 1;
-	npot = globalImages->currentDepthImage->uploadHeight;
-	parm[1] = (float)nh / pot;
-	parm[2] = 0.0f;
-	parm[3] = 1.0f;
-	glProgramEnvParameter4fvARB(GL_FRAGMENT_PROGRAM_ARB, 4, parm);
 	// set eye position in global space
 	parm[0] = backEnd.viewDef->renderView.vieworg[0];
 	parm[1] = backEnd.viewDef->renderView.vieworg[1];
 	parm[2] = backEnd.viewDef->renderView.vieworg[2];
 	parm[3] = 1.0f;
 	glProgramEnvParameter4fvARB(GL_VERTEX_PROGRAM_ARB, 1, parm);
+	// depth buffer image
+	npot = globalImages->currentRenderImage->uploadWidth;
+	parm[0] = (float)w / npot;
+	npot = globalImages->currentRenderImage->uploadHeight;
+	parm[1] = (float)h / npot;
+	parm[2] = 0.0f;
+	parm[3] = 1.0f;
+	glProgramEnvParameter4fvARB(GL_VERTEX_PROGRAM_ARB, 4, parm);
+	glProgramEnvParameter4fvARB(GL_FRAGMENT_PROGRAM_ARB, 4, parm);
 }
 
 /*
@@ -642,9 +661,9 @@ static void RB_STD_T_RenderShaderPasses(const drawSurf_t *surf) {
 	if (r_useScissor.GetBool() && !backEnd.currentScissor.Equals(surf->scissorRect)) {
 		backEnd.currentScissor = surf->scissorRect;
 		GL_Scissor(backEnd.viewDef->viewport.x1 + backEnd.currentScissor.x1,
-			backEnd.viewDef->viewport.y1 + backEnd.currentScissor.y1,
-			backEnd.currentScissor.x2 + 1 - backEnd.currentScissor.x1,
-			backEnd.currentScissor.y2 + 1 - backEnd.currentScissor.y1);
+		backEnd.viewDef->viewport.y1 + backEnd.currentScissor.y1,
+		backEnd.currentScissor.x2 + 1 - backEnd.currentScissor.x1,
+		backEnd.currentScissor.y2 + 1 - backEnd.currentScissor.y1);
 	}
 	// some deforms may disable themselves by setting numIndexes = 0
 	if (!tri->numIndexes) {
@@ -711,7 +730,7 @@ Draw non-light dependent passes
 =====================
 */
 static int RB_STD_DrawShaderPasses(drawSurf_t **drawSurfs, int numDrawSurfs) {
-	int	shaderPasses;
+	int		shaderPasses;
 	// only obey skipAmbient if we are rendering a view
 	if (backEnd.viewDef->viewEntitys && r_skipAmbient.GetBool()) {
 		return numDrawSurfs;
@@ -867,9 +886,11 @@ static void RB_T_Shadow(const drawSurf_t *surf) {
 		glEnable(GL_STENCIL_TEST);
 		return;
 	}
-	// Moved depthbounds test here
-	if (r_useDepthBoundsTest.GetBool()) {
+	// Moved depthbounds test here and made code for using depth clamp if disabled
+	if (r_useDepthBoundsTest.GetBool() && glConfig.depthBoundsTestAvailable) {
 		GL_DepthBoundsTest(surf->scissorRect.zmin, surf->scissorRect.zmax);
+	} else if (glConfig.depthClampAvailable) {
+		glEnable(GL_DEPTH_CLAMP);
 	}
 	// patent-free work arounds
 	if (glConfig.gl2TwoSidedStencilAvailable && r_useTwoSidedStencil.GetBool()) {
@@ -935,8 +956,10 @@ static void RB_T_Shadow(const drawSurf_t *surf) {
 	}
 	GL_Cull(CT_FRONT_SIDED);
 	// Moved depthbounds test here
-	if (r_useDepthBoundsTest.GetBool()) {
+	if (r_useDepthBoundsTest.GetBool() && glConfig.depthBoundsTestAvailable) {
 		GL_DepthBoundsTest(0.0f, 0.0f);
+	} else if (glConfig.depthClampAvailable) {
+		glDisable(GL_DEPTH_CLAMP);
 	}
 }
 

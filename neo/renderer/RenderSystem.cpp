@@ -774,7 +774,7 @@ void idRenderSystemLocal::CaptureDepthToImage(const char *imageName) {
 	}
 	// look up the image before we create the depth command, because it
 	// may need to sync to create the image
-	idImage				*image = globalImages->ImageFromFile(imageName, TF_DEFAULT, true, TR_REPEAT, TD_SPECULAR);
+	idImage				*image = globalImages->ImageFromFile(imageName, TF_LINEAR, false, TR_CLAMP_TO_BORDER, TD_HIGH_QUALITY);
 	renderCrop_t		*rc = &renderCrops[currentRenderCrop];
 	copyRenderCommand_t *cmd = (copyRenderCommand_t *)R_GetCommandBuffer(sizeof(*cmd));
 	cmd->commandId = RC_COPY_DEPTH;

@@ -336,7 +336,6 @@ public:
 
 	void					Process(const renderView_t *view);
 	void					CaptureCurrentRender();
-	void					CaptureCurrentDepth();
 	void					Blendback(float alpha);
 
 	idVec2					GetShiftScale()			{

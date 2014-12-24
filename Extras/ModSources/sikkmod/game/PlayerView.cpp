@@ -326,18 +326,6 @@ void idPlayerView::AddBloodSpray(float duration) {
 	float s2 = 1.0f;
 	float t2 = 1.0f;
 	// sikk---> No more drifting
-	/*	if ( blob->driftAmount < 0.6 ) {
-			s1 = 1.0f;
-			s2 = 0.0f;
-			} else if ( blob->driftAmount < 0.75 ) {
-			t1 = 1.0f;
-			t2 = 0.0f;
-			} else if ( blob->driftAmount < 0.85 ) {
-			s1 = 1.0f;
-			s2 = 0.0f;
-			t1 = 1.0f;
-			t2 = 0.0f;
-			}*/
 	float f = gameLocal.random.CRandomFloat();
 	if (f < 0.25) {
 		s1 = 1.0f;
@@ -691,8 +679,8 @@ void idPlayerView::RenderDepth(bool bCrop) {
 		player->ToggleSuppression(true);
 	}
 	if (bCrop && !bDepthRendered) {
-		int	nWidth = renderSystem->GetScreenWidth() / 2;
-		int	nHeight = renderSystem->GetScreenHeight() / 2;
+		int	nWidth	= MakePowerOfTwo( renderSystem->GetScreenWidth() );
+		int	nHeight	= MakePowerOfTwo( renderSystem->GetScreenHeight() );
 		renderSystem->CropRenderSize(nWidth, nHeight, true);
 		// set our depthView parms
 		renderView_t depthView = hackedView;
@@ -701,7 +689,8 @@ void idPlayerView::RenderDepth(bool bCrop) {
 		// render scene
 		gameRenderWorld->RenderScene(&depthView);
 		// capture image for our depth buffer
-		renderSystem->CaptureRenderToImage("_depth");
+		//renderSystem->CaptureRenderToImage("_depth");
+		renderSystem->CaptureDepthToImage("_depth");
 		renderSystem->UnCrop();
 		bDepthRendered = true;
 	}
@@ -713,7 +702,8 @@ void idPlayerView::RenderDepth(bool bCrop) {
 		// render scene
 		gameRenderWorld->RenderScene(&depthView);
 		// capture image for our depth buffer
-		renderSystem->CaptureRenderToImage("_ssDepth");
+		//renderSystem->CaptureRenderToImage("_ssDepth");
+		renderSystem->CaptureDepthToImage("_ssDepth");
 	}
 	// Restore player models
 	if (!player->IsHidden() && !pm_thirdPerson.GetBool() && player->bViewModelsModified) {
@@ -727,8 +717,8 @@ idPlayerView::RenderNormals
 ===================
 */
 void idPlayerView::RenderNormals(bool bFace) {
-	int	nWidth = renderSystem->GetScreenWidth() / 2;
-	int	nHeight = renderSystem->GetScreenHeight() / 2;
+	int	nWidth	= MakePowerOfTwo( renderSystem->GetScreenWidth() );
+	int	nHeight	= MakePowerOfTwo( renderSystem->GetScreenHeight() );
 	if (bFace) {
 		renderSystem->CropRenderSize(nWidth, nHeight, true);
 		renderSystem->SetColor4(g_fov.GetFloat(), 1.0f, 1.0f, bFace);
@@ -1139,8 +1129,8 @@ idPlayerView::PostFX_SSIL
 ===================
 */
 void idPlayerView::PostFX_SSIL() {
-	int	nWidth = renderSystem->GetScreenWidth() / 2.0f;
-	int	nHeight = renderSystem->GetScreenHeight() / 2.0f;
+	int	nWidth	= MakePowerOfTwo( renderSystem->GetScreenWidth() );
+	int	nHeight	= MakePowerOfTwo( renderSystem->GetScreenHeight() );
 	renderSystem->CaptureRenderToImage("_currentRender");
 	RenderDepth(true);
 	RenderNormals(false);
@@ -1171,8 +1161,8 @@ idPlayerView::PostFX_SSAO
 ===================
 */
 void idPlayerView::PostFX_SSAO() {
-	int	nWidth = renderSystem->GetScreenWidth() / 2.0f;
-	int	nHeight = renderSystem->GetScreenHeight() / 2.0f;
+	int	nWidth	= MakePowerOfTwo( renderSystem->GetScreenWidth() );
+	int	nHeight	= MakePowerOfTwo( renderSystem->GetScreenHeight() );
 	renderSystem->CaptureRenderToImage("_currentRender");
 	RenderDepth(true);
 	renderSystem->CropRenderSize(nWidth, nHeight, true);
@@ -1216,14 +1206,12 @@ void idPlayerView::PostFX_SunShafts() {
 	for (int i = 0; i < 3; i++) {
 		VdotS[i] = viewVector[i] * -sunVector;
 	}
-	//	float sign = VdotS[0];
-	//	VdotS[0] = idMath::ClampFloat( 0.0f, 1.0f, VdotS[0] );
 	idVec3 ndc;
 	renderSystem->GlobalToNormalizedDeviceCoordinates(sunOrigin, ndc);
 	ndc.x = ndc.x * 0.5 + 0.5;
 	ndc.y = ndc.y * 0.5 + 0.5;
-	int	nWidth = renderSystem->GetScreenWidth() / 2.0f;
-	int	nHeight = renderSystem->GetScreenHeight() / 2.0f;
+	int	nWidth	= MakePowerOfTwo( renderSystem->GetScreenWidth() );
+	int	nHeight	= MakePowerOfTwo( renderSystem->GetScreenHeight() );
 	renderSystem->CaptureRenderToImage("_currentRender");
 	RenderDepth(true);
 	renderSystem->CropRenderSize(nWidth, nHeight, true, true);
@@ -1341,8 +1329,8 @@ idPlayerView::PostFX_DoF
 */
 void idPlayerView::PostFX_DoF() {
 	if (DoFConditionCheck()) {
-		int	nWidth = renderSystem->GetScreenWidth() / 2.0f;
-		int	nHeight = renderSystem->GetScreenHeight() / 2.0f;
+		int	nWidth	= MakePowerOfTwo( renderSystem->GetScreenWidth() );
+		int	nHeight	= MakePowerOfTwo( renderSystem->GetScreenHeight() );
 		renderSystem->CaptureRenderToImage("_currentRender");
 		RenderDepth(true);
 		renderSystem->CropRenderSize(nWidth, nHeight, true, true);
@@ -1408,8 +1396,8 @@ void idPlayerView::PostFX_MotionBlur() {
 		renderSystem->CaptureRenderToImage("_prevRender");
 	}
 	if (MBConditionCheck() && (r_useMotionBlur.GetInteger() == 1 || r_useMotionBlur.GetInteger() == 3)) {
-		int	nWidth = renderSystem->GetScreenWidth() / 2.0f;
-		int	nHeight = renderSystem->GetScreenHeight() / 2.0f;
+		int	nWidth	= MakePowerOfTwo( renderSystem->GetScreenWidth() );
+		int	nHeight	= MakePowerOfTwo( renderSystem->GetScreenHeight() );
 		int nQuality = idMath::ClampInt(1, 4, r_motionBlurQuality.GetInteger());
 		float parm[6];
 		parm[0] = player->viewAngles.yaw - prevViewAngles.yaw;
@@ -1479,8 +1467,8 @@ idPlayerView::PostFX_ColorGrading
 ===================
 */
 void idPlayerView::PostFX_ColorGrading() {
-	int	nWidth = renderSystem->GetScreenWidth() / 2.0f;
-	int	nHeight = renderSystem->GetScreenHeight() / 2.0f;
+	int	nWidth	= MakePowerOfTwo( renderSystem->GetScreenWidth() );
+	int	nHeight	= MakePowerOfTwo( renderSystem->GetScreenHeight() );
 	renderSystem->CaptureRenderToImage("_currentRender");
 	// unsharp mask buffer
 	renderSystem->CropRenderSize(nWidth, nHeight, true, true);
@@ -1582,8 +1570,8 @@ idPlayerView::PostFX_AdrenalineVision
 ===================
 */
 void idPlayerView::PostFX_AdrenalineVision() {
-	int	nWidth = renderSystem->GetScreenWidth() / 2.0f;
-	int	nHeight = renderSystem->GetScreenHeight() / 2.0f;
+	int	nWidth	= MakePowerOfTwo( renderSystem->GetScreenWidth() );
+	int	nHeight	= MakePowerOfTwo( renderSystem->GetScreenHeight() );
 	renderSystem->CaptureRenderToImage("_currentRender");
 	// unsharp mask buffer
 	renderSystem->CropRenderSize(nWidth, nHeight, true, true);
@@ -1609,8 +1597,8 @@ idPlayerView::PostFX_DoubleVision
 ===================
 */
 void idPlayerView::PostFX_DoubleVision() {
-	int	nWidth = renderSystem->GetScreenWidth() / 2;
-	int	nHeight = renderSystem->GetScreenHeight() / 2;
+	int	nWidth	= MakePowerOfTwo( renderSystem->GetScreenWidth() );
+	int	nHeight	= MakePowerOfTwo( renderSystem->GetScreenHeight() );
 	int offset = dvFinishTime - gameLocal.time;
 	float scale = (offset * g_dvAmplitude.GetFloat()) > 0.5f ? 0.5f : offset * g_dvAmplitude.GetFloat();
 	float shift = fabs(scale * sin(sqrtf(offset) * g_dvFrequency.GetFloat()));

@@ -98,11 +98,11 @@ public:
 
 	// get space from here, if NULL, it is a pre-generated shadow volume from dmap
 	idRenderEntityLocal 	*entityDef;
-	idRenderLightLocal 	*lightDef;
+	idRenderLightLocal 		*lightDef;
 
 	idInteraction 			*lightNext;				// for lightDef chains
 	idInteraction 			*lightPrev;
-	idInteraction 			*entityNext;				// for entityDef chains
+	idInteraction 			*entityNext;			// for entityDef chains
 	idInteraction 			*entityPrev;
 
 public:

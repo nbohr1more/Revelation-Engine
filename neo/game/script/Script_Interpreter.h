@@ -1,5 +1,30 @@
-// Copyright (C) 2004 Id Software, Inc.
-//
+/*
+===========================================================================
+
+Doom 3 GPL Source Code
+Copyright (C) 1999-2011 id Software LLC, a ZeniMax Media company.
+
+This file is part of the Doom 3 GPL Source Code (?Doom 3 Source Code?).
+
+Doom 3 Source Code is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Doom 3 Source Code is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Doom 3 Source Code.  If not, see <http://www.gnu.org/licenses/>.
+
+In addition, the Doom 3 Source Code is also subject to certain additional terms. You should have received a copy of these additional terms immediately following the terms and conditions of the GNU General Public License which accompanied the Doom 3 Source Code.  If not, please request a copy in writing from id Software at the address below.
+
+If you have questions concerning this license or the applicable additional terms, you may contact in writing id Software LLC, c/o ZeniMax Media Inc., Suite 120, Rockville, Maryland 20850 USA.
+
+===========================================================================
+*/
 
 #ifndef __SCRIPT_INTERPRETER_H__
 #define __SCRIPT_INTERPRETER_H__
@@ -15,11 +40,11 @@ typedef struct prstack_s {
 
 class idInterpreter {
 private:
-	prstack_t			callStack[ MAX_STACK_DEPTH ];
+	prstack_t			callStack[MAX_STACK_DEPTH];
 	int 				callStackDepth;
 	int 				maxStackDepth;
 
-	byte				localstack[ LOCALSTACK_SIZE ];
+	byte				localstack[LOCALSTACK_SIZE];
 	int 				localstackUsed;
 	int 				localstackBase;
 	int 				maxLocalstackUsed;
@@ -33,21 +58,21 @@ private:
 
 	idThread			*thread;
 
-	void				PopParms( int numParms );
-	void				PushString( const char *string );
-	void				Push( int value );
-	const char			*FloatToString( float value );
-	void				AppendString( idVarDef *def, const char *from );
-	void				SetString( idVarDef *def, const char *from );
-	const char			*GetString( idVarDef *def );
-	varEval_t			GetVariable( idVarDef *def );
-	idEntity			*GetEntity( int entnum ) const;
-	idScriptObject		*GetScriptObject( int entnum ) const;
-	void				NextInstruction( int position );
+	void				PopParms(int numParms);
+	void				PushString(const char *string);
+	void				Push(int value);
+	const char			*FloatToString(float value);
+	void				AppendString(idVarDef *def, const char *from);
+	void				SetString(idVarDef *def, const char *from);
+	const char			*GetString(idVarDef *def);
+	varEval_t			GetVariable(idVarDef *def);
+	idEntity			*GetEntity(int entnum) const;
+	idScriptObject		*GetScriptObject(int entnum) const;
+	void				NextInstruction(int position);
 
-	void				LeaveFunction( idVarDef *returnDef );
-	void				CallEvent( const function_t *func, int argsize );
-	void				CallSysEvent( const function_t *func, int argsize );
+	void				LeaveFunction(idVarDef *returnDef);
+	void				CallEvent(const function_t *func, int argsize);
+	void				CallSysEvent(const function_t *func, int argsize);
 
 public:
 	bool				doneProcessing;
@@ -58,37 +83,36 @@ public:
 	idInterpreter();
 
 	// save games
-	void				Save( idSaveGame *savefile ) const;				// archives object for save game file
-	void				Restore( idRestoreGame *savefile );				// unarchives object from save game file
+	void				Save(idSaveGame *savefile) const;				// archives object for save game file
+	void				Restore(idRestoreGame *savefile);				// unarchives object from save game file
 
-	void				SetThread( idThread *pThread );
+	void				SetThread(idThread *pThread);
 
-	void				StackTrace( void ) const;
+	void				StackTrace(void) const;
 
-	int					CurrentLine( void ) const;
-	const char			*CurrentFile( void ) const;
+	int					CurrentLine(void) const;
+	const char			*CurrentFile(void) const;
 
-	void				Error( char *fmt, ... ) const id_attribute( ( format( printf, 2, 3 ) ) );
-	void				Warning( char *fmt, ... ) const id_attribute( ( format( printf, 2, 3 ) ) );
-	void				DisplayInfo( void ) const;
+	void				Error(char *fmt, ...) const id_attribute((format(printf, 2, 3)));
+	void				Warning(char *fmt, ...) const id_attribute((format(printf, 2, 3)));
+	void				DisplayInfo(void) const;
 
-	bool				BeginMultiFrameEvent( idEntity *ent, const idEventDef *event );
-	void				EndMultiFrameEvent( idEntity *ent, const idEventDef *event );
-	bool				MultiFrameEventInProgress( void ) const;
+	bool				BeginMultiFrameEvent(idEntity *ent, const idEventDef *event);
+	void				EndMultiFrameEvent(idEntity *ent, const idEventDef *event);
+	bool				MultiFrameEventInProgress(void) const;
 
-	void				ThreadCall( idInterpreter *source, const function_t *func, int args );
-	void				EnterFunction( const function_t *func, bool clearStack );
-	void				EnterObjectFunction( idEntity *self, const function_t *func, bool clearStack );
+	void				ThreadCall(idInterpreter *source, const function_t *func, int args);
+	void				EnterFunction(const function_t *func, bool clearStack);
+	void				EnterObjectFunction(idEntity *self, const function_t *func, bool clearStack);
 
-	bool				Execute( void );
-	void				Reset( void );
+	bool				Execute(void);
+	void				Reset(void);
 
-	bool				GetRegisterValue( const char *name, idStr &out, int scopeDepth );
-	int					GetCallstackDepth( void ) const;
-	const prstack_t		*GetCallstack( void ) const;
-	const function_t	*GetCurrentFunction( void ) const;
-	idThread			*GetThread( void ) const;
-
+	bool				GetRegisterValue(const char *name, idStr &out, int scopeDepth);
+	int					GetCallstackDepth(void) const;
+	const prstack_t		*GetCallstack(void) const;
+	const function_t	*GetCurrentFunction(void) const;
+	idThread			*GetThread(void) const;
 };
 
 /*
@@ -96,10 +120,10 @@ public:
 idInterpreter::PopParms
 ====================
 */
-ID_INLINE void idInterpreter::PopParms( int numParms ) {
+ID_INLINE void idInterpreter::PopParms(int numParms) {
 	// pop our parms off the stack
-	if( localstackUsed < numParms ) {
-		Error( "locals stack underflow\n" );
+	if (localstackUsed < numParms) {
+		Error("locals stack underflow\n");
 	}
 	localstackUsed -= numParms;
 }
@@ -109,12 +133,12 @@ ID_INLINE void idInterpreter::PopParms( int numParms ) {
 idInterpreter::Push
 ====================
 */
-ID_INLINE void idInterpreter::Push( int value ) {
-	if( localstackUsed + sizeof( int ) > LOCALSTACK_SIZE ) {
-		Error( "Push: locals stack overflow\n" );
+ID_INLINE void idInterpreter::Push(int value) {
+	if (localstackUsed + sizeof(int) > LOCALSTACK_SIZE) {
+		Error("Push: locals stack overflow\n");
 	}
-	*( int * )&localstack[ localstackUsed ]	= value;
-	localstackUsed += sizeof( int );
+	*(int *)&localstack[localstackUsed] = value;
+	localstackUsed += sizeof(int);
 }
 
 /*
@@ -122,11 +146,11 @@ ID_INLINE void idInterpreter::Push( int value ) {
 idInterpreter::PushString
 ====================
 */
-ID_INLINE void idInterpreter::PushString( const char *string ) {
-	if( localstackUsed + MAX_STRING_LEN > LOCALSTACK_SIZE ) {
-		Error( "PushString: locals stack overflow\n" );
+ID_INLINE void idInterpreter::PushString(const char *string) {
+	if (localstackUsed + MAX_STRING_LEN > LOCALSTACK_SIZE) {
+		Error("PushString: locals stack overflow\n");
 	}
-	idStr::Copynz( ( char * )&localstack[ localstackUsed ], string, MAX_STRING_LEN );
+	idStr::Copynz((char *)&localstack[localstackUsed], string, MAX_STRING_LEN);
 	localstackUsed += MAX_STRING_LEN;
 }
 
@@ -135,12 +159,13 @@ ID_INLINE void idInterpreter::PushString( const char *string ) {
 idInterpreter::FloatToString
 ====================
 */
-ID_INLINE const char *idInterpreter::FloatToString( float value ) {
-	static char	text[ 32 ];
-	if( value == ( float )( int )value ) {
-		sprintf( text, "%d", ( int )value );
-	} else {
-		sprintf( text, "%f", value );
+ID_INLINE const char *idInterpreter::FloatToString(float value) {
+	static char	text[32];
+	if (value == (float)(int)value) {
+		sprintf(text, "%d", (int)value);
+	}
+	else {
+		sprintf(text, "%f", value);
 	}
 	return text;
 }
@@ -150,11 +175,12 @@ ID_INLINE const char *idInterpreter::FloatToString( float value ) {
 idInterpreter::AppendString
 ====================
 */
-ID_INLINE void idInterpreter::AppendString( idVarDef *def, const char *from ) {
-	if( def->initialized == idVarDef::stackVariable ) {
-		idStr::Append( ( char * )&localstack[ localstackBase + def->value.stackOffset ], MAX_STRING_LEN, from );
-	} else {
-		idStr::Append( def->value.stringPtr, MAX_STRING_LEN, from );
+ID_INLINE void idInterpreter::AppendString(idVarDef *def, const char *from) {
+	if (def->initialized == idVarDef::stackVariable) {
+		idStr::Append((char *)&localstack[localstackBase + def->value.stackOffset], MAX_STRING_LEN, from);
+	}
+	else {
+		idStr::Append(def->value.stringPtr, MAX_STRING_LEN, from);
 	}
 }
 
@@ -163,11 +189,12 @@ ID_INLINE void idInterpreter::AppendString( idVarDef *def, const char *from ) {
 idInterpreter::SetString
 ====================
 */
-ID_INLINE void idInterpreter::SetString( idVarDef *def, const char *from ) {
-	if( def->initialized == idVarDef::stackVariable ) {
-		idStr::Copynz( ( char * )&localstack[ localstackBase + def->value.stackOffset ], from, MAX_STRING_LEN );
-	} else {
-		idStr::Copynz( def->value.stringPtr, from, MAX_STRING_LEN );
+ID_INLINE void idInterpreter::SetString(idVarDef *def, const char *from) {
+	if (def->initialized == idVarDef::stackVariable) {
+		idStr::Copynz((char *)&localstack[localstackBase + def->value.stackOffset], from, MAX_STRING_LEN);
+	}
+	else {
+		idStr::Copynz(def->value.stringPtr, from, MAX_STRING_LEN);
 	}
 }
 
@@ -176,10 +203,11 @@ ID_INLINE void idInterpreter::SetString( idVarDef *def, const char *from ) {
 idInterpreter::GetString
 ====================
 */
-ID_INLINE const char *idInterpreter::GetString( idVarDef *def ) {
-	if( def->initialized == idVarDef::stackVariable ) {
-		return ( char * )&localstack[ localstackBase + def->value.stackOffset ];
-	} else {
+ID_INLINE const char *idInterpreter::GetString(idVarDef *def) {
+	if (def->initialized == idVarDef::stackVariable) {
+		return (char *)&localstack[localstackBase + def->value.stackOffset];
+	}
+	else {
 		return def->value.stringPtr;
 	}
 }
@@ -189,12 +217,13 @@ ID_INLINE const char *idInterpreter::GetString( idVarDef *def ) {
 idInterpreter::GetVariable
 ====================
 */
-ID_INLINE varEval_t idInterpreter::GetVariable( idVarDef *def ) {
-	if( def->initialized == idVarDef::stackVariable ) {
+ID_INLINE varEval_t idInterpreter::GetVariable(idVarDef *def) {
+	if (def->initialized == idVarDef::stackVariable) {
 		varEval_t val;
-		val.intPtr = ( int * )&localstack[ localstackBase + def->value.stackOffset ];
+		val.intPtr = (int *)&localstack[localstackBase + def->value.stackOffset];
 		return val;
-	} else {
+	}
+	else {
 		return def->value;
 	}
 }
@@ -204,10 +233,10 @@ ID_INLINE varEval_t idInterpreter::GetVariable( idVarDef *def ) {
 idInterpreter::GetEntity
 ================
 */
-ID_INLINE idEntity *idInterpreter::GetEntity( int entnum ) const {
-	assert( entnum <= MAX_GENTITIES );
-	if( ( entnum > 0 ) && ( entnum <= MAX_GENTITIES ) ) {
-		return gameLocal.entities[ entnum - 1 ];
+ID_INLINE idEntity *idInterpreter::GetEntity(int entnum) const {
+	assert(entnum <= MAX_GENTITIES);
+	if ((entnum > 0) && (entnum <= MAX_GENTITIES)) {
+		return gameLocal.entities[entnum - 1];
 	}
 	return NULL;
 }
@@ -217,12 +246,12 @@ ID_INLINE idEntity *idInterpreter::GetEntity( int entnum ) const {
 idInterpreter::GetScriptObject
 ================
 */
-ID_INLINE idScriptObject *idInterpreter::GetScriptObject( int entnum ) const {
+ID_INLINE idScriptObject *idInterpreter::GetScriptObject(int entnum) const {
 	idEntity *ent;
-	assert( entnum <= MAX_GENTITIES );
-	if( ( entnum > 0 ) && ( entnum <= MAX_GENTITIES ) ) {
-		ent = gameLocal.entities[ entnum - 1 ];
-		if( ent && ent->scriptObject.data ) {
+	assert(entnum <= MAX_GENTITIES);
+	if ((entnum > 0) && (entnum <= MAX_GENTITIES)) {
+		ent = gameLocal.entities[entnum - 1];
+		if (ent && ent->scriptObject.data) {
 			return &ent->scriptObject;
 		}
 	}
@@ -234,7 +263,7 @@ ID_INLINE idScriptObject *idInterpreter::GetScriptObject( int entnum ) const {
 idInterpreter::NextInstruction
 ====================
 */
-ID_INLINE void idInterpreter::NextInstruction( int position ) {
+ID_INLINE void idInterpreter::NextInstruction(int position) {
 	// Before we execute an instruction, we increment instructionPointer,
 	// therefore we need to compensate for that here.
 	instructionPointer = position - 1;

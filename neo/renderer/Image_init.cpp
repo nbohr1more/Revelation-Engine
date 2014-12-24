@@ -227,7 +227,7 @@ the default image will be grey with a white box outline
 to allow you to see the mapping coordinates on a surface
 ==================
 */
-#define	DEFAULT_SIZE	16
+static const int DEFAULT_SIZE = 16;
 void idImage::MakeDefault() {
 	int		x, y;
 	byte	data[DEFAULT_SIZE][DEFAULT_SIZE][4];
@@ -324,6 +324,34 @@ static void R_BorderClampImage(idImage *image) {
 	}
 	// explicit zero border
 	float	color[4];
+	color[0] = color[1] = color[2] = color[3] = 0.0f;
+	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, color);
+}
+
+static const int DEPTH_CLAMP_SIZE = 1024;
+static void R_DepthBufferImage(idImage *image) {
+	int		x, y;
+	byte	data[DEPTH_CLAMP_SIZE][DEPTH_CLAMP_SIZE][4];
+	for (y = 0; y < DEFAULT_SIZE; y++) {
+		for (x = 0; x < DEFAULT_SIZE; x++) {
+			data[y][x][0] = 16;
+			data[y][x][1] = 32;
+			data[y][x][2] = 48;
+			data[y][x][3] = 96;
+		}
+	}
+	image->GenerateImage((byte *)data, 4, 4, TF_LINEAR, false, TR_CLAMP_TO_BORDER, TD_HIGH_QUALITY);
+	if (!glConfig.isInitialized) {
+		// can't call glTexParameter functions yet
+		return;
+	}
+	// now reset it to a depth image
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24_ARB, DEPTH_CLAMP_SIZE, DEPTH_CLAMP_SIZE, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, data);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE_ARB, GL_COMPARE_R_TO_TEXTURE_ARB);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC_ARB, GL_LEQUAL);
+	glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE_ARB, GL_INTENSITY);
+	// explicit zero depth border
+	float color[4];
 	color[0] = color[1] = color[2] = color[3] = 0.0f;
 	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, color);
 }
@@ -430,8 +458,8 @@ static void CreateSquareLight(void) {
 				d = 0;
 			}
 			buffer[(y * 128 + x) * 4 + 0] =
-				buffer[(y * 128 + x) * 4 + 1] =
-				buffer[(y * 128 + x) * 4 + 2] = d;
+			buffer[(y * 128 + x) * 4 + 1] =
+			buffer[(y * 128 + x) * 4 + 2] = d;
 			buffer[(y * 128 + x) * 4 + 3] = 255;
 		}
 	}
@@ -451,8 +479,8 @@ static void CreateFlashOff(void) {
 		for (y = 0; y < height; y++) {
 			d = 255 - (x * 256 / width);
 			buffer[(y * width + x) * 4 + 0] =
-				buffer[(y * width + x) * 4 + 1] =
-				buffer[(y * width + x) * 4 + 2] = d;
+			buffer[(y * width + x) * 4 + 1] =
+			buffer[(y * width + x) * 4 + 2] = d;
 			buffer[(y * width + x) * 4 + 3] = 255;
 		}
 	}
@@ -511,13 +539,12 @@ void CreatealphaSquareImage(void) {
 	R_WriteTGA("shapes/alphaSquare.tga", data[0][0], 16, 16);
 }
 
-#define	NORMAL_MAP_SIZE		32
-
 /*** NORMALIZATION CUBE MAP CONSTRUCTION ***/
 
 /* Given a cube map face index, cube map size, and integer 2D face position,
 * return the cooresponding normalized vector.
 */
+static const int NORMAL_MAP_SIZE = 32;
 static void getCubeVector(int i, int cubesize, int x, int y, float *vector) {
 	float s, t, sc, tc, mag;
 	s = ((float)x + 0.5) / (float)cubesize;
@@ -620,8 +647,7 @@ We calculate distance correctly in two planes, but the
 third will still be projection based
 ================
 */
-const int	FOG_SIZE = 128;
-
+static const int FOG_SIZE = 128;
 void R_FogImage(idImage *image) {
 	int		x, y;
 	byte	data[FOG_SIZE][FOG_SIZE][4];
@@ -755,12 +781,10 @@ void R_FogEnterImage(idImage *image) {
 /*
 ================
 R_QuadraticImage
-
 ================
 */
-static const int	QUADRATIC_WIDTH = 32;
-static const int	QUADRATIC_HEIGHT = 4;
-
+static const int QUADRATIC_WIDTH = 32;
+static const int QUADRATIC_HEIGHT = 4;
 void R_QuadraticImage(idImage *image) {
 	int		x, y;
 	byte	data[QUADRATIC_HEIGHT][QUADRATIC_WIDTH][4];
@@ -1733,7 +1757,7 @@ void idImageManager::Init() {
 	scratchImage2 = ImageFromFunction("_scratch2", R_RGBA8Image);
 	accumImage = ImageFromFunction("_accum", R_RGBA8Image);
 	scratchCubeMapImage = ImageFromFunction("_scratchCubeMap", makeNormalizeVectorCubeMap);
-	currentDepthImage = ImageFromFunction("_currentDepth", R_RGBA8Image);
+	currentDepthImage = ImageFromFunction("_currentDepth", R_DepthBufferImage);
 	currentRenderImage = ImageFromFunction("_currentRender", R_RGBA8Image);
 	cmdSystem->AddCommand("reloadImages", R_ReloadImages_f, CMD_FL_RENDERER, "reloads images");
 	cmdSystem->AddCommand("listImages", R_ListImages_f, CMD_FL_RENDERER, "lists images");

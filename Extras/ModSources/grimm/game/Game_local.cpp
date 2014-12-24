@@ -691,7 +691,6 @@ void idGameLocal::SetServerInfo( const idDict &_serverInfo ) {
 	}
 }
 
-
 /*
 ===================
 idGameLocal::LoadMap
@@ -2037,7 +2036,6 @@ gameReturn_t idGameLocal::RunFrame( const usercmd_t *clientCmds ) {
 	return ret;
 }
 
-
 /*
 ======================================================================
 
@@ -2826,7 +2824,6 @@ void idGameLocal::SetTrapSkill( int value ) {
 	g_trapskill.SetInteger( skill_level );
 }
 
-
 /*
 ==============
 idGameLocal::GameState
@@ -3567,7 +3564,6 @@ bool idGameLocal::SkipCinematic( void ) {
 	return true;
 }
 
-
 /*
 ======================
 idGameLocal::SpreadLocations
@@ -3813,7 +3809,6 @@ void idGameLocal::UpdateServerInfoFlags() {
 	}
 }
 
-
 /*
 ================
 idGameLocal::SetGlobalMaterial
@@ -3908,7 +3903,6 @@ void idGameLocal::GetClientStats( int clientNum, char *data, const int len ) {
 	mpGame.PlayerStats( clientNum, data, len );
 }
 
-
 /*
 ================
 idGameLocal::SwitchTeam
@@ -3937,7 +3931,6 @@ idGameLocal::GetMapLoadingGUI
 ===============
 */
 void idGameLocal::GetMapLoadingGUI( char gui[ MAX_STRING_CHARS ] ) { }
-
 
 // sikk---> Random Encounters System
 /*

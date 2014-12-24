@@ -185,8 +185,8 @@ void GetPointOutsideObstacles(const obstacle_t *obstacles, const int numObstacle
 		}
 		return;
 	}
-	queue = (int *)_alloca8(numObstacles * sizeof(queue[0]));
-	obstacleVisited = (bool *)_alloca8(numObstacles * sizeof(obstacleVisited[0]));
+	queue = (int *)_alloca(numObstacles * sizeof(queue[0]));
+	obstacleVisited = (bool *)_alloca(numObstacles * sizeof(obstacleVisited[0]));
 	queueStart = 0;
 	queueEnd = 1;
 	queue[0] = bestObstacle;

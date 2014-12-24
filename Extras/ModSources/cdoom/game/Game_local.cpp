@@ -684,7 +684,6 @@ void idGameLocal::SetServerInfo( const idDict &_serverInfo ) {
 	}
 }
 
-
 /*
 ===================
 idGameLocal::LoadMap
@@ -2007,7 +2006,6 @@ gameReturn_t idGameLocal::RunFrame( const usercmd_t *clientCmds ) {
 	D_DrawDebugLines();
 	return ret;
 }
-
 
 /*
 ======================================================================
@@ -3452,7 +3450,6 @@ bool idGameLocal::SkipCinematic( void ) {
 	return true;
 }
 
-
 /*
 ======================
 idGameLocal::SpreadLocations
@@ -3698,7 +3695,6 @@ void idGameLocal::UpdateServerInfoFlags() {
 	}
 }
 
-
 /*
 ================
 idGameLocal::SetGlobalMaterial
@@ -3793,7 +3789,6 @@ void idGameLocal::GetClientStats( int clientNum, char *data, const int len ) {
 	mpGame.PlayerStats( clientNum, data, len );
 }
 
-
 /*
 ================
 idGameLocal::SwitchTeam
@@ -3840,4 +3835,3 @@ void idGameLocal::DeactivateSecretAreas( int areanum ) {
 		}
 	}
 }
-

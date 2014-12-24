@@ -932,7 +932,7 @@ void R_MakeShadowFrustums(idRenderLightLocal *light) {
 		// we will need to build the planes a little differently
 		if (idMath::Fabs(light->parms.lightCenter[0]) > light->parms.lightRadius[0] ||
 			idMath::Fabs(light->parms.lightCenter[1]) > light->parms.lightRadius[1] ||
-			idMath::Fabs(light->parms.lightCenter[2]) > light->parms.lightRadius[2])	{
+			idMath::Fabs(light->parms.lightCenter[2]) > light->parms.lightRadius[2]) {
 			centerOutside = true;
 		}
 		// make the corners

@@ -44,7 +44,7 @@ public:
 	explicit idBounds(const idVec3 &point);
 
 	const idVec3 	&operator[](const int index) const;
-	idVec3 		&operator[](const int index);
+	idVec3 			&operator[](const int index);
 	idBounds		operator+(const idVec3 &t) const;				// returns translated bounds
 	idBounds 		&operator+=(const idVec3 &t);					// translate the bounds
 	idBounds		operator*(const idMat3 &r) const;				// returns rotated bounds
@@ -54,14 +54,16 @@ public:
 	idBounds		operator-(const idBounds &a) const;
 	idBounds 		&operator-=(const idBounds &a);
 
-	bool			Compare(const idBounds &a) const;							// exact compare, no epsilon
+	bool			Compare(const idBounds &a) const;						// exact compare, no epsilon
 	bool			Compare(const idBounds &a, const float epsilon) const;	// compare with epsilon
-	bool			operator==(const idBounds &a) const;						// exact compare, no epsilon
-	bool			operator!=(const idBounds &a) const;						// exact compare, no epsilon
+	bool			operator==(const idBounds &a) const;					// exact compare, no epsilon
+	bool			operator!=(const idBounds &a) const;					// exact compare, no epsilon
 
-	void			Clear(void);									// inside out bounds
+	void			Clear(void);								// inside out bounds
 	void			Zero(void);									// single point at origin
 
+	idVec3			GetMaxs( void ) const;
+	idVec3			GetMins( void ) const;
 	idVec3			GetCenter(void) const;						// returns center of bounds
 	float			GetRadius(void) const;						// returns the radius relative to the bounds origin
 	float			GetRadius(const idVec3 &center) const;		// returns the radius relative to the given center
@@ -69,15 +71,15 @@ public:
 	bool			IsCleared(void) const;						// returns true if bounds are inside out
 
 	bool			AddPoint(const idVec3 &v);					// add the point, returns true if the bounds expanded
-	bool			AddBounds(const idBounds &a);					// add the bounds, returns true if the bounds expanded
+	bool			AddBounds(const idBounds &a);				// add the bounds, returns true if the bounds expanded
 	idBounds		Intersect(const idBounds &a) const;			// return intersection of this bounds with the given bounds
-	idBounds 		&IntersectSelf(const idBounds &a);				// intersect this bounds with the given bounds
-	idBounds		Expand(const float d) const;					// return bounds expanded in all directions with the given value
+	idBounds 		&IntersectSelf(const idBounds &a);			// intersect this bounds with the given bounds
+	idBounds		Expand(const float d) const;				// return bounds expanded in all directions with the given value
 	idBounds 		&ExpandSelf(const float d);					// expand bounds in all directions with the given value
 	idBounds		Translate(const idVec3 &translation) const;	// return translated bounds
-	idBounds 		&TranslateSelf(const idVec3 &translation);		// translate this bounds
-	idBounds		Rotate(const idMat3 &rotation) const;			// return rotated bounds
-	idBounds 		&RotateSelf(const idMat3 &rotation);			// rotate this bounds
+	idBounds 		&TranslateSelf(const idVec3 &translation);	// translate this bounds
+	idBounds		Rotate(const idMat3 &rotation) const;		// return rotated bounds
+	idBounds 		&RotateSelf(const idMat3 &rotation);		// rotate this bounds
 
 	float			PlaneDistance(const idPlane &plane) const;
 	int				PlaneSide(const idPlane &plane, const float epsilon = ON_EPSILON) const;

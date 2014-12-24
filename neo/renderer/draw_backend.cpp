@@ -201,7 +201,7 @@ RB_Backend_DrawInteractions
 ==================
 */
 void RB_Backend_DrawInteractions(void) {
-	viewLight_t			*vLight;
+	viewLight_t	 *vLight;
 	GL_SelectTexture(0);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	//
@@ -217,8 +217,10 @@ void RB_Backend_DrawInteractions(void) {
 			continue;
 		}
 		if (!vLight->localInteractions && !vLight->globalInteractions && !vLight->translucentInteractions) {
-			if (r_useDepthBoundsTest.GetBool()) {
+			if (r_useDepthBoundsTest.GetBool() && glConfig.depthBoundsTestAvailable) {
 				GL_DepthBoundsTest(vLight->scissorRect.zmin, vLight->scissorRect.zmax);
+			} else if (glConfig.depthClampAvailable) {
+				glEnable(GL_DEPTH_CLAMP);
 			}
 			continue;
 		}
@@ -259,7 +261,7 @@ void RB_Backend_DrawInteractions(void) {
 		}
 		// turn off depthbounds testing again.
 		if (!vLight->translucentInteractions) {
-			if(r_useDepthBoundsTest.GetBool()) {
+			if(r_useDepthBoundsTest.GetBool() && glConfig.depthBoundsTestAvailable) {
 				GL_DepthBoundsTest(0.0f, 0.0f);
 			}
 		}

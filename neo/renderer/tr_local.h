@@ -399,7 +399,7 @@ typedef struct viewDef_s {
 
 	// drawSurfs are the visible surfaces of the viewEntities, sorted
 	// by the material sort parameter
-	drawSurf_t 		**drawSurfs;				// we don't use an idList for this, because
+	drawSurf_t 			**drawSurfs;			// we don't use an idList for this, because
 	int					numDrawSurfs;			// it is allocated in frame temporary memory
 	int					maxDrawSurfs;			// may be resized
 
@@ -631,7 +631,6 @@ typedef struct {
 	int					depthFunc;				// GLS_DEPTHFUNC_EQUAL, or GLS_DEPTHFUNC_LESS for translucent
 	float				lightTextureMatrix[16];	// only if lightStage->texture.hasMatrix
 	float				lightColor[4];			// evaluation of current light's color stage
-
 	float				lightScale;				// Every light color calaculation will be multiplied by this,
 	// which will guarantee that the result is < tr.backEndRendererMaxLight
 	// A card with high dynamic range will have this set to 1.0
@@ -640,6 +639,7 @@ typedef struct {
 	// A high dynamic range card will have this set to 1.0.
 
 	bool				currentRenderCopied;	// true if any material has already referenced _currentRender
+	bool				currentDepthCopied;		// true if any material has already referenced _currentDepth
 
 	// our OpenGL state deltas
 	glstate_t			glState;

@@ -356,6 +356,7 @@ public:
 	float			ToYaw(void) const;
 	float			ToPitch(void) const;
 	idAngles		ToAngles(void) const;
+	float			toAngle(idVec3 B); // return the angle in degrees between two idVec3s
 	idPolar3		ToPolar(void) const;
 	idMat3			ToMat3(void) const;		// vector should be normalized
 	const idVec2 	&ToVec2(void) const;

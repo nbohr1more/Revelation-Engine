@@ -168,10 +168,6 @@
     <ClCompile Include="game\Weapon.cpp" />
     <ClCompile Include="game\WorldSpawn.cpp" />
     <ClCompile Include="idlib\precompiled.cpp" />
-    <ClCompile Include="game\Grab.cpp" />
-    <ClCompile Include="game\physics\Force_Grab.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\ai\AAS.h">
@@ -302,10 +298,6 @@
     <ClInclude Include="game\Trigger.h" />
     <ClInclude Include="game\Weapon.h" />
     <ClInclude Include="game\WorldSpawn.h" />
-    <ClInclude Include="game\Grab.h" />
-    <ClInclude Include="game\physics\Force_Grab.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="game\Game.def" />

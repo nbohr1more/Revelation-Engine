@@ -4,7 +4,6 @@
 #ifndef __GAME_MISC_H__
 #define __GAME_MISC_H__
 
-
 /*
 ===============================================================================
 
@@ -64,7 +63,6 @@ private:
 	void				TeleportPlayer( idPlayer *player );
 };
 
-
 /*
 ===============================================================================
 
@@ -93,7 +91,6 @@ private:
 	void				Event_Activate( idEntity *activator );
 };
 
-
 /*
 ===============================================================================
 
@@ -114,7 +111,6 @@ public:
 private:
 	void				Event_RandomPath( void );
 };
-
 
 /*
 ===============================================================================
@@ -145,7 +141,6 @@ private:
 	void				Event_RestoreDamagable( void );
 };
 
-
 /*
 ===============================================================================
 
@@ -163,7 +158,6 @@ public:
 private:
 	void				Event_Explode( idEntity *activator );
 };
-
 
 /*
 ===============================================================================
@@ -193,7 +187,6 @@ private:
 	void				Event_LinkSpring( void );
 };
 
-
 /*
 ===============================================================================
 
@@ -222,7 +215,6 @@ private:
 	void				Event_Toggle( void );
 	void				Event_FindTargets( void );
 };
-
 
 /*
 ===============================================================================
@@ -267,7 +259,6 @@ private:
 	void					Event_LaunchMissilesUpdate( int launchjoint, int targetjoint, int numshots, int framedelay );
 };
 
-
 /*
 ===============================================================================
 
@@ -291,10 +282,6 @@ public:
 	virtual void		Show( void );
 	void				Fade( const idVec4 &to, float fadeTime );
 	virtual void		Think( void );
-
-	// grimm idle sound for statics
-	// const idSoundShader *	sndHum;
-	// grimm idle sound for statics
 
 	virtual void		WriteToSnapshot( idBitMsgDelta &msg ) const;
 	virtual void		ReadFromSnapshot( const idBitMsgDelta &msg );
@@ -340,9 +327,7 @@ public:
 
 private:
 	bool				hidden;
-
 };
-
 
 /*
 ===============================================================================
@@ -372,7 +357,6 @@ private:
 	bool					restart;
 };
 
-
 /*
 ===============================================================================
 
@@ -393,7 +377,6 @@ private:
 	void				Event_Activate( idEntity *activator );
 	void				Event_Splat();
 };
-
 
 /*
 ===============================================================================
@@ -418,7 +401,6 @@ private:
 	idStr				text;
 	bool				playerOriented;
 };
-
 
 /*
 ===============================================================================
@@ -474,7 +456,6 @@ public:
 private:
 };
 
-
 /*
 ===============================================================================
 
@@ -512,7 +493,6 @@ private:
 	idEntityPtr<idBeam>	master;
 };
 
-
 /*
 ===============================================================================
 
@@ -535,10 +515,8 @@ public:
 private:
 	void				Event_Touch( idEntity *other, trace_t *trace );
 
-
 	idRenderModelLiquid *model;
 };
-
 
 /*
 ===============================================================================
@@ -566,7 +544,6 @@ private:
 	void					BeginShaking( void );
 	void					Event_Activate( idEntity *activator );
 };
-
 
 /*
 ===============================================================================
@@ -601,7 +578,6 @@ private:
 
 	void				Event_Activate( idEntity *activator );
 };
-
 
 /*
 ===============================================================================
@@ -679,7 +655,6 @@ private:
 	void				Event_Activate( idEntity *activator );
 };
 
-
 /*
 ===============================================================================
 
@@ -704,7 +679,6 @@ private:
 	void				Event_Activate( idEntity *activator );
 	void				Event_ResetRadioHud( idEntity *activator );
 };
-
 
 /*
 ===============================================================================

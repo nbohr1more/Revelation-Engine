@@ -1,5 +1,30 @@
-// Copyright (C) 2004 Id Software, Inc.
-//
+/*
+===========================================================================
+
+Doom 3 GPL Source Code
+Copyright (C) 1999-2011 id Software LLC, a ZeniMax Media company.
+
+This file is part of the Doom 3 GPL Source Code (?Doom 3 Source Code?).
+
+Doom 3 Source Code is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Doom 3 Source Code is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Doom 3 Source Code.  If not, see <http://www.gnu.org/licenses/>.
+
+In addition, the Doom 3 Source Code is also subject to certain additional terms. You should have received a copy of these additional terms immediately following the terms and conditions of the GNU General Public License which accompanied the Doom 3 Source Code.  If not, please request a copy in writing from id Software at the address below.
+
+If you have questions concerning this license or the applicable additional terms, you may contact in writing id Software LLC, c/o ZeniMax Media Inc., Suite 120, Rockville, Maryland 20850 USA.
+
+===========================================================================
+*/
 
 #ifndef __GAME_MOVEABLE_H__
 #define __GAME_MOVEABLE_H__
@@ -7,7 +32,7 @@
 /*
 ===============================================================================
 
-  Entity using rigid body physics.
+Entity using rigid body physics.
 
 ===============================================================================
 */
@@ -17,27 +42,27 @@ extern const idEventDef EV_IsAtRest;
 
 class idMoveable : public idEntity {
 public:
-	CLASS_PROTOTYPE( idMoveable );
+	CLASS_PROTOTYPE(idMoveable);
 
-	idMoveable( void );
-	~idMoveable( void );
+	idMoveable(void);
+	~idMoveable(void);
 
-	void					Spawn( void );
+	void					Spawn(void);
 
-	void					Save( idSaveGame *savefile ) const;
-	void					Restore( idRestoreGame *savefile );
+	void					Save(idSaveGame *savefile) const;
+	void					Restore(idRestoreGame *savefile);
 
-	virtual void			Think( void );
+	virtual void			Think(void);
 
-	virtual void			Hide( void );
-	virtual void			Show( void );
+	virtual void			Hide(void);
+	virtual void			Show(void);
 
-	bool					AllowStep( void ) const;
-	void					EnableDamage( bool enable, float duration );
-	virtual bool			Collide( const trace_t &collision, const idVec3 &velocity );
-	virtual void			Killed( idEntity *inflictor, idEntity *attacker, int damage, const idVec3 &dir, int location );
-	virtual void			WriteToSnapshot( idBitMsgDelta &msg ) const;
-	virtual void			ReadFromSnapshot( const idBitMsgDelta &msg );
+	bool					AllowStep(void) const;
+	void					EnableDamage(bool enable, float duration);
+	virtual bool			Collide(const trace_t &collision, const idVec3 &velocity);
+	virtual void			Killed(idEntity *inflictor, idEntity *attacker, int damage, const idVec3 &dir, int location);
+	virtual void			WriteToSnapshot(idBitMsgDelta &msg) const;
+	virtual void			ReadFromSnapshot(const idBitMsgDelta &msg);
 
 protected:
 	idPhysics_RigidBody		physicsObj;				// physics object
@@ -56,50 +81,41 @@ protected:
 	int						nextDamageTime;			// next time the movable can hurt the player
 	int						nextSoundTime;			// next time the moveable can make a sound
 
-	// grimm -->
-	idStr					mtr_collide;			// material to spray on walls when object collides with something.
-	int						last_spraytime;			// last time that a spray was made.
-	const idDeclParticle 	*smokeFly;
-	int						smokeFlyTime;
-	// <-- grimm
+	const idMaterial 		*GetRenderModelMaterial(void) const;
+	void					BecomeNonSolid(void);
+	void					InitInitialSpline(int startTime);
+	bool					FollowInitialSplinePath(void);
 
-	const idMaterial 		*GetRenderModelMaterial( void ) const;
-	void					BecomeNonSolid( void );
-	void					InitInitialSpline( int startTime );
-	bool					FollowInitialSplinePath( void );
-
-	void					Event_Activate( idEntity *activator );
-	void					Event_BecomeNonSolid( void );
-	void					Event_SetOwnerFromSpawnArgs( void );
-	void					Event_IsAtRest( void );
-	void					Event_EnableDamage( float enable );
+	void					Event_Activate(idEntity *activator);
+	void					Event_BecomeNonSolid(void);
+	void					Event_SetOwnerFromSpawnArgs(void);
+	void					Event_IsAtRest(void);
+	void					Event_EnableDamage(float enable);
 };
-
 
 /*
 ===============================================================================
 
-  A barrel using rigid body physics. The barrel has special handling of
-  the view model orientation to make it look like it rolls instead of slides.
+A barrel using rigid body physics. The barrel has special handling of
+the view model orientation to make it look like it rolls instead of slides.
 
 ===============================================================================
 */
 
 class idBarrel : public idMoveable {
-
 public:
-	CLASS_PROTOTYPE( idBarrel );
+	CLASS_PROTOTYPE(idBarrel);
 	idBarrel();
 
-	void					Spawn( void );
+	void					Spawn(void);
 
-	void					Save( idSaveGame *savefile ) const;
-	void					Restore( idRestoreGame *savefile );
+	void					Save(idSaveGame *savefile) const;
+	void					Restore(idRestoreGame *savefile);
 
-	void					BarrelThink( void );
-	virtual void			Think( void );
-	virtual bool			GetPhysicsToVisualTransform( idVec3 &origin, idMat3 &axis );
-	virtual void			ClientPredictionThink( void );
+	void					BarrelThink(void);
+	virtual void			Think(void);
+	virtual bool			GetPhysicsToVisualTransform(idVec3 &origin, idMat3 &axis);
+	virtual void			ClientPredictionThink(void);
 
 private:
 	float					radius;					// radius of barrel
@@ -110,37 +126,36 @@ private:
 	idMat3					additionalAxis;			// additional rotation axis
 };
 
-
 /*
 ===============================================================================
 
-  A barrel using rigid body physics and special handling of the view model
-  orientation to make it look like it rolls instead of slides. The barrel
-  can burn and explode when damaged.
+A barrel using rigid body physics and special handling of the view model
+orientation to make it look like it rolls instead of slides. The barrel
+can burn and explode when damaged.
 
 ===============================================================================
 */
 
 class idExplodingBarrel : public idBarrel {
 public:
-	CLASS_PROTOTYPE( idExplodingBarrel );
+	CLASS_PROTOTYPE(idExplodingBarrel);
 
 	idExplodingBarrel();
 	~idExplodingBarrel();
 
-	void					Spawn( void );
+	void					Spawn(void);
 
-	void					Save( idSaveGame *savefile ) const;
-	void					Restore( idRestoreGame *savefile );
+	void					Save(idSaveGame *savefile) const;
+	void					Restore(idRestoreGame *savefile);
 
-	virtual void			Think( void );
-	virtual void			Damage( idEntity *inflictor, idEntity *attacker, const idVec3 &dir,
-									const char *damageDefName, const float damageScale, const int location );
-	virtual void			Killed( idEntity *inflictor, idEntity *attacker, int damage, const idVec3 &dir, int location );
+	virtual void			Think(void);
+	virtual void			Damage(idEntity *inflictor, idEntity *attacker, const idVec3 &dir,
+		const char *damageDefName, const float damageScale, const int location);
+	virtual void			Killed(idEntity *inflictor, idEntity *attacker, int damage, const idVec3 &dir, int location);
 
-	virtual void			WriteToSnapshot( idBitMsgDelta &msg ) const;
-	virtual void			ReadFromSnapshot( const idBitMsgDelta &msg );
-	virtual bool			ClientReceiveEvent( int event, int time, const idBitMsg &msg );
+	virtual void			WriteToSnapshot(idBitMsgDelta &msg) const;
+	virtual void			ReadFromSnapshot(const idBitMsgDelta &msg);
+	virtual bool			ClientReceiveEvent(int event, int time, const idBitMsg &msg);
 
 	enum {
 		EVENT_EXPLODE = idEntity::EVENT_MAXEVENTS,
@@ -166,11 +181,11 @@ private:
 	int						lightTime;
 	float					time;
 
-	void					AddParticles( const char *name, bool burn );
-	void					AddLight( const char *name , bool burn );
-	void					ExplodingEffects( void );
+	void					AddParticles(const char *name, bool burn);
+	void					AddLight(const char *name, bool burn);
+	void					ExplodingEffects(void);
 
-	void					Event_Activate( idEntity *activator );
+	void					Event_Activate(idEntity *activator);
 	void					Event_Respawn();
 	void					Event_Explode();
 	void					Event_TriggerTargets();

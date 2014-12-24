@@ -6,7 +6,6 @@
 
 #include "Game_local.h"
 
-
 /*
 ===============================================================================
 
@@ -91,7 +90,6 @@ void idMultiModelAF::Think( void ) {
 	RunPhysics();
 	Present();
 }
-
 
 /*
 ===============================================================================
@@ -453,7 +451,6 @@ void idAFAttachment::UnlinkCombat( void ) {
 	}
 }
 
-
 /*
 ===============================================================================
 
@@ -592,7 +589,6 @@ void idAFEntity_Base::Think( void ) {
 		RunPhysics();
 	}
 	// <-- grimm
-	//RunPhysics();
 	UpdateAnimation();
 	if( thinkFlags & TH_UPDATEVISUALS ) {
 		Present();
@@ -725,9 +721,6 @@ bool idAFEntity_Base::Collide( const trace_t &collision, const idVec3 &velocity 
 	mtr_collide = spawnArgs.GetString( "mtr_collide" );
 	if( IsActive() && mtr_collide.Length() && NextSprayTime < gameLocal.GetTime() ) {
 		NextSprayTime = gameLocal.GetTime() + 750.0f;
-		//float ranScale;
-		//ranScale = 64 + ( 100.0f * gameLocal.random.CRandomFloat() );
-		//gameLocal.ProjectDecal( GetPhysics()->GetOrigin(), GetPhysics()->GetGravity(), 128.0f, true, ranScale, mtr_collide.c_str() );
 		gameLocal.ProjectDecal( GetPhysics()->GetOrigin(), -collision.c.normal, 128.0f, true, 128.0f, mtr_collide.c_str(), 0, false );
 	}
 	// <-- grimm
@@ -926,7 +919,6 @@ CLASS_DECLARATION( idAFEntity_Base, idAFEntity_Gibbable )
 EVENT( EV_Gib,		idAFEntity_Gibbable::Event_Gib )
 EVENT( EV_Gibbed,	idAFEntity_Base::Event_Remove )
 END_CLASS
-
 
 /*
 ================
@@ -1262,7 +1254,6 @@ void idAFEntity_Generic::Event_Activate( idEntity *activator ) {
 	}
 }
 
-
 /*
 ===============================================================================
 
@@ -1504,7 +1495,6 @@ void idAFEntity_WithAttachedHead::Event_Activate( idEntity *activator ) {
 	}
 }
 
-
 /*
 ===============================================================================
 
@@ -1604,7 +1594,6 @@ float idAFEntity_Vehicle::GetSteerAngle( void ) {
 	}
 	return steerAngle;
 }
-
 
 /*
 ===============================================================================
@@ -1777,7 +1766,6 @@ void idAFEntity_VehicleSimple::Think( void ) {
 	}
 }
 
-
 /*
 ===============================================================================
 
@@ -1788,7 +1776,6 @@ void idAFEntity_VehicleSimple::Think( void ) {
 
 CLASS_DECLARATION( idAFEntity_Vehicle, idAFEntity_VehicleFourWheels )
 END_CLASS
-
 
 /*
 ================
@@ -1937,7 +1924,6 @@ void idAFEntity_VehicleFourWheels::Think( void ) {
 		LinkCombat();
 	}
 }
-
 
 /*
 ===============================================================================
@@ -2112,7 +2098,6 @@ void idAFEntity_VehicleSixWheels::Think( void ) {
 	}
 }
 
-
 /*
 ===============================================================================
 
@@ -2123,7 +2108,6 @@ void idAFEntity_VehicleSixWheels::Think( void ) {
 
 CLASS_DECLARATION( idAFEntity_Base, idAFEntity_SteamPipe )
 END_CLASS
-
 
 /*
 ================
@@ -2247,7 +2231,6 @@ void idAFEntity_SteamPipe::Think( void ) {
 	idAFEntity_Base::Think();
 }
 
-
 /*
 ===============================================================================
 
@@ -2354,7 +2337,6 @@ void idAFEntity_ClawFourFingers::Event_StopFingers( void ) {
 	}
 }
 
-
 /*
 ===============================================================================
 
@@ -2362,7 +2344,6 @@ void idAFEntity_ClawFourFingers::Event_StopFingers( void ) {
 
 ===============================================================================
 */
-
 
 /*
 ================

@@ -41,14 +41,15 @@ const int USERCMD_HZ = 60;			// 60 frames per second
 const int USERCMD_MSEC = 1000 / USERCMD_HZ;
 
 // usercmd_t->button bits
-const int BUTTON_ATTACK = BIT(0);
-const int BUTTON_RUN = BIT(1);
-const int BUTTON_ZOOM = BIT(2);
-const int BUTTON_SCORES = BIT(3);
-const int BUTTON_MLOOK = BIT(4);
-const int BUTTON_5 = BIT(5);
-const int BUTTON_6 = BIT(6);
-const int BUTTON_7 = BIT(7);
+const int BUTTON_ATTACK		= BIT(0);
+const int BUTTON_RUN		= BIT(1);
+const int BUTTON_ZOOM		= BIT(2);
+const int BUTTON_SCORES		= BIT(3);
+const int BUTTON_MLOOK		= BIT(4);
+const int BUTTON_ATTACK2	= BIT(5); // Zeroth404
+const int BUTTON_5			= BIT(5);
+const int BUTTON_6			= BIT(6);
+const int BUTTON_7			= BIT(7);
 
 // usercmd_t->impulse commands
 const int IMPULSE_0 = 0;			// weap 0
@@ -92,6 +93,12 @@ const int IMPULSE_37 = 37;			// unused
 const int IMPULSE_38 = 38;			// unused
 const int IMPULSE_39 = 39;			// unused
 const int IMPULSE_40 = 40;			// use vehicle
+// Zeroth
+const int IMPULSE_41 = 41;			// hec Inventory Scroll Right
+const int IMPULSE_42 = 42;			// hec Inventory Scroll Left
+const int IMPULSE_43 = 43;			// hec use selected item
+const int IMPULSE_44 = 44;			// hec drop selected item
+const int IMPULSE_45 = 45;			// toggle automap
 
 // usercmd_t->flags
 const int UCF_IMPULSE_SEQUENCE = 0x0001;		// toggled every time an impulse command is sent

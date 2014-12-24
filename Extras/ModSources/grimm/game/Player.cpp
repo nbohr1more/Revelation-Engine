@@ -1552,15 +1552,6 @@ void idPlayer::Spawn( void ) {
 			}
 		} else {
 			g_damageScale.SetFloat( 1.0f );
-			// sikk - Commented to allow this to be set by the user
-			//			g_armorProtection.SetFloat( ( g_skill.GetInteger() < 2 ) ? 0.4f : 0.2f );
-#ifndef ID_DEMO_BUILD
-			//grimm --> disabled health snooping in nightmare
-			//if ( g_skill.GetInteger() == 3 ) {
-			//	healthTake = true;
-			//	nextHealthTake = gameLocal.time + g_healthTakeTime.GetInteger() * 1000;
-			//}
-#endif
 		}
 	}
 	// sikk---> Random Encounters System
@@ -2595,14 +2586,9 @@ void idPlayer::DrawHUD( idUserInterface *_hud ) {
 		return;
 	}
 	UpdateHudStats( _hud );
-	// grimm --> weapicons aren't used in grimm
-	//_hud->SetStateString( "weapicon", weapon.GetEntity()->Icon() );
-	// <-- grimm
 	// FIXME: this is temp to allow the sound meter to show up in the hud
 	// it should be commented out before shipping but the code can remain
 	// for mod developers to enable for the same functionality
-	// grimm --> and yes, commented out.
-	//_hud->SetStateInt( "s_debug", cvarSystem->GetCVarInteger( "s_showLevelMeter" ) );
 	weapon.GetEntity()->UpdateGUI();
 	_hud->Redraw( gameLocal.realClientTime );
 	// weapon targeting crosshair
@@ -2864,7 +2850,6 @@ bool idPlayer::Give( const char *statname, const char *value ) {
 	}
 	return true;
 }
-
 
 /*
 ===============
@@ -4217,7 +4202,6 @@ bool idPlayer::Collide( const trace_t &collision, const idVec3 &velocity ) {
 	return false;
 }
 
-
 /*
 ================
 idPlayer::UpdateLocation
@@ -4948,96 +4932,6 @@ void idPlayer::SetCurrentHeartRate( void ) {
 
 /*
 ==============
-idPlayer::UpdateAir
-==============
-*/
-/* grimm --> air not used in grimm, this ain't mars and death = the grimm reaper, he needs no frikkin air. :P
-
-void idPlayer::UpdateAir( void ) {
-	if ( health <= 0 ) {
-		return;
-	}
-
-	// see if the player is connected to the info_vacuum
-	bool newAirless = false;
-
-	if ( gameLocal.vacuumAreaNum != -1 ) {
-		int	num = GetNumPVSAreas();
-		if ( num > 0 ) {
-			int		areaNum;
-
-			// if the player box spans multiple areas, get the area from the origin point instead,
-			// otherwise a rotating player box may poke into an outside area
-			if ( num == 1 ) {
-				const int *pvsAreas = GetPVSAreas();
-				areaNum = pvsAreas[0];
-			} else {
-				areaNum = gameRenderWorld->PointInArea( this->GetPhysics()->GetOrigin() );
-			}
-			newAirless = gameRenderWorld->AreasAreConnected( gameLocal.vacuumAreaNum, areaNum, PS_BLOCK_AIR );
-		}
-	}
-
-	if ( newAirless ) {
-		if ( !airless ) {
-			StartSound( "snd_decompress", SND_CHANNEL_ANY, SSF_GLOBAL, false, NULL );
-			StartSound( "snd_noAir", SND_CHANNEL_BODY2, 0, false, NULL );
-			if ( hud ) {
-				hud->HandleNamedEvent( "noAir" );
-			}
-		}
-		airTics--;
-		if ( airTics < 0 ) {
-			airTics = 0;
-			// check for damage
-			const idDict *damageDef = gameLocal.FindEntityDefDict( "damage_noair", false );
-			int dmgTiming = 1000 * ((damageDef) ? damageDef->GetFloat( "delay", "3.0" ) : 3.0f );
-			if ( gameLocal.time > lastAirDamage + dmgTiming ) {
-				Damage( NULL, NULL, vec3_origin, "damage_noair", 1.0f, 0 );
-				lastAirDamage = gameLocal.time;
-			}
-		}
-
-// sikk---> Screen Frost
-		if ( g_screenFrostTime.GetInteger() ) {
-			int n = g_screenFrostTime.GetInteger() * 60;
-			nScreenFrostAlpha++;
-			nScreenFrostAlpha = ( nScreenFrostAlpha > n ) ? n : nScreenFrostAlpha;
-		}
-// <---sikk
-
-	} else {
-		if ( airless ) {
-			StartSound( "snd_recompress", SND_CHANNEL_ANY, SSF_GLOBAL, false, NULL );
-			StopSound( SND_CHANNEL_BODY2, false );
-			if ( hud ) {
-				hud->HandleNamedEvent( "Air" );
-			}
-		}
-		airTics+=2;	// regain twice as fast as lose
-		if ( airTics > pm_airTics.GetInteger() ) {
-			airTics = pm_airTics.GetInteger();
-		}
-
-// sikk---> Screen Frost
-		if ( g_screenFrostTime.GetInteger() ) {
-			nScreenFrostAlpha -= 2;
-			nScreenFrostAlpha = ( nScreenFrostAlpha < 0 ) ? 0 : nScreenFrostAlpha;
-		}
-// <---sikk
-
-	}
-
-	airless = newAirless;
-
-	if ( hud ) {
-		hud->SetStateInt( "player_air", 100 * airTics / pm_airTics.GetInteger() );
-	}
-}
-*/
-
-/*
-==============
 idPlayer::AddGuiPDAData
 ==============
  */
@@ -5101,7 +4995,6 @@ const idDeclPDA *idPlayer::GetPDA( void ) const {
 	}
 }
 
-
 /*
 ==============
 idPlayer::GetVideo
@@ -5113,7 +5006,6 @@ const idDeclVideo *idPlayer::GetVideo( int index ) {
 	}
 	return NULL;
 }
-
 
 /*
 ==============
@@ -5447,102 +5339,95 @@ void idPlayer::PerformImpulse( int impulse ) {
 		return;
 	}
 	switch( impulse ) {
-	case IMPULSE_13: {
-		//nShowHudTimer = gameLocal.time + g_dynamicHudTime.GetInteger() * 1000;	// sikk - Dynamic Hud System
-		Reload();
-		break;
-	}
-	case IMPULSE_14: {
-		NextWeapon();
-		break;
-	}
-	case IMPULSE_15: {
-		PrevWeapon();
-		break;
-	}
-	case IMPULSE_17: {
-		if( gameLocal.isClient || entityNumber == gameLocal.localClientNum ) {
-			gameLocal.mpGame.ToggleReady();
+		case IMPULSE_13: {
+			Reload();
+			break;
 		}
-		break;
-	}
-	case IMPULSE_18: {
-		centerView.Init( gameLocal.time, 200, viewAngles.pitch, 0 );
-		break;
-	}
-	case IMPULSE_19: {
-		// when we're not in single player, IMPULSE_19 is used for showScores
-		// otherwise it opens the pda
-		if( !gameLocal.isMultiplayer ) {
-			if( objectiveSystemOpen ) {
-				TogglePDA();
-			} else if( weapon_pda >= 0 ) {
-				SelectWeapon( weapon_pda, true );
+		case IMPULSE_14: {
+			NextWeapon();
+			break;
+		}
+		case IMPULSE_15: {
+			PrevWeapon();
+			break;
+		}
+		case IMPULSE_17: {
+			if( gameLocal.isClient || entityNumber == gameLocal.localClientNum ) {
+				gameLocal.mpGame.ToggleReady();
 			}
+			break;
 		}
-		break;
-	}
-	case IMPULSE_20: {
-		if( gameLocal.isClient || entityNumber == gameLocal.localClientNum ) {
-			gameLocal.mpGame.ToggleTeam();
+		case IMPULSE_18: {
+			centerView.Init( gameLocal.time, 200, viewAngles.pitch, 0 );
+			break;
 		}
-		break;
-	}
-	case IMPULSE_22: {
-		if( gameLocal.isClient || entityNumber == gameLocal.localClientNum ) {
-			gameLocal.mpGame.ToggleSpectate();
+		case IMPULSE_19: {
+			// when we're not in single player, IMPULSE_19 is used for showScores
+			// otherwise it opens the pda
+			if( !gameLocal.isMultiplayer ) {
+				if( objectiveSystemOpen ) {
+					TogglePDA();
+				} else if( weapon_pda >= 0 ) {
+					SelectWeapon( weapon_pda, true );
+				}
+			}
+			break;
 		}
-		break;
-	}
-	case IMPULSE_28: {
-		if( gameLocal.isClient || entityNumber == gameLocal.localClientNum ) {
-			gameLocal.mpGame.CastVote( gameLocal.localClientNum, true );
+		case IMPULSE_20: {
+			if( gameLocal.isClient || entityNumber == gameLocal.localClientNum ) {
+				gameLocal.mpGame.ToggleTeam();
+			}
+			break;
 		}
-		break;
-	}
-	case IMPULSE_29: {
-		if( gameLocal.isClient || entityNumber == gameLocal.localClientNum ) {
-			gameLocal.mpGame.CastVote( gameLocal.localClientNum, false );
+		case IMPULSE_22: {
+			if( gameLocal.isClient || entityNumber == gameLocal.localClientNum ) {
+				gameLocal.mpGame.ToggleSpectate();
+			}
+			break;
 		}
-		break;
-	}
-	// grimm --> Dash
-	case IMPULSE_23: {
-		if( !gameLocal.inCinematic ) {
-			Dash();
+		case IMPULSE_28: {
+			if( gameLocal.isClient || entityNumber == gameLocal.localClientNum ) {
+				gameLocal.mpGame.CastVote( gameLocal.localClientNum, true );
+			}
+			break;
 		}
-		break;
-	}
-	// <-- grimm
-	// sikk---> Infrared Goggles PostProcess
-	case IMPULSE_24: {
-		//if ( GetCurrentWeapon() != 12 && !gameLocal.inCinematic && ( !GetInfluenceMaterial() && GetInfluenceEntity() == NULL ) )
-		//	ToggleIRGoggles();
-		ShowCombos();
-		break;
-	}
-	// <---sikk
-	// sikk---> Health Management System (Health Pack)
-	case IMPULSE_25: {
-		//if ( g_healthManagementType.GetInteger() == 1 )
-		UseHealthPack();
-		break;
-	}
-	// <---sikk
-	// grimm --> stats
-	case IMPULSE_26: {
-		ShowStats();
-		break;
-	}
-	// <-- grimm
-	// sikk---> Random Encounters System - Print info
-	case IMPULSE_27: {
-		gameLocal.Printf( "randomEnemyTally = %d	list size = %d\n", gameLocal.randomEnemyTally, gameLocal.randomEnemyList.Num() );
-		break;
-	}
-	// <---sikk
-	// sikk---> Use Function: Overriding the default UseVehicle() call but still allowing a vehicle to be used
-	// <---sikk
+		case IMPULSE_29: {
+			if( gameLocal.isClient || entityNumber == gameLocal.localClientNum ) {
+				gameLocal.mpGame.CastVote( gameLocal.localClientNum, false );
+			}
+			break;
+		}
+		// grimm --> Dash
+		case IMPULSE_23: {
+			if( !gameLocal.inCinematic ) {
+				Dash();
+			}
+			break;
+		}
+		// <-- grimm
+		// sikk---> Infrared Goggles PostProcess
+		case IMPULSE_24: {
+			ShowCombos();
+			break;
+		}
+		// <---sikk
+		// sikk---> Health Management System (Health Pack)
+		case IMPULSE_25: {
+			UseHealthPack();
+			break;
+		}
+		// <---sikk
+		// grimm --> stats
+		case IMPULSE_26: {
+			ShowStats();
+			break;
+		}
+		// <-- grimm
+		// sikk---> Random Encounters System - Print info
+		case IMPULSE_27: {
+			gameLocal.Printf( "randomEnemyTally = %d	list size = %d\n", gameLocal.randomEnemyTally, gameLocal.randomEnemyList.Num() );
+			break;
+		}
 	}
 }
 
@@ -6256,7 +6141,6 @@ void idPlayer::Think( void ) {
 		if( !spectating && !af.IsActive() && !gameLocal.inCinematic ) {
 			UpdateConditions();
 			UpdateAnimState();
-			//CheckBlink(); <-- actors need no blinking in grimm (yet)
 		}
 		// clear out our pain flag so we can tell if we recieve any damage between now and the next time we think
 		AI_PAIN = false;
@@ -6279,10 +6163,7 @@ void idPlayer::Think( void ) {
 		ToggleAmbientLight( false );
 	}
 	// <---sikk
-	//UpdateBattery();	// sikk--> Infrared Goggles/Headlight Mod
-	//UpdateAir();
 	UpdateHud();
-	//UpdatePowerUps();
 	UpdateDeathSkin( false );
 	if( gameLocal.isMultiplayer ) {
 		DrawPlayerIcons();
@@ -6369,10 +6250,6 @@ idPlayer::UpdateDynamicMusic
 =================
 */
 void idPlayer::UpdateDynamicMusic( void ) {
-	//if (!music_suspense) { <--this crashes sometimes upon mapload (timing issue somewhere), so I've saved the references in the savegame.
-	//	music_suspense			= gameLocal.FindEntity("music_suspense");
-	//	music_combat			= gameLocal.FindEntity("music_combat");
-	//}
 	if( music_suspense ) {
 		new_music_volume = s_musicvolume_DB.GetFloat();
 		if( ( !use_combat_music || !combat_musicon ) && old_music_volume != new_music_volume ) {
@@ -7388,26 +7265,6 @@ void idPlayer::AddAIKill( void ) {
 	kills_amt_total++;
 	hud->SetStateString( "kills_amt", va( "%i", kills_amt ) );
 	hud->SetStateString( "kills_amt_total", va( "%i", kills_amt_total ) );
-	/* The soulcube is a cool weapon, but unused in grimm.
-	int max_souls;
-	int ammo_souls;
-
-	if ( ( weapon_soulcube < 0 ) || ( inventory.weapons & ( 1 << weapon_soulcube ) ) == 0 ) {
-		return;
-	}
-
-	assert( hud );
-
-	ammo_souls = idWeapon::GetAmmoNumForName( "ammo_souls" );
-	max_souls = inventory.MaxAmmoForAmmoClass( this, "ammo_souls" );
-	if ( inventory.ammo[ ammo_souls ] < max_souls ) {
-		inventory.ammo[ ammo_souls ]++;
-		if ( inventory.ammo[ ammo_souls ] >= max_souls ) {
-			hud->HandleNamedEvent( "soulCubeReady" );
-			StartSound( "snd_soulcube_ready", SND_CHANNEL_ANY, 0, false, NULL );
-		}
-	}
-	*/
 }
 
 /*
@@ -7602,7 +7459,6 @@ void idPlayer::Event_SetViewAngles( const idAngles &vAngles ) {
 	viewAngles = vAngles;
 }
 // <-- grimm
-
 
 /*
 ==================
@@ -8489,7 +8345,6 @@ void idPlayer::ShowStats( void ) {
 	hud->HandleNamedEvent( "statsUp" );
 	lastStatsTime = gameLocal.GetTime() + 6000.0f;
 }
-
 
 /*
 ===============

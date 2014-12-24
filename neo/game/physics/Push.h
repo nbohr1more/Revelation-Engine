@@ -1,5 +1,30 @@
-// Copyright (C) 2004 Id Software, Inc.
-//
+/*
+===========================================================================
+
+Doom 3 GPL Source Code
+Copyright (C) 1999-2011 id Software LLC, a ZeniMax Media company.
+
+This file is part of the Doom 3 GPL Source Code (?Doom 3 Source Code?).
+
+Doom 3 Source Code is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Doom 3 Source Code is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Doom 3 Source Code.  If not, see <http://www.gnu.org/licenses/>.
+
+In addition, the Doom 3 Source Code is also subject to certain additional terms. You should have received a copy of these additional terms immediately following the terms and conditions of the GNU General Public License which accompanied the Doom 3 Source Code.  If not, please request a copy in writing from id Software at the address below.
+
+If you have questions concerning this license or the applicable additional terms, you may contact in writing id Software LLC, c/o ZeniMax Media Inc., Suite 120, Rockville, Maryland 20850 USA.
+
+===========================================================================
+*/
 
 #ifndef __PUSH_H__
 #define __PUSH_H__
@@ -7,7 +32,7 @@
 /*
 ===============================================================================
 
-  Allows physics objects to be pushed geometrically.
+Allows physics objects to be pushed geometrically.
 
 ===============================================================================
 */
@@ -25,27 +50,27 @@ public:
 	// Try to push other entities by moving the given entity.
 	// If results.fraction < 1.0 the move was blocked by results.c.entityNum
 	// Returns total mass of all pushed entities.
-	float			ClipTranslationalPush( trace_t &results, idEntity *pusher, const int flags,
-										   const idVec3 &newOrigin, const idVec3 &move );
+	float			ClipTranslationalPush(trace_t &results, idEntity *pusher, const int flags,
+		const idVec3 &newOrigin, const idVec3 &move);
 
-	float			ClipRotationalPush( trace_t &results, idEntity *pusher, const int flags,
-										const idMat3 &newAxis, const idRotation &rotation );
+	float			ClipRotationalPush(trace_t &results, idEntity *pusher, const int flags,
+		const idMat3 &newAxis, const idRotation &rotation);
 
-	float			ClipPush( trace_t &results, idEntity *pusher, const int flags,
-							  const idVec3 &oldOrigin, const idMat3 &oldAxis,
-							  idVec3 &newOrigin, idMat3 &newAxis );
+	float			ClipPush(trace_t &results, idEntity *pusher, const int flags,
+		const idVec3 &oldOrigin, const idMat3 &oldAxis,
+		idVec3 &newOrigin, idMat3 &newAxis);
 
 	// initialize saving the positions of entities being pushed
-	void			InitSavingPushedEntityPositions( void );
+	void			InitSavingPushedEntityPositions(void);
 	// move all pushed entities back to their previous position
-	void			RestorePushedEntityPositions( void );
+	void			RestorePushedEntityPositions(void);
 	// returns the number of pushed entities
-	int				GetNumPushedEntities( void ) const {
+	int				GetNumPushedEntities(void) const {
 		return numPushed;
 	}
 	// get the ith pushed entity
-	idEntity 		*GetPushedEntity( int i ) const {
-		assert( i >= 0 && i < numPushed );
+	idEntity 		*GetPushedEntity(int i) const {
+		assert(i >= 0 && i < numPushed);
 		return pushed[i].ent;
 	}
 
@@ -65,28 +90,28 @@ private:
 	int				pushedGroupSize;
 
 private:
-	void			SaveEntityPosition( idEntity *ent );
-	bool			RotateEntityToAxial( idEntity *ent, idVec3 rotationPoint );
+	void			SaveEntityPosition(idEntity *ent);
+	bool			RotateEntityToAxial(idEntity *ent, idVec3 rotationPoint);
 #ifdef NEW_PUSH
-	bool			CanPushEntity( idEntity *ent, idEntity *pusher, idEntity *initialPusher, const int flags );
-	void			AddEntityToPushedGroup( idEntity *ent, float fraction, bool groundContact );
-	bool			IsFullyPushed( idEntity *ent );
-	bool			ClipTranslationAgainstPusher( trace_t &results, idEntity *ent, idEntity *pusher, const idVec3 &translation );
-	int				GetPushableEntitiesForTranslation( idEntity *pusher, idEntity *initialPusher, const int flags,
-			const idVec3 &translation, idEntity *entityList[], int maxEntities );
-	bool			ClipRotationAgainstPusher( trace_t &results, idEntity *ent, idEntity *pusher, const idRotation &rotation );
-	int				GetPushableEntitiesForRotation( idEntity *pusher, idEntity *initialPusher, const int flags,
-			const idRotation &rotation, idEntity *entityList[], int maxEntities );
+	bool			CanPushEntity(idEntity *ent, idEntity *pusher, idEntity *initialPusher, const int flags);
+	void			AddEntityToPushedGroup(idEntity *ent, float fraction, bool groundContact);
+	bool			IsFullyPushed(idEntity *ent);
+	bool			ClipTranslationAgainstPusher(trace_t &results, idEntity *ent, idEntity *pusher, const idVec3 &translation);
+	int				GetPushableEntitiesForTranslation(idEntity *pusher, idEntity *initialPusher, const int flags,
+		const idVec3 &translation, idEntity *entityList[], int maxEntities);
+	bool			ClipRotationAgainstPusher(trace_t &results, idEntity *ent, idEntity *pusher, const idRotation &rotation);
+	int				GetPushableEntitiesForRotation(idEntity *pusher, idEntity *initialPusher, const int flags,
+		const idRotation &rotation, idEntity *entityList[], int maxEntities);
 #else
-	void			ClipEntityRotation( trace_t &trace, const idEntity *ent, const idClipModel *clipModel,
-										idClipModel *skip, const idRotation &rotation );
-	void			ClipEntityTranslation( trace_t &trace, const idEntity *ent, const idClipModel *clipModel,
-										   idClipModel *skip, const idVec3 &translation );
-	int				TryTranslatePushEntity( trace_t &results, idEntity *check, idClipModel *clipModel, const int flags,
-											const idVec3 &newOrigin, const idVec3 &move );
-	int				TryRotatePushEntity( trace_t &results, idEntity *check, idClipModel *clipModel, const int flags,
-										 const idMat3 &newAxis, const idRotation &rotation );
-	int				DiscardEntities( idEntity *entityList[], int numEntities, int flags, idEntity *pusher );
+	void			ClipEntityRotation(trace_t &trace, const idEntity *ent, const idClipModel *clipModel,
+		idClipModel *skip, const idRotation &rotation);
+	void			ClipEntityTranslation(trace_t &trace, const idEntity *ent, const idClipModel *clipModel,
+		idClipModel *skip, const idVec3 &translation);
+	int				TryTranslatePushEntity(trace_t &results, idEntity *check, idClipModel *clipModel, const int flags,
+		const idVec3 &newOrigin, const idVec3 &move);
+	int				TryRotatePushEntity(trace_t &results, idEntity *check, idClipModel *clipModel, const int flags,
+		const idMat3 &newAxis, const idRotation &rotation);
+	int				DiscardEntities(idEntity *entityList[], int numEntities, int flags, idEntity *pusher);
 #endif
 };
 

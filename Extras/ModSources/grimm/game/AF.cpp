@@ -6,7 +6,6 @@
 
 #include "Game_local.h"
 
-
 /*
 ===============================================================================
 
@@ -808,17 +807,6 @@ bool idAF::Load( idEntity *ent, const char *fileName ) {
 		LoadConstraint( file->constraints[i] );
 	}
 	physicsObj.UpdateClipModels();
-	// grimm --> annoyingness in the console. I know the last body is not contained, but I'm so dumb I can't fix it and this error is driving me a bit crazy.
-	// todo: fix this bug in the cloth AF's and put this in again.
-	/*
-	// check if each joint is contained by a body
-	for( i = 0; i < animator->NumJoints(); i++ ) {
-		if ( jointBody[i] == -1 ) {
-			gameLocal.Warning( "idAF::Load: articulated figure '%s' for entity '%s' at (%s) joint '%s' is not contained by a body",
-				name.c_str(), self->name.c_str(), self->GetPhysics()->GetOrigin().ToString(0), animator->GetJointName( (jointHandle_t)i ) );
-		}
-	}
-	*/
 	physicsObj.SetMass( file->totalMass );
 	physicsObj.SetChanged();
 	// disable the articulated figure for collision detection until activated

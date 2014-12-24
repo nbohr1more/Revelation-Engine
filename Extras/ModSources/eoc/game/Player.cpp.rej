@@ -1,0 +1,75 @@
+--- game/Player.cpp	2007-01-16 18:38:06.000000000 -0500
++++ game/Player.cpp	2010-11-05 15:40:43.000000000 -0400
+@@ -64,6 +75,35 @@
+ const idEventDef EV_Player_LevelTrigger( "levelTrigger" );
+ const idEventDef EV_SpectatorTouch( "spectatorTouch", "et" );
+ const idEventDef EV_Player_GetIdealWeapon( "getIdealWeapon", NULL, 's' );
++// ************** Defined in PlayerScriptEvents.cpp:
++const idEventDef EV_GiveHealth( "GiveHealth", "f" );
++const idEventDef EV_GiveSpeed( "GiveSpeed", "f" );
++const idEventDef EV_GiveArmor( "GiveArmor", "f" );
++const idEventDef EV_SetHealth( "SetHealth", "f" );
++const idEventDef EV_SetArmor( "SetArmor", "f" );
++const idEventDef EV_GetHealth( "GetHealth", NULL, 'f' );
++const idEventDef EV_GetArmor( "GetArmor", NULL, 'f' );
++const idEventDef EV_GetFullHealth( "GetFullHealth", NULL, 'f' );
++const idEventDef EV_GetFullArmor( "GetFullArmor", NULL, 'f' );
++const idEventDef EV_SetAmmo( "SetAmmo", "sf" );
++const idEventDef EV_GetAmmo( "GetAmmo", "s", 'f' );
++const idEventDef EV_GetFullAmmo( "GetFullAmmo", "s", 'f' );
++const idEventDef EV_GetClass( "GetClass", NULL, 'f' );
++const idEventDef EV_SetInvincible( "SetInvincible", "f" );
++const idEventDef EV_GetInvincible( "GetInvincible", NULL, 'f' );
++const idEventDef EV_ChaosDevice( "ChaosDevice" );
++const idEventDef EV_SetFreeMove( "SetFreeMove", "f" );
++const idEventDef EV_SetViewAngles( "SetViewAngles", "v" ); //does nothing?
++const idEventDef EV_GetEyePos( "GetEyePos", NULL, 'v' );
++const idEventDef EV_StickToSurface( "StickToSurface", "v" );
++const idEventDef EV_UnstickToSurface( "UnstickToSurface" );
++const idEventDef EV_StuckToSurface( "StuckToSurface", NULL, 'f');
++const idEventDef EV_SetPowerTome( "SetPowerTome", "f");
++const idEventDef EV_GetPowerTome( "GetPowerTome", NULL, 'f');
++const idEventDef EV_VecForwardP( "VecForwardP", NULL, 'v' );
++const idEventDef EV_VecFacingP( "VecFacingP", NULL, 'v' );
++const idEventDef EV_HudMessage( "HudMessage", "s" );
++const idEventDef EV_ArtifactUseFlash( "ArtifactUseFlash" );
+ 
+ CLASS_DECLARATION( idActor, idPlayer )
+ 	EVENT( EV_Player_GetButtons,			idPlayer::Event_GetButtons )
+@@ -84,6 +124,36 @@
+ 	EVENT( EV_Player_LevelTrigger,			idPlayer::Event_LevelTrigger )
+ 	EVENT( EV_Gibbed,						idPlayer::Event_Gibbed )
+ 	EVENT( EV_Player_GetIdealWeapon,		idPlayer::Event_GetIdealWeapon )
++// ************** Defined in PlayerScriptEvents.cpp:
++	EVENT( EV_GiveHealth,				idPlayer::Event_GiveHealth )
++	EVENT( EV_GiveSpeed,				idPlayer::Event_GiveSpeed )
++	EVENT( EV_GiveArmor,				idPlayer::Event_GiveArmor )
++	EVENT( EV_GetHealth,				idPlayer::Event_GetHealth )
++	EVENT( EV_GetFullHealth,			idPlayer::Event_GetFullHealth )
++	EVENT( EV_GetArmor,					idPlayer::Event_GetArmor )
++	EVENT( EV_GetFullArmor,				idPlayer::Event_GetFullArmor )
++	EVENT( EV_SetHealth,				idPlayer::Event_SetHealth )
++	EVENT( EV_SetArmor,					idPlayer::Event_SetArmor )
++	EVENT( EV_SetAmmo,					idPlayer::Event_SetAmmo )
++	EVENT( EV_GetAmmo,					idPlayer::Event_GetAmmo )
++	EVENT( EV_GetFullAmmo,				idPlayer::Event_GetFullAmmo )
++	EVENT( EV_GetClass,					idPlayer::Event_GetClass )
++	EVENT( EV_SetInvincible,			idPlayer::Event_SetInvincible )
++	EVENT( EV_GetInvincible,			idPlayer::Event_GetInvincible )
++	EVENT( EV_ChaosDevice,				idPlayer::Event_ChaosDevice )
++	EVENT( EV_SetFreeMove,				idPlayer::Event_SetFreeMove )
++	EVENT( EV_SetViewAngles,			idPlayer::Event_SetViewAngles )
++	EVENT( EV_GetEyePos,				idPlayer::Event_GetEyePos )
++	EVENT( EV_StickToSurface,			idPlayer::Event_StickToSurface )
++	EVENT( EV_UnstickToSurface,			idPlayer::Event_UnstickToSurface )
++	EVENT( EV_StuckToSurface,			idPlayer::Event_StuckToSurface )
++	EVENT( EV_GetPowerTome,				idPlayer::Event_GetPowerTome )
++	EVENT( EV_SetPowerTome,				idPlayer::Event_SetPowerTome )
++	EVENT( EV_VecForwardP,				idPlayer::Event_VecForwardP )
++	EVENT( EV_VecFacingP,				idPlayer::Event_VecFacingP )
++	EVENT( EV_HudMessage,				idPlayer::Event_HudMessage )
++	EVENT( EV_ArtifactUseFlash,			idPlayer::Event_ArtifactUseFlash )
++// ************** 
+ END_CLASS
+ 
+ const int MAX_RESPAWN_TIME = 10000;

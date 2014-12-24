@@ -251,14 +251,14 @@ public:
 	idPVS					pvs;					// potential visible set
 
 	idTestModel 			*testmodel;				// for development testing of models
-	idEntityFx 			*testFx;					// for development testing of fx
+	idEntityFx 				*testFx;				// for development testing of fx
 
 	idStr					sessionCommand;			// a target_sessionCommand can set this to return something to the session
 
 	idMultiplayerGame		mpGame;					// handles rules for standard dm
 
-	idSmokeParticles 		*smokeParticles;			// global smoke trails
-	idEditEntities 		*editEntities;			// in game editing
+	idSmokeParticles 		*smokeParticles;		// global smoke trails
+	idEditEntities 			*editEntities;			// in game editing
 
 	int						cinematicSkipTime;		// don't allow skipping cinemetics until this time has passed so player doesn't skip out accidently from a firefight
 	int						cinematicStopTime;		// cinematics have several camera changes, so keep track of when we stop them so that we don't reset cinematicSkipTime unnecessarily
@@ -670,7 +670,6 @@ public:
 };
 
 //============================================================================
-
 
 //
 // these defines work for all startsounds from all entity types

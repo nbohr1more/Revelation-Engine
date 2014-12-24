@@ -33,7 +33,6 @@ void idWorldspawn::Spawn( void ) {
 	idStr				scriptname;
 	idThread			*thread;
 	const function_t	*func;
-	//const idKeyValue	*kv;		<-- not used in grimm
 	// grimm -->
 	gameSoundWorld->SetSlowmo( false );
 	gameSoundWorld->SetSlowmoSpeed( 0.8f );
@@ -59,22 +58,6 @@ void idWorldspawn::Spawn( void ) {
 	}
 	// grimm --> set the current ambient light levels for this session
 	SetAmbientLight();
-	// <-- grimm
-	/* grimm --> not needed for us. I call everything from main anyway.
-
-	// call any functions specified in worldspawn
-	kv = spawnArgs.MatchPrefix( "call" );
-	while( kv != NULL ) {
-		func = gameLocal.program.FindFunction( kv->GetValue() );
-		if ( func == NULL ) {
-			gameLocal.Error( "Function '%s' not found in script for '%s' key on worldspawn", kv->GetValue().c_str(), kv->GetKey().c_str() );
-		}
-
-		thread = new idThread( func );
-		thread->DelayedStart( 0 );
-		kv = spawnArgs.MatchPrefix( "call", kv );
-	}
-	*/
 	// <-- grimm
 }
 

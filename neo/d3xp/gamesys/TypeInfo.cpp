@@ -61,7 +61,7 @@ private:
 	static idFile 					*fp;
 	static int						initValue;
 	static WriteVariableType_t		Write;
-	static idLexer 					*src;
+	static idLexer 				*src;
 	static bool						typeError;
 
 	static const char 				*OutputString(const char *string);
@@ -75,7 +75,7 @@ private:
 	static void						WriteClass_r(const void *classPtr, const char *className, const char *classType, const char *scope, const char *prefix, const int pointerDepth);
 };
 
-idFile 								*idTypeInfoTools::fp = NULL;
+idFile 							*idTypeInfoTools::fp = NULL;
 int									idTypeInfoTools::initValue = 0;
 WriteVariableType_t					idTypeInfoTools::Write = NULL;
 idLexer 							*idTypeInfoTools::src = NULL;

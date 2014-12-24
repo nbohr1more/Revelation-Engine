@@ -155,6 +155,20 @@ idAngles idVec3::ToAngles(void) const {
 
 /*
 =============
+idVec3::toAngle
+
+HEXEN : Zeroth
+=============
+*/
+float idVec3::toAngle( idVec3 B) {
+	// return the angle in degrees between two idVec3s
+	idVec3	Bn = B; Bn.Normalize();
+	idVec3	An = *this; An.Normalize();
+	return RAD2DEG( idMath::ACos( An * Bn ) );
+}
+
+/*
+=============
 idVec3::ToPolar
 =============
 */
@@ -247,7 +261,6 @@ Vectors are expected to be normalized.
 =============
 */
 #define LERP_DELTA 1e-6
-
 void idVec3::SLerp(const idVec3 &v1, const idVec3 &v2, const float t) {
 	float omega, cosom, sinom, scale0, scale1;
 	if (t <= 0.0f) {

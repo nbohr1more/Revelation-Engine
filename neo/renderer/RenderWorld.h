@@ -120,17 +120,17 @@ typedef struct renderEntity_s {
 	// texturing
 	const idMaterial 		*customShader;			// if non-0, all surfaces will use this
 	const idMaterial 		*referenceShader;		// used so flares can reference the proper light shader
-	const idDeclSkin 		*customSkin;				// 0 for no remappings
-	class idSoundEmitter 	*referenceSound;			// for shader sound tables, allowing effects to vary with sounds
+	const idDeclSkin 		*customSkin;			// 0 for no remappings
+	class idSoundEmitter 	*referenceSound;		// for shader sound tables, allowing effects to vary with sounds
 	float					shaderParms[MAX_ENTITY_SHADER_PARMS];	// can be used in any way by shader or model generation
 
 	// networking: see WriteGUIToSnapshot / ReadGUIFromSnapshot
-	class idUserInterface *gui[MAX_RENDERENTITY_GUI];
+	class idUserInterface	*gui[MAX_RENDERENTITY_GUI];
 
 	struct renderView_s		*remoteRenderView;		// any remote camera surfaces will use this
 
 	int						numJoints;
-	idJointMat 			*joints;					// array of joints that will modify vertices.
+	idJointMat 				*joints;				// array of joints that will modify vertices.
 	// NULL if non-deformable model.  NOT freed by renderer
 
 	float					modelDepthHack;			// squash depth range so particle effects don't clip into walls

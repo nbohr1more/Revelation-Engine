@@ -140,7 +140,7 @@ idCVar r_useExternalShadows("r_useExternalShadows", "1", CVAR_RENDERER | CVAR_IN
 idCVar r_useOptimizedShadows("r_useOptimizedShadows", "1", CVAR_RENDERER | CVAR_BOOL, "use the dmap generated static shadow volumes");
 idCVar r_useScissor("r_useScissor", "1", CVAR_RENDERER | CVAR_BOOL, "scissor clip as portals and lights are processed");
 idCVar r_useCombinerDisplayLists("r_useCombinerDisplayLists", "1", CVAR_RENDERER | CVAR_BOOL | CVAR_NOCHEAT, "put all nvidia register combiner programming in display lists");
-idCVar r_useDepthBoundsTest("r_useDepthBoundsTest", "1", CVAR_RENDERER | CVAR_BOOL, "use depth bounds test to reduce shadow fill");
+idCVar r_useDepthBoundsTest("r_useDepthBoundsTest", "0", CVAR_RENDERER | CVAR_BOOL, "use depth bounds test to reduce shadow fill");
 
 idCVar r_screenFraction("r_screenFraction", "100", CVAR_RENDERER | CVAR_INTEGER, "for testing fill rate, the resolution of the entire screen can be changed");
 idCVar r_demonstrateBug("r_demonstrateBug", "0", CVAR_RENDERER | CVAR_BOOL, "used during development to show IHV's their problems");
@@ -277,6 +277,15 @@ static void R_CheckPortableExtensions(void) {
 	else {
 		common->Printf("GL_ARB_texture_non_power_of_two: not availiable!\n");
 		glConfig.textureNonPowerOfTwoAvailable = false;
+	}
+	// GL_ARB_depth_clamp
+	if (glewIsSupported("GL_ARB_depth_clamp")) {
+		common->Printf("...initializing GL_ARB_depth_clamp\n");
+		glConfig.depthClampAvailable = true;
+	}
+	else {
+		common->Printf("GL_ARB_depth_clamp: not availiable!\n");
+		glConfig.depthClampAvailable = false;
 	}
 	// GL_ARB_texture_compression + GL_S3_s3tc
 	// DRI drivers may have GL_ARB_texture_compression but no GL_EXT_texture_compression_s3tc
@@ -1236,15 +1245,16 @@ void R_ScreenShot_f(const idCmdArgs &args) {
 /*
 ===============
 R_StencilShot
+
 Save out a screenshot showing the stencil buffer expanded by 16x range
 ===============
 */
 void R_StencilShot(void) {
 	byte		*buffer;
 	int			i, c;
-	int	width = tr.GetScreenWidth();
-	int	height = tr.GetScreenHeight();
-	int	pix = width * height;
+	int			width = tr.GetScreenWidth();
+	int			height = tr.GetScreenHeight();
+	int			pix = width * height;
 	c = pix * 3 + 18;
 	buffer = (byte *)Mem_Alloc(c);
 	memset(buffer, 0, 18);

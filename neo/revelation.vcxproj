@@ -279,6 +279,8 @@
       <UseIntelOptimizedHeaders>true</UseIntelOptimizedHeaders>
       <FloatingPointModel>
       </FloatingPointModel>
+      <Optimization>Full</Optimization>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <MinimumRequiredVersion />

@@ -721,7 +721,6 @@ void Cmd_Damage_f( const idCmdArgs &args ) {
 	ent->Damage( gameLocal.world, gameLocal.world, idVec3( 0, 0, 1 ), "damage_grimm_1", atoi( args.Argv( 2 ) ), INVALID_JOINT );
 }
 
-
 /*
 ==================
 Cmd_Remove_f
@@ -1545,11 +1544,6 @@ static void Cmd_SaveRagdolls_f( const idCmdArgs &args ) {
 		if( !af->IsType( idAFEntity_WithAttachedHead::Type ) && !af->IsType( idAFEntity_Generic::Type ) ) {
 			continue;
 		}
-		/* grimm --> I need to be able to place bound af's as well.
-		if ( af->IsBound() ) {
-			continue;
-		}
-		<-- grimm */
 		if( !af->IsAtRest() ) {
 			gameLocal.Warning( "the articulated figure for entity %s is not at rest", gameLocal.entities[ e ]->name.c_str() );
 		}
@@ -1621,7 +1615,6 @@ Cmd_GameError_f
 static void Cmd_GameError_f( const idCmdArgs &args ) {
 	gameLocal.Error( "game error" );
 }
-
 
 /* grimm--> own resolution setting implementation
 ==================
@@ -1981,7 +1974,6 @@ static void Cmd_SaveLights_f( const idCmdArgs &args ) {
 	mapFile->Write( mapName, ".map" );
 }
 
-
 /*
 ==================
 Cmd_SaveParticles_f
@@ -2026,7 +2018,6 @@ static void Cmd_SaveParticles_f( const idCmdArgs &args ) {
 	// write out the map file
 	mapFile->Write( mapName, ".map" );
 }
-
 
 /*
 ==================

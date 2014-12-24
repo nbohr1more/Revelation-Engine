@@ -232,9 +232,9 @@ void RB_RenderDrawSurfListWithFunction(drawSurf_t **drawSurfs, int numDrawSurfs,
 		if (r_useScissor.GetBool() && !backEnd.currentScissor.Equals(drawSurf->scissorRect)) {
 			backEnd.currentScissor = drawSurf->scissorRect;
 			GL_Scissor(backEnd.viewDef->viewport.x1 + backEnd.currentScissor.x1,
-				backEnd.viewDef->viewport.y1 + backEnd.currentScissor.y1,
-				backEnd.currentScissor.x2 + 1 - backEnd.currentScissor.x1,
-				backEnd.currentScissor.y2 + 1 - backEnd.currentScissor.y1);
+			backEnd.viewDef->viewport.y1 + backEnd.currentScissor.y1,
+			backEnd.currentScissor.x2 + 1 - backEnd.currentScissor.x1,
+			backEnd.currentScissor.y2 + 1 - backEnd.currentScissor.y1);
 		}
 		// render it
 		triFunc_(drawSurf);
@@ -600,16 +600,20 @@ void RB_CreateSingleDrawInteractions(const drawSurf_t *surf, void(*DrawInteracti
 		if (r_useDepthBoundsTest.GetBool() && !vLight->translucentInteractions) {
 			// turn off the light depth bounds test if this model is rendered with a depth hack
 			if (!surf->space->weaponDepthHack && surf->space->modelDepthHack == 0.0f) {
-				if (lightDepthBoundsDisabled) {
+				if (glConfig.depthBoundsTestAvailable && lightDepthBoundsDisabled) {
 					GL_DepthBoundsTest(vLight->scissorRect.zmin, vLight->scissorRect.zmax);
-					lightDepthBoundsDisabled = false;
+				} else if (glConfig.depthClampAvailable && lightDepthBoundsDisabled) {
+					glEnable(GL_DEPTH_CLAMP);
 				}
+				lightDepthBoundsDisabled = false;
 			}
 			else {
-				if (!lightDepthBoundsDisabled) {
+				if (glConfig.depthBoundsTestAvailable && !lightDepthBoundsDisabled) {
 					GL_DepthBoundsTest(0.0f, 0.0f);
-					lightDepthBoundsDisabled = true;
+				} else if (glConfig.depthClampAvailable && !lightDepthBoundsDisabled) {
+					glDisable(GL_DEPTH_CLAMP);
 				}
+				lightDepthBoundsDisabled = true;
 			}
 		}
 		// model-view-projection
@@ -660,13 +664,14 @@ void RB_CreateSingleDrawInteractions(const drawSurf_t *surf, void(*DrawInteracti
 		inter.diffuseImage = NULL;
 		inter.diffuseColor[0] = inter.diffuseColor[1] = inter.diffuseColor[2] = inter.diffuseColor[3] = 0;
 		inter.specularColor[0] = inter.specularColor[1] = inter.specularColor[2] = inter.specularColor[3] = 0;
-		float lightColor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
 		// backEnd.lightScale is calculated so that lightColor[] will never exceed
 		// tr.backEndRendererMaxLight
-		lightColor[0] = backEnd.lightScale * lightRegs[ lightStage->color.registers[0] ];
-		lightColor[1] = backEnd.lightScale * lightRegs[ lightStage->color.registers[1] ];
-		lightColor[2] = backEnd.lightScale * lightRegs[ lightStage->color.registers[2] ];
-		lightColor[3] = lightRegs[ lightStage->color.registers[3] ];
+		float lightColor[4] = {
+			backEnd.lightScale * lightRegs[ lightStage->color.registers[0] ],
+			backEnd.lightScale * lightRegs[ lightStage->color.registers[1] ],
+			backEnd.lightScale * lightRegs[ lightStage->color.registers[2] ],
+			lightColor[3] = lightRegs[ lightStage->color.registers[3] ]
+		};
 		// go through the individual stages
 		for (int surfaceStageNum = 0; surfaceStageNum < surfaceShader->GetNumStages(); surfaceStageNum++) {
 			const shaderStage_t	*surfaceStage = surfaceShader->GetStage(surfaceStageNum);
@@ -728,13 +733,20 @@ void RB_CreateSingleDrawInteractions(const drawSurf_t *surf, void(*DrawInteracti
 	if (surf->space->weaponDepthHack || surf->space->modelDepthHack != 0.0f) {
 		RB_LeaveDepthHack();
 	}
-	// Once again into the night
-	if (r_useDepthBoundsTest.GetBool()) {
+	// Clamp Z to a 0..1 value
+	if (r_useDepthBoundsTest.GetBool() && glConfig.depthBoundsTestAvailable) {
 		if (lightDepthBoundsDisabled) {
 			GL_DepthBoundsTest(vLight->scissorRect.zmin, vLight->scissorRect.zmax);
 		}
 		else {
 			GL_DepthBoundsTest(0.0f, 0.0f);
+		}
+	} else if (glConfig.depthClampAvailable) {
+		if (lightDepthBoundsDisabled) {
+			glEnable(GL_DEPTH_CLAMP);
+		}
+		else {
+			glDisable(GL_DEPTH_CLAMP);
 		}
 	}
 }
@@ -751,6 +763,8 @@ void RB_DrawView(const void *data) {
 	// we will need to do a new copyTexSubImage of the screen
 	// when a SS_POST_PROCESS material is used
 	backEnd.currentRenderCopied = false;
+	// Yank in depth buffer to
+	backEnd.currentDepthCopied = false;
 	// if there aren't any drawsurfs, do nothing
 	if (!backEnd.viewDef->numDrawSurfs) {
 		return;

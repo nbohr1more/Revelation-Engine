@@ -1,5 +1,30 @@
-// Copyright (C) 2004 Id Software, Inc.
-//
+/*
+===========================================================================
+
+Doom 3 GPL Source Code
+Copyright (C) 1999-2011 id Software LLC, a ZeniMax Media company.
+
+This file is part of the Doom 3 GPL Source Code (?Doom 3 Source Code?).
+
+Doom 3 Source Code is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Doom 3 Source Code is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Doom 3 Source Code.  If not, see <http://www.gnu.org/licenses/>.
+
+In addition, the Doom 3 Source Code is also subject to certain additional terms. You should have received a copy of these additional terms immediately following the terms and conditions of the GNU General Public License which accompanied the Doom 3 Source Code.  If not, please request a copy in writing from id Software at the address below.
+
+If you have questions concerning this license or the applicable additional terms, you may contact in writing id Software LLC, c/o ZeniMax Media Inc., Suite 120, Rockville, Maryland 20850 USA.
+
+===========================================================================
+*/
 
 #ifndef __SCRIPT_PROGRAM_H__
 #define __SCRIPT_PROGRAM_H__
@@ -27,10 +52,10 @@ class function_t {
 public:
 	function_t();
 
-	size_t				Allocated( void ) const;
-	void				SetName( const char *name );
-	const char			*Name( void ) const;
-	void				Clear( void );
+	size_t				Allocated(void) const;
+	void				SetName(const char *name);
+	const char			*Name(void) const;
+	void				Clear(void);
 
 private:
 	idStr 				name;
@@ -49,7 +74,7 @@ public:
 typedef union eval_s {
 	const char			*stringPtr;
 	float				_float;
-	float				vector[ 3 ];
+	float				vector[3];
 	function_t			*function;
 	int 				_int;
 	int 				entity;
@@ -67,7 +92,7 @@ class idTypeDef {
 private:
 	etype_t						type;
 	idStr 						name;
-	int							size;
+	size_t						size;
 
 	// function types are more complex
 	idTypeDef					*auxType;					// return type
@@ -78,42 +103,42 @@ private:
 public:
 	idVarDef					*def;						// a def that points to this type
 
-	idTypeDef( const idTypeDef &other );
-	idTypeDef( etype_t etype, idVarDef *edef, const char *ename, int esize, idTypeDef *aux );
-	void				operator=( const idTypeDef &other );
-	size_t				Allocated( void ) const;
+	idTypeDef(const idTypeDef &other);
+	idTypeDef(etype_t etype, idVarDef *edef, const char *ename, int esize, idTypeDef *aux);
+	void				operator=(const idTypeDef &other);
+	size_t				Allocated(void) const;
 
-	bool				Inherits( const idTypeDef *basetype ) const;
-	bool				MatchesType( const idTypeDef &matchtype ) const;
-	bool				MatchesVirtualFunction( const idTypeDef &matchfunc ) const;
-	void				AddFunctionParm( idTypeDef *parmtype, const char *name );
-	void				AddField( idTypeDef *fieldtype, const char *name );
+	bool				Inherits(const idTypeDef *basetype) const;
+	bool				MatchesType(const idTypeDef &matchtype) const;
+	bool				MatchesVirtualFunction(const idTypeDef &matchfunc) const;
+	void				AddFunctionParm(idTypeDef *parmtype, const char *name);
+	void				AddField(idTypeDef *fieldtype, const char *name);
 
-	void				SetName( const char *newname );
-	const char			*Name( void ) const;
+	void				SetName(const char *newname);
+	const char			*Name(void) const;
 
-	etype_t				Type( void ) const;
-	int					Size( void ) const;
+	etype_t				Type(void) const;
+	size_t				Size(void) const;
 
-	idTypeDef			*SuperClass( void ) const;
+	idTypeDef			*SuperClass(void) const;
 
-	idTypeDef			*ReturnType( void ) const;
-	void				SetReturnType( idTypeDef *type );
+	idTypeDef			*ReturnType(void) const;
+	void				SetReturnType(idTypeDef *type);
 
-	idTypeDef			*FieldType( void ) const;
-	void				SetFieldType( idTypeDef *type );
+	idTypeDef			*FieldType(void) const;
+	void				SetFieldType(idTypeDef *type);
 
-	idTypeDef			*PointerType( void ) const;
-	void				SetPointerType( idTypeDef *type );
+	idTypeDef			*PointerType(void) const;
+	void				SetPointerType(idTypeDef *type);
 
-	int					NumParameters( void ) const;
-	idTypeDef			*GetParmType( int parmNumber ) const;
-	const char			*GetParmName( int parmNumber ) const;
+	int					NumParameters(void) const;
+	idTypeDef			*GetParmType(int parmNumber) const;
+	const char			*GetParmName(int parmNumber) const;
 
-	int					NumFunctions( void ) const;
-	int					GetFunctionNumber( const function_t *func ) const;
-	const function_t	*GetFunction( int funcNumber ) const;
-	void				AddFunction( const function_t *func );
+	int					NumFunctions(void) const;
+	int					GetFunctionNumber(const function_t *func) const;
+	const function_t	*GetFunction(int funcNumber) const;
+	void				AddFunction(const function_t *func);
 };
 
 /***********************************************************************
@@ -135,20 +160,20 @@ public:
 	idScriptObject();
 	~idScriptObject();
 
-	void						Save( idSaveGame *savefile ) const;			// archives object for save game file
-	void						Restore( idRestoreGame *savefile );			// unarchives object from save game file
+	void						Save(idSaveGame *savefile) const;			// archives object for save game file
+	void						Restore(idRestoreGame *savefile);			// unarchives object from save game file
 
-	void						Free( void );
-	bool						SetType( const char *typeName );
-	void						ClearObject( void );
-	bool						HasObject( void ) const;
-	idTypeDef					*GetTypeDef( void ) const;
-	const char					*GetTypeName( void ) const;
-	const function_t			*GetConstructor( void ) const;
-	const function_t			*GetDestructor( void ) const;
-	const function_t			*GetFunction( const char *name ) const;
+	void						Free(void);
+	bool						SetType(const char *typeName);
+	void						ClearObject(void);
+	bool						HasObject(void) const;
+	idTypeDef					*GetTypeDef(void) const;
+	const char					*GetTypeName(void) const;
+	const function_t			*GetConstructor(void) const;
+	const function_t			*GetDestructor(void) const;
+	const function_t			*GetFunction(const char *name) const;
 
-	byte						*GetVariable( const char *name, etype_t etype ) const;
+	byte						*GetVariable(const char *name, etype_t etype) const;
 };
 
 /***********************************************************************
@@ -168,10 +193,10 @@ private:
 
 public:
 	idScriptVariable();
-	bool				IsLinked( void ) const;
-	void				Unlink( void );
-	void				LinkTo( idScriptObject &obj, const char *name );
-	idScriptVariable	&operator=( const returnType &value );
+	bool				IsLinked(void) const;
+	void				Unlink(void);
+	void				LinkTo(idScriptObject &obj, const char *name);
+	idScriptVariable	&operator=(const returnType &value);
 	operator returnType() const;
 };
 
@@ -181,30 +206,30 @@ ID_INLINE idScriptVariable<type, etype, returnType>::idScriptVariable() {
 }
 
 template<class type, etype_t etype, class returnType>
-ID_INLINE bool idScriptVariable<type, etype, returnType>::IsLinked( void ) const {
-	return ( data != NULL );
+ID_INLINE bool idScriptVariable<type, etype, returnType>::IsLinked(void) const {
+	return (data != NULL);
 }
 
 template<class type, etype_t etype, class returnType>
-ID_INLINE void idScriptVariable<type, etype, returnType>::Unlink( void ) {
+ID_INLINE void idScriptVariable<type, etype, returnType>::Unlink(void) {
 	data = NULL;
 }
 
 template<class type, etype_t etype, class returnType>
-ID_INLINE void idScriptVariable<type, etype, returnType>::LinkTo( idScriptObject &obj, const char *name ) {
-	data = ( type * )obj.GetVariable( name, etype );
-	if( !data ) {
-		gameError( "Missing '%s' field in script object '%s'", name, obj.GetTypeName() );
+ID_INLINE void idScriptVariable<type, etype, returnType>::LinkTo(idScriptObject &obj, const char *name) {
+	data = (type *)obj.GetVariable(name, etype);
+	if (!data) {
+		gameError("Missing '%s' field in script object '%s'", name, obj.GetTypeName());
 	}
 }
 
 template<class type, etype_t etype, class returnType>
-ID_INLINE idScriptVariable<type, etype, returnType> &idScriptVariable<type, etype, returnType>::operator=( const returnType &value ) {
+ID_INLINE idScriptVariable<type, etype, returnType> &idScriptVariable<type, etype, returnType>::operator=(const returnType &value) {
 	// check if we attempt to access the object before it's been linked
-	assert( data );
+	assert(data);
 	// make sure we don't crash if we don't have a pointer
-	if( data ) {
-		*data = ( type )value;
+	if (data) {
+		*data = (type)value;
 	}
 	return *this;
 }
@@ -212,13 +237,14 @@ ID_INLINE idScriptVariable<type, etype, returnType> &idScriptVariable<type, etyp
 template<class type, etype_t etype, class returnType>
 ID_INLINE idScriptVariable<type, etype, returnType>::operator returnType() const {
 	// check if we attempt to access the object before it's been linked
-	assert( data );
+	assert(data);
 	// make sure we don't crash if we don't have a pointer
-	if( data ) {
-		return ( const returnType ) * data;
-	} else {
+	if (data) {
+		return (const returnType)* data;
+	}
+	else {
 		// reasonably safe value
-		return ( const returnType )0;
+		return (const returnType)0;
 	}
 }
 
@@ -250,7 +276,7 @@ display an error message with line and file info.
 
 class idCompileError : public idException {
 public:
-	idCompileError( const char *text ) : idException( text ) {}
+	idCompileError(const char *text) : idException(text) {}
 };
 
 /***********************************************************************
@@ -297,34 +323,34 @@ public:
 	initialized_t			initialized;
 
 public:
-	idVarDef( idTypeDef *typeptr = NULL );
+	idVarDef(idTypeDef *typeptr = NULL);
 	~idVarDef();
 
-	const char 			*Name( void ) const;
-	const char 			*GlobalName( void ) const;
+	const char 			*Name(void) const;
+	const char 			*GlobalName(void) const;
 
-	void					SetTypeDef( idTypeDef *_type ) {
+	void					SetTypeDef(idTypeDef *_type) {
 		typeDef = _type;
 	}
-	idTypeDef 				*TypeDef( void ) const {
+	idTypeDef 				*TypeDef(void) const {
 		return typeDef;
 	}
-	etype_t					Type( void ) const {
-		return ( typeDef != NULL ) ? typeDef->Type() : ev_void;
+	etype_t					Type(void) const {
+		return (typeDef != NULL) ? typeDef->Type() : ev_void;
 	}
 
-	int						DepthOfScope( const idVarDef *otherScope ) const;
+	int						DepthOfScope(const idVarDef *otherScope) const;
 
-	void					SetFunction( function_t *func );
-	void					SetObject( idScriptObject *object );
-	void					SetValue( const eval_t &value, bool constant );
-	void					SetString( const char *string, bool constant );
+	void					SetFunction(function_t *func);
+	void					SetObject(idScriptObject *object);
+	void					SetValue(const eval_t &value, bool constant);
+	void					SetString(const char *string, bool constant);
 
-	idVarDef 				*Next( void ) const {
+	idVarDef 				*Next(void) const {
 		return next;    // next var def with same name
 	}
 
-	void					PrintInfo( idFile *file, int instructionPointer ) const;
+	void					PrintInfo(idFile *file, int instructionPointer) const;
 
 private:
 	idTypeDef 				*typeDef;
@@ -336,27 +362,27 @@ private:
 
   idVarDefName
 
-***********************************************************************/
+  ***********************************************************************/
 
 class idVarDefName {
 public:
-	idVarDefName( void ) {
+	idVarDefName(void) {
 		defs = NULL;
 	}
-	idVarDefName( const char *n ) {
+	idVarDefName(const char *n) {
 		name = n;
 		defs = NULL;
 	}
 
-	const char 			*Name( void ) const {
+	const char 			*Name(void) const {
 		return name;
 	}
-	idVarDef 				*GetDefs( void ) const {
+	idVarDef 				*GetDefs(void) const {
 		return defs;
 	}
 
-	void					AddDef( idVarDef *def );
-	void					RemoveDef( idVarDef *def );
+	void					AddDef(idVarDef *def);
+	void					RemoveDef(idVarDef *def);
 
 private:
 	idStr					name;
@@ -367,7 +393,7 @@ private:
 
   Variable and type defintions
 
-***********************************************************************/
+  ***********************************************************************/
 
 extern	idTypeDef	type_void;
 extern	idTypeDef	type_scriptevent;
@@ -428,7 +454,7 @@ private:
 	int											filenum;
 
 	int											numVariables;
-	byte										variables[ MAX_GLOBALS ];
+	byte										variables[MAX_GLOBALS];
 	idStaticList<byte, MAX_GLOBALS>				variableDefaults;
 	idStaticList<function_t, MAX_FUNCS>			functions;
 	idStaticList<statement_t, MAX_STATEMENTS>	statements;
@@ -445,7 +471,7 @@ private:
 	int											top_defs;
 	int											top_files;
 
-	void										CompileStats( void );
+	void										CompileStats(void);
 
 public:
 	idVarDef									*returnDef;
@@ -455,63 +481,63 @@ public:
 	~idProgram();
 
 	// save games
-	void										Save( idSaveGame *savefile ) const;
-	bool										Restore( idRestoreGame *savefile );
-	int											CalculateChecksum( void ) const;		// Used to insure program code has not
+	void										Save(idSaveGame *savefile) const;
+	bool										Restore(idRestoreGame *savefile);
+	int											CalculateChecksum(void) const;		// Used to insure program code has not
 	//    changed between savegames
 
-	void										Startup( const char *defaultScript );
-	void										Restart( void );
-	bool										CompileText( const char *source, const char *text, bool console );
-	const function_t							*CompileFunction( const char *functionName, const char *text );
-	void										CompileFile( const char *filename );
-	void										BeginCompilation( void );
-	void										FinishCompilation( void );
-	void										DisassembleStatement( idFile *file, int instructionPointer ) const;
-	void										Disassemble( void ) const;
-	void										FreeData( void );
+	void										Startup(const char *defaultScript);
+	void										Restart(void);
+	bool										CompileText(const char *source, const char *text, bool console);
+	const function_t							*CompileFunction(const char *functionName, const char *text);
+	void										CompileFile(const char *filename);
+	void										BeginCompilation(void);
+	void										FinishCompilation(void);
+	void										DisassembleStatement(idFile *file, int instructionPointer) const;
+	void										Disassemble(void) const;
+	void										FreeData(void);
 
-	const char									*GetFilename( int num );
-	int											GetFilenum( const char *name );
-	int											GetLineNumberForStatement( int index );
-	const char									*GetFilenameForStatement( int index );
+	const char									*GetFilename(int num);
+	int											GetFilenum(const char *name);
+	int											GetLineNumberForStatement(int index);
+	const char									*GetFilenameForStatement(int index);
 
-	idTypeDef									*AllocType( idTypeDef &type );
-	idTypeDef									*AllocType( etype_t etype, idVarDef *edef, const char *ename, int esize, idTypeDef *aux );
-	idTypeDef									*GetType( idTypeDef &type, bool allocate );
-	idTypeDef									*FindType( const char *name );
+	idTypeDef									*AllocType(idTypeDef &type);
+	idTypeDef									*AllocType(etype_t etype, idVarDef *edef, const char *ename, int esize, idTypeDef *aux);
+	idTypeDef									*GetType(idTypeDef &type, bool allocate);
+	idTypeDef									*FindType(const char *name);
 
-	idVarDef									*AllocDef( idTypeDef *type, const char *name, idVarDef *scope, bool constant );
-	idVarDef									*GetDef( const idTypeDef *type, const char *name, const idVarDef *scope ) const;
-	void										FreeDef( idVarDef *d, const idVarDef *scope );
-	idVarDef									*FindFreeResultDef( idTypeDef *type, const char *name, idVarDef *scope, const idVarDef *a, const idVarDef *b );
-	idVarDef									*GetDefList( const char *name ) const;
-	void										AddDefToNameList( idVarDef *def, const char *name );
+	idVarDef									*AllocDef(idTypeDef *type, const char *name, idVarDef *scope, bool constant);
+	idVarDef									*GetDef(const idTypeDef *type, const char *name, const idVarDef *scope) const;
+	void										FreeDef(idVarDef *d, const idVarDef *scope);
+	idVarDef									*FindFreeResultDef(idTypeDef *type, const char *name, idVarDef *scope, const idVarDef *a, const idVarDef *b);
+	idVarDef									*GetDefList(const char *name) const;
+	void										AddDefToNameList(idVarDef *def, const char *name);
 
-	function_t									*FindFunction( const char *name ) const;						// returns NULL if function not found
-	function_t									*FindFunction( const char *name, const idTypeDef *type ) const;	// returns NULL if function not found
-	function_t									&AllocFunction( idVarDef *def );
-	function_t									*GetFunction( int index );
-	int											GetFunctionIndex( const function_t *func );
+	function_t									*FindFunction(const char *name) const;						// returns NULL if function not found
+	function_t									*FindFunction(const char *name, const idTypeDef *type) const;	// returns NULL if function not found
+	function_t									&AllocFunction(idVarDef *def);
+	function_t									*GetFunction(int index);
+	int											GetFunctionIndex(const function_t *func);
 
-	void										SetEntity( const char *name, idEntity *ent );
+	void										SetEntity(const char *name, idEntity *ent);
 
-	statement_t									*AllocStatement( void );
-	statement_t									&GetStatement( int index );
-	int											NumStatements( void ) {
+	statement_t									*AllocStatement(void);
+	statement_t									&GetStatement(int index);
+	int											NumStatements(void) {
 		return statements.Num();
 	}
 
-	int 										GetReturnedInteger( void );
+	int 										GetReturnedInteger(void);
 
-	void										ReturnFloat( float value );
-	void										ReturnInteger( int value );
-	void										ReturnVector( idVec3 const &vec );
-	void										ReturnString( const char *string );
-	void										ReturnEntity( idEntity *ent );
+	void										ReturnFloat(float value);
+	void										ReturnInteger(int value);
+	void										ReturnVector(idVec3 const &vec);
+	void										ReturnString(const char *string);
+	void										ReturnEntity(idEntity *ent);
 
-	int											NumFilenames( void ) {
-		return fileList.Num( );
+	int											NumFilenames(void) {
+		return fileList.Num();
 	}
 };
 
@@ -520,8 +546,8 @@ public:
 idProgram::GetStatement
 ================
 */
-ID_INLINE statement_t &idProgram::GetStatement( int index ) {
-	return statements[ index ];
+ID_INLINE statement_t &idProgram::GetStatement(int index) {
+	return statements[index];
 }
 
 /*
@@ -529,8 +555,8 @@ ID_INLINE statement_t &idProgram::GetStatement( int index ) {
 idProgram::GetFunction
 ================
 */
-ID_INLINE function_t *idProgram::GetFunction( int index ) {
-	return &functions[ index ];
+ID_INLINE function_t *idProgram::GetFunction(int index) {
+	return &functions[index];
 }
 
 /*
@@ -538,7 +564,7 @@ ID_INLINE function_t *idProgram::GetFunction( int index ) {
 idProgram::GetFunctionIndex
 ================
 */
-ID_INLINE int idProgram::GetFunctionIndex( const function_t *func ) {
+ID_INLINE int idProgram::GetFunctionIndex(const function_t *func) {
 	return func - &functions[0];
 }
 
@@ -547,7 +573,7 @@ ID_INLINE int idProgram::GetFunctionIndex( const function_t *func ) {
 idProgram::GetReturnedInteger
 ================
 */
-ID_INLINE int idProgram::GetReturnedInteger( void ) {
+ID_INLINE int idProgram::GetReturnedInteger(void) {
 	return *returnDef->value.intPtr;
 }
 
@@ -556,7 +582,7 @@ ID_INLINE int idProgram::GetReturnedInteger( void ) {
 idProgram::ReturnFloat
 ================
 */
-ID_INLINE void idProgram::ReturnFloat( float value ) {
+ID_INLINE void idProgram::ReturnFloat(float value) {
 	*returnDef->value.floatPtr = value;
 }
 
@@ -565,7 +591,7 @@ ID_INLINE void idProgram::ReturnFloat( float value ) {
 idProgram::ReturnInteger
 ================
 */
-ID_INLINE void idProgram::ReturnInteger( int value ) {
+ID_INLINE void idProgram::ReturnInteger(int value) {
 	*returnDef->value.intPtr = value;
 }
 
@@ -574,7 +600,7 @@ ID_INLINE void idProgram::ReturnInteger( int value ) {
 idProgram::ReturnVector
 ================
 */
-ID_INLINE void idProgram::ReturnVector( idVec3 const &vec ) {
+ID_INLINE void idProgram::ReturnVector(idVec3 const &vec) {
 	*returnDef->value.vectorPtr = vec;
 }
 
@@ -583,8 +609,8 @@ ID_INLINE void idProgram::ReturnVector( idVec3 const &vec ) {
 idProgram::ReturnString
 ================
 */
-ID_INLINE void idProgram::ReturnString( const char *string ) {
-	idStr::Copynz( returnStringDef->value.stringPtr, string, MAX_STRING_LEN );
+ID_INLINE void idProgram::ReturnString(const char *string) {
+	idStr::Copynz(returnStringDef->value.stringPtr, string, MAX_STRING_LEN);
 }
 
 /*
@@ -592,8 +618,8 @@ ID_INLINE void idProgram::ReturnString( const char *string ) {
 idProgram::GetFilename
 ================
 */
-ID_INLINE const char *idProgram::GetFilename( int num ) {
-	return fileList[ num ];
+ID_INLINE const char *idProgram::GetFilename(int num) {
+	return fileList[num];
 }
 
 /*
@@ -601,8 +627,8 @@ ID_INLINE const char *idProgram::GetFilename( int num ) {
 idProgram::GetLineNumberForStatement
 ================
 */
-ID_INLINE int idProgram::GetLineNumberForStatement( int index ) {
-	return statements[ index ].linenumber;
+ID_INLINE int idProgram::GetLineNumberForStatement(int index) {
+	return statements[index].linenumber;
 }
 
 /*
@@ -610,8 +636,8 @@ ID_INLINE int idProgram::GetLineNumberForStatement( int index ) {
 idProgram::GetFilenameForStatement
 ================
 */
-ID_INLINE const char *idProgram::GetFilenameForStatement( int index ) {
-	return GetFilename( statements[ index ].file );
+ID_INLINE const char *idProgram::GetFilenameForStatement(int index) {
+	return GetFilename(statements[index].file);
 }
 
 #endif /* !__SCRIPT_PROGRAM_H__ */

@@ -1494,7 +1494,6 @@ void FullscreenFXManager::Initialize(idPlayerView *pv) {
 	renderSystem->CaptureRenderToImage("_scratch");
 	renderSystem->UnCrop();
 	renderSystem->CaptureRenderToImage("_currentRender");
-	renderSystem->CaptureDepthToImage("_currentDepth");
 }
 
 /*
@@ -1549,15 +1548,6 @@ void FullscreenFXManager::CaptureCurrentRender() {
 
 /*
 ==================
-FullscreenFXManager::CaptureCurrentDepth
-==================
-*/
-void FullscreenFXManager::CaptureCurrentDepth() {
-	renderSystem->CaptureDepthToImage("_currentDepth");
-}
-
-/*
-==================
 FullscreenFXManager::Process
 ==================
 */
@@ -1607,9 +1597,8 @@ void FullscreenFXManager::Process(const renderView_t *view) {
 		// do the actual drawing
 		if (drawIt) {
 			atLeastOneFX = true;
-			// we need to dump to _currentRender and _currentDepth
+			// we need to dump to _currentRender
 			CaptureCurrentRender();
-			CaptureCurrentDepth();
 			// handle the accum pass if we have one
 			if (pfx->HasAccum()) {
 				// if we're in high quality mode, we need to crop the accum pass
@@ -1629,9 +1618,8 @@ void FullscreenFXManager::Process(const renderView_t *view) {
 		}
 	}
 	if (!highQualityMode) {
-		// we need to dump to _currentRender and _currentDepth
+		// we need to dump to _currentRender
 		CaptureCurrentRender();
-		CaptureCurrentDepth();
 		// uncrop view
 		renderSystem->UnCrop();
 		// draw the final full-screen image

@@ -485,7 +485,6 @@ void idEntity::Spawn( void ) {
 	}
 	// auto-start a sound on the entity
 	if( refSound.shader && !refSound.waitfortrigger ) {
-		//StartSoundShader( refSound.shader, SND_CHANNEL_ANY, 0, false, NULL );
 		// grimm --> changed to snd_channel_ambient
 		StartSoundShader( refSound.shader, SND_CHANNEL_AMBIENT, 0, false, NULL );
 	}
@@ -701,7 +700,6 @@ idEntity::GetName
 const char *idEntity::GetName( void ) const {
 	return name.c_str();
 }
-
 
 /***********************************************************************
 
@@ -2553,8 +2551,6 @@ void idEntity::RemoveContactEntity( idEntity *ent ) {
 	GetPhysics()->RemoveContactEntity( ent );
 }
 
-
-
 /***********************************************************************
 
 	Damage
@@ -2759,7 +2755,6 @@ This is a virtual function that subclasses are expected to implement.
 */
 void idEntity::Killed( idEntity *inflictor, idEntity *attacker, int damage, const idVec3 &dir, int location ) {
 }
-
 
 /***********************************************************************
 
@@ -2975,7 +2970,6 @@ void idEntity::SignalEvent( idThread *thread, signalNum_t signalnum ) {
   Guis.
 
 ***********************************************************************/
-
 
 /*
 ================
@@ -3601,7 +3595,6 @@ void idEntity::Event_SetShaderParms( float parm0, float parm1, float parm2, floa
 	UpdateVisuals();
 }
 
-
 /*
 ================
 idEntity::Event_SetColor
@@ -4149,9 +4142,8 @@ idEntity::Event_SprayDecal
 ================
 */
 void idEntity::Event_SprayDecal( idVec3 spray_origin, const char *mtr_decal, idVec3 spray_angle, float size ) {
-	//srpay something
+	//spray something
 	idVec3 newangle = spray_angle;
-	//gameLocal.Printf( "%s <--current vector\n", spray_angle->ToString() );
 	if( spray_angle.x <= -45 ) {
 		newangle.z = 90;
 	}
@@ -4160,7 +4152,6 @@ void idEntity::Event_SprayDecal( idVec3 spray_origin, const char *mtr_decal, idV
 	}
 	gameLocal.ProjectDecal( spray_origin, newangle, 256.0f, true, size, mtr_decal, 0, true );
 }
-
 
 /***********************************************************************
 

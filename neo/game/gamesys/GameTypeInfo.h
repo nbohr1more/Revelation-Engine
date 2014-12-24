@@ -7,9 +7,9 @@
 
 	This file has been generated with the Type Info Generator v1.0 (c) 2004 id Software
 
-	1109 constants
+	1115 constants
 	118 enums
-	514 classes/structs/unions
+	508 classes/structs/unions
 	36 templates
 	6 max inheritance level for 'idPlayer'
 
@@ -250,6 +250,7 @@ static constantInfo_t constantInfo[] = {
 	{ "const int", "BUTTON_ZOOM", "(1<<(2))" },
 	{ "const int", "BUTTON_SCORES", "(1<<(3))" },
 	{ "const int", "BUTTON_MLOOK", "(1<<(4))" },
+	{ "const int", "BUTTON_ATTACK2", "(1<<(5))" },
 	{ "const int", "BUTTON_5", "(1<<(5))" },
 	{ "const int", "BUTTON_6", "(1<<(6))" },
 	{ "const int", "BUTTON_7", "(1<<(7))" },
@@ -294,6 +295,11 @@ static constantInfo_t constantInfo[] = {
 	{ "const int", "IMPULSE_38", "38" },
 	{ "const int", "IMPULSE_39", "39" },
 	{ "const int", "IMPULSE_40", "40" },
+	{ "const int", "IMPULSE_41", "41" },
+	{ "const int", "IMPULSE_42", "42" },
+	{ "const int", "IMPULSE_43", "43" },
+	{ "const int", "IMPULSE_44", "44" },
+	{ "const int", "IMPULSE_45", "45" },
 	{ "const int", "UCF_IMPULSE_SEQUENCE", "0x0001" },
 	{ "int", "INHIBIT_SESSION", "0" },
 	{ "int", "INHIBIT_ASYNC", "1" },
@@ -756,7 +762,7 @@ static constantInfo_t constantInfo[] = {
 	{ "int", "idMultiplayerGame::VOTE_RESET", "4" },
 	{ "const int", "MAX_GAME_MESSAGE_SIZE", "8192" },
 	{ "const int", "MAX_ENTITY_STATE_SIZE", "512" },
-	{ "const int", "ENTITY_PVS_SIZE", "(((1<<13)+31)>>5)" },
+	{ "const int", "ENTITY_PVS_SIZE", "(((1<<12)+31)>>5)" },
 	{ "const int", "NUM_RENDER_PORTAL_BITS", "0(7)" },
 	{ "const int", "MAX_EVENT_PARAM_SIZE", "128" },
 	{ "int", "GAME_RELIABLE_MESSAGE_INIT_DECL_REMAP", "0" },
@@ -4203,6 +4209,7 @@ static classVariableInfo_t glconfig_t_typeInfo[] = {
 	{ "bool", "twoSidedStencilAvailable", (int)(&((glconfig_t *)0)->twoSidedStencilAvailable), sizeof( ((glconfig_t *)0)->twoSidedStencilAvailable ) },
 	{ "bool", "textureNonPowerOfTwoAvailable", (int)(&((glconfig_t *)0)->textureNonPowerOfTwoAvailable), sizeof( ((glconfig_t *)0)->textureNonPowerOfTwoAvailable ) },
 	{ "bool", "depthBoundsTestAvailable", (int)(&((glconfig_t *)0)->depthBoundsTestAvailable), sizeof( ((glconfig_t *)0)->depthBoundsTestAvailable ) },
+	{ "bool", "depthClampAvailable", (int)(&((glconfig_t *)0)->depthClampAvailable), sizeof( ((glconfig_t *)0)->depthClampAvailable ) },
 	{ "bool", "atiFragmentShaderAvailable", (int)(&((glconfig_t *)0)->atiFragmentShaderAvailable), sizeof( ((glconfig_t *)0)->atiFragmentShaderAvailable ) },
 	{ "bool", "atiTwoSidedStencilAvailable", (int)(&((glconfig_t *)0)->atiTwoSidedStencilAvailable), sizeof( ((glconfig_t *)0)->atiTwoSidedStencilAvailable ) },
 	{ "bool", "gl2TwoSidedStencilAvailable", (int)(&((glconfig_t *)0)->gl2TwoSidedStencilAvailable), sizeof( ((glconfig_t *)0)->gl2TwoSidedStencilAvailable ) },
@@ -4767,7 +4774,7 @@ static classVariableInfo_t eval_t_typeInfo[] = {
 static classVariableInfo_t idTypeDef_typeInfo[] = {
 	{ "etype_t", "type", (int)(&((idTypeDef *)0)->type), sizeof( ((idTypeDef *)0)->type ) },
 	{ "idStr", "name", (int)(&((idTypeDef *)0)->name), sizeof( ((idTypeDef *)0)->name ) },
-	{ "int", "size", (int)(&((idTypeDef *)0)->size), sizeof( ((idTypeDef *)0)->size ) },
+	{ "size_t", "size", (int)(&((idTypeDef *)0)->size), sizeof( ((idTypeDef *)0)->size ) },
 	{ "idTypeDef *", "auxType", (int)(&((idTypeDef *)0)->auxType), sizeof( ((idTypeDef *)0)->auxType ) },
 	{ "idList < idTypeDef * >", "parmTypes", (int)(&((idTypeDef *)0)->parmTypes), sizeof( ((idTypeDef *)0)->parmTypes ) },
 	{ "idStrList", "parmNames", (int)(&((idTypeDef *)0)->parmNames), sizeof( ((idTypeDef *)0)->parmNames ) },
@@ -5102,9 +5109,9 @@ static classVariableInfo_t idPush_pushedGroup_s_typeInfo[] = {
 };
 
 static classVariableInfo_t idPush_typeInfo[] = {
-	{ "idPush::pushed_s[8192]", "pushed", (int)(&((idPush *)0)->pushed), sizeof( ((idPush *)0)->pushed ) },
+	{ "idPush::pushed_s[4096]", "pushed", (int)(&((idPush *)0)->pushed), sizeof( ((idPush *)0)->pushed ) },
 	{ "int", "numPushed", (int)(&((idPush *)0)->numPushed), sizeof( ((idPush *)0)->numPushed ) },
-	{ "idPush::pushedGroup_s[8192]", "pushedGroup", (int)(&((idPush *)0)->pushedGroup), sizeof( ((idPush *)0)->pushedGroup ) },
+	{ "idPush::pushedGroup_s[4096]", "pushedGroup", (int)(&((idPush *)0)->pushedGroup), sizeof( ((idPush *)0)->pushedGroup ) },
 	{ "int", "pushedGroupSize", (int)(&((idPush *)0)->pushedGroupSize), sizeof( ((idPush *)0)->pushedGroupSize ) },
 	{ NULL, 0 }
 };
@@ -5213,7 +5220,7 @@ static classVariableInfo_t entityState_t_typeInfo[] = {
 static classVariableInfo_t snapshot_t_typeInfo[] = {
 	{ "int", "sequence", (int)(&((snapshot_t *)0)->sequence), sizeof( ((snapshot_t *)0)->sequence ) },
 	{ "entityState_t *", "firstEntityState", (int)(&((snapshot_t *)0)->firstEntityState), sizeof( ((snapshot_t *)0)->firstEntityState ) },
-	{ "int[256]", "pvs", (int)(&((snapshot_t *)0)->pvs), sizeof( ((snapshot_t *)0)->pvs ) },
+	{ "int[128]", "pvs", (int)(&((snapshot_t *)0)->pvs), sizeof( ((snapshot_t *)0)->pvs ) },
 	{ "snapshot_s *", "next", (int)(&((snapshot_t *)0)->next), sizeof( ((snapshot_t *)0)->next ) },
 	{ NULL, 0 }
 };
@@ -5253,8 +5260,8 @@ static classVariableInfo_t idGameLocal_typeInfo[] = {
 	{ "idDict[32]", "userInfo", (int)(&((idGameLocal *)0)->userInfo), sizeof( ((idGameLocal *)0)->userInfo ) },
 	{ "usercmd_t[32]", "usercmds", (int)(&((idGameLocal *)0)->usercmds), sizeof( ((idGameLocal *)0)->usercmds ) },
 	{ "idDict[32]", "persistentPlayerInfo", (int)(&((idGameLocal *)0)->persistentPlayerInfo), sizeof( ((idGameLocal *)0)->persistentPlayerInfo ) },
-	{ "idEntity *[8192]", "entities", (int)(&((idGameLocal *)0)->entities), sizeof( ((idGameLocal *)0)->entities ) },
-	{ "int[8192]", "spawnIds", (int)(&((idGameLocal *)0)->spawnIds), sizeof( ((idGameLocal *)0)->spawnIds ) },
+	{ "idEntity *[4096]", "entities", (int)(&((idGameLocal *)0)->entities), sizeof( ((idGameLocal *)0)->entities ) },
+	{ "int[4096]", "spawnIds", (int)(&((idGameLocal *)0)->spawnIds), sizeof( ((idGameLocal *)0)->spawnIds ) },
 	{ "int", "firstFreeIndex", (int)(&((idGameLocal *)0)->firstFreeIndex), sizeof( ((idGameLocal *)0)->firstFreeIndex ) },
 	{ "int", "num_entities", (int)(&((idGameLocal *)0)->num_entities), sizeof( ((idGameLocal *)0)->num_entities ) },
 	{ "idHashIndex", "entityHash", (int)(&((idGameLocal *)0)->entityHash), sizeof( ((idGameLocal *)0)->entityHash ) },
@@ -5299,17 +5306,6 @@ static classVariableInfo_t idGameLocal_typeInfo[] = {
 	{ "int", "entityDefBits", (int)(&((idGameLocal *)0)->entityDefBits), sizeof( ((idGameLocal *)0)->entityDefBits ) },
 	{ "idEntityPtr < idEntity >", "lastGUIEnt", (int)(&((idGameLocal *)0)->lastGUIEnt), sizeof( ((idGameLocal *)0)->lastGUIEnt ) },
 	{ "int", "lastGUI", (int)(&((idGameLocal *)0)->lastGUI), sizeof( ((idGameLocal *)0)->lastGUI ) },
-	{ "idList < int >", "currentLights", (int)(&((idGameLocal *)0)->currentLights), sizeof( ((idGameLocal *)0)->currentLights ) },
-	{ "idVec3", "explosionOrigin", (int)(&((idGameLocal *)0)->explosionOrigin), sizeof( ((idGameLocal *)0)->explosionOrigin ) },
-	{ "int", "explosionRadius", (int)(&((idGameLocal *)0)->explosionRadius), sizeof( ((idGameLocal *)0)->explosionRadius ) },
-	{ "int", "explosionDamage", (int)(&((idGameLocal *)0)->explosionDamage), sizeof( ((idGameLocal *)0)->explosionDamage ) },
-	{ "int", "explosionTime", (int)(&((idGameLocal *)0)->explosionTime), sizeof( ((idGameLocal *)0)->explosionTime ) },
-	{ "idList < int >", "randomEnemyList", (int)(&((idGameLocal *)0)->randomEnemyList), sizeof( ((idGameLocal *)0)->randomEnemyList ) },
-	{ "int", "randomEnemyListNum", (int)(&((idGameLocal *)0)->randomEnemyListNum), sizeof( ((idGameLocal *)0)->randomEnemyListNum ) },
-	{ "int", "randomEnemyTime", (int)(&((idGameLocal *)0)->randomEnemyTime), sizeof( ((idGameLocal *)0)->randomEnemyTime ) },
-	{ "int", "randomEnemyTally", (int)(&((idGameLocal *)0)->randomEnemyTally), sizeof( ((idGameLocal *)0)->randomEnemyTally ) },
-	{ "idEntityPtr < idEntity >", "portalSkyEnt", (int)(&((idGameLocal *)0)->portalSkyEnt), sizeof( ((idGameLocal *)0)->portalSkyEnt ) },
-	{ "bool", "portalSkyActive", (int)(&((idGameLocal *)0)->portalSkyActive), sizeof( ((idGameLocal *)0)->portalSkyActive ) },
 	{ "idStr", "mapFileName", (int)(&((idGameLocal *)0)->mapFileName), sizeof( ((idGameLocal *)0)->mapFileName ) },
 	{ "idMapFile *", "mapFile", (int)(&((idGameLocal *)0)->mapFile), sizeof( ((idGameLocal *)0)->mapFile ) },
 	{ "bool", "mapCycleLoaded", (int)(&((idGameLocal *)0)->mapCycleLoaded), sizeof( ((idGameLocal *)0)->mapCycleLoaded ) },
@@ -5330,15 +5326,15 @@ static classVariableInfo_t idGameLocal_typeInfo[] = {
 	{ "bool", "influenceActive", (int)(&((idGameLocal *)0)->influenceActive), sizeof( ((idGameLocal *)0)->influenceActive ) },
 	{ "int", "nextGibTime", (int)(&((idGameLocal *)0)->nextGibTime), sizeof( ((idGameLocal *)0)->nextGibTime ) },
 	{ "idList < int >[1024]", "clientDeclRemap", (int)(&((idGameLocal *)0)->clientDeclRemap), sizeof( ((idGameLocal *)0)->clientDeclRemap ) },
-	{ "entityState_t *[262144]", "clientEntityStates", (int)(&((idGameLocal *)0)->clientEntityStates), sizeof( ((idGameLocal *)0)->clientEntityStates ) },
-	{ "int[8192]", "clientPVS", (int)(&((idGameLocal *)0)->clientPVS), sizeof( ((idGameLocal *)0)->clientPVS ) },
+	{ "entityState_t *[131072]", "clientEntityStates", (int)(&((idGameLocal *)0)->clientEntityStates), sizeof( ((idGameLocal *)0)->clientEntityStates ) },
+	{ "int[4096]", "clientPVS", (int)(&((idGameLocal *)0)->clientPVS), sizeof( ((idGameLocal *)0)->clientPVS ) },
 	{ "snapshot_t *[32]", "clientSnapshots", (int)(&((idGameLocal *)0)->clientSnapshots), sizeof( ((idGameLocal *)0)->clientSnapshots ) },
 	{ "idBlockAlloc < entityState_t , 256 >", "entityStateAllocator", (int)(&((idGameLocal *)0)->entityStateAllocator), sizeof( ((idGameLocal *)0)->entityStateAllocator ) },
 	{ "idBlockAlloc < snapshot_t , 64 >", "snapshotAllocator", (int)(&((idGameLocal *)0)->snapshotAllocator), sizeof( ((idGameLocal *)0)->snapshotAllocator ) },
 	{ "idEventQueue", "eventQueue", (int)(&((idGameLocal *)0)->eventQueue), sizeof( ((idGameLocal *)0)->eventQueue ) },
 	{ "idEventQueue", "savedEventQueue", (int)(&((idGameLocal *)0)->savedEventQueue), sizeof( ((idGameLocal *)0)->savedEventQueue ) },
-	{ "idStaticList < spawnSpot_t , ( 1 << 13 ) >", "spawnSpots", (int)(&((idGameLocal *)0)->spawnSpots), sizeof( ((idGameLocal *)0)->spawnSpots ) },
-	{ "idStaticList < idEntity * , ( 1 << 13 ) >", "initialSpots", (int)(&((idGameLocal *)0)->initialSpots), sizeof( ((idGameLocal *)0)->initialSpots ) },
+	{ "idStaticList < spawnSpot_t , ( 1 << 12 ) >", "spawnSpots", (int)(&((idGameLocal *)0)->spawnSpots), sizeof( ((idGameLocal *)0)->spawnSpots ) },
+	{ "idStaticList < idEntity * , ( 1 << 12 ) >", "initialSpots", (int)(&((idGameLocal *)0)->initialSpots), sizeof( ((idGameLocal *)0)->initialSpots ) },
 	{ "int", "currentInitialSpot", (int)(&((idGameLocal *)0)->currentInitialSpot), sizeof( ((idGameLocal *)0)->currentInitialSpot ) },
 	{ "idDict", "newInfo", (int)(&((idGameLocal *)0)->newInfo), sizeof( ((idGameLocal *)0)->newInfo ) },
 	{ "idStrList", "shakeSounds", (int)(&((idGameLocal *)0)->shakeSounds), sizeof( ((idGameLocal *)0)->shakeSounds ) },
@@ -5368,15 +5364,6 @@ static classVariableInfo_t idForce_Drag_typeInfo[] = {
 	{ "int", "id", (int)(&((idForce_Drag *)0)->id), sizeof( ((idForce_Drag *)0)->id ) },
 	{ "idVec3", "p", (int)(&((idForce_Drag *)0)->p), sizeof( ((idForce_Drag *)0)->p ) },
 	{ "idVec3", "dragPosition", (int)(&((idForce_Drag *)0)->dragPosition), sizeof( ((idForce_Drag *)0)->dragPosition ) },
-	{ NULL, 0 }
-};
-
-static classVariableInfo_t idForce_Grab_typeInfo[] = {
-	{ "float", "damping", (int)(&((idForce_Grab *)0)->damping), sizeof( ((idForce_Grab *)0)->damping ) },
-	{ "idVec3", "goalPosition", (int)(&((idForce_Grab *)0)->goalPosition), sizeof( ((idForce_Grab *)0)->goalPosition ) },
-	{ "float", "distanceToGoal", (int)(&((idForce_Grab *)0)->distanceToGoal), sizeof( ((idForce_Grab *)0)->distanceToGoal ) },
-	{ "idPhysics *", "physics", (int)(&((idForce_Grab *)0)->physics), sizeof( ((idForce_Grab *)0)->physics ) },
-	{ "int", "id", (int)(&((idForce_Grab *)0)->id), sizeof( ((idForce_Grab *)0)->id ) },
 	{ NULL, 0 }
 };
 
@@ -6061,20 +6048,6 @@ static classVariableInfo_t idEditEntities_typeInfo[] = {
 	{ NULL, 0 }
 };
 
-static classVariableInfo_t idGrabEntity_typeInfo[] = {
-	{ "idEntityPtr < idEntity >", "dragEnt", (int)(&((idGrabEntity *)0)->dragEnt), sizeof( ((idGrabEntity *)0)->dragEnt ) },
-	{ "idForce_Grab", "drag", (int)(&((idGrabEntity *)0)->drag), sizeof( ((idGrabEntity *)0)->drag ) },
-	{ "idPlayer *", "owner", (int)(&((idGrabEntity *)0)->owner), sizeof( ((idGrabEntity *)0)->owner ) },
-	{ "idVec3", "saveGravity", (int)(&((idGrabEntity *)0)->saveGravity), sizeof( ((idGrabEntity *)0)->saveGravity ) },
-	{ "idVec3", "localPlayerPoint", (int)(&((idGrabEntity *)0)->localPlayerPoint), sizeof( ((idGrabEntity *)0)->localPlayerPoint ) },
-	{ "idAngles", "prevViewAngles", (int)(&((idGrabEntity *)0)->prevViewAngles), sizeof( ((idGrabEntity *)0)->prevViewAngles ) },
-	{ "int", "id", (int)(&((idGrabEntity *)0)->id), sizeof( ((idGrabEntity *)0)->id ) },
-	{ "int", "oldUcmdFlags", (int)(&((idGrabEntity *)0)->oldUcmdFlags), sizeof( ((idGrabEntity *)0)->oldUcmdFlags ) },
-	{ "int", "dragFailTime", (int)(&((idGrabEntity *)0)->dragFailTime), sizeof( ((idGrabEntity *)0)->dragFailTime ) },
-	{ "int", "lastThrownTime", (int)(&((idGrabEntity *)0)->lastThrownTime), sizeof( ((idGrabEntity *)0)->lastThrownTime ) },
-	{ NULL, 0 }
-};
-
 static classVariableInfo_t jointConversion_t_typeInfo[] = {
 	{ "int", "bodyId", (int)(&((jointConversion_t *)0)->bodyId), sizeof( ((jointConversion_t *)0)->bodyId ) },
 	{ "jointHandle_t", "jointHandle", (int)(&((jointConversion_t *)0)->jointHandle), sizeof( ((jointConversion_t *)0)->jointHandle ) },
@@ -6191,7 +6164,6 @@ static classVariableInfo_t idAFAttachment_typeInfo[] = {
 };
 
 static classVariableInfo_t idAFEntity_Base_typeInfo[] = {
-	{ "float", "NextSprayTime", (int)(&((idAFEntity_Base *)0)->NextSprayTime), sizeof( ((idAFEntity_Base *)0)->NextSprayTime ) },
 	{ "idAF", "af", (int)(&((idAFEntity_Base *)0)->af), sizeof( ((idAFEntity_Base *)0)->af ) },
 	{ "idClipModel *", "combatModel", (int)(&((idAFEntity_Base *)0)->combatModel), sizeof( ((idAFEntity_Base *)0)->combatModel ) },
 	{ "int", "combatModelContents", (int)(&((idAFEntity_Base *)0)->combatModelContents), sizeof( ((idAFEntity_Base *)0)->combatModelContents ) },
@@ -6202,7 +6174,6 @@ static classVariableInfo_t idAFEntity_Base_typeInfo[] = {
 };
 
 static classVariableInfo_t idAFEntity_Gibbable_typeInfo[] = {
-	{ "bool", "searchable", (int)(&((idAFEntity_Gibbable *)0)->searchable), sizeof( ((idAFEntity_Gibbable *)0)->searchable ) },
 	{ "idRenderModel *", "skeletonModel", (int)(&((idAFEntity_Gibbable *)0)->skeletonModel), sizeof( ((idAFEntity_Gibbable *)0)->skeletonModel ) },
 	{ "int", "skeletonModelDefHandle", (int)(&((idAFEntity_Gibbable *)0)->skeletonModelDefHandle), sizeof( ((idAFEntity_Gibbable *)0)->skeletonModelDefHandle ) },
 	{ "bool", "gibbed", (int)(&((idAFEntity_Gibbable *)0)->gibbed), sizeof( ((idAFEntity_Gibbable *)0)->gibbed ) },
@@ -6438,10 +6409,6 @@ static classVariableInfo_t idPhantomObjects_typeInfo[] = {
 	{ NULL, 0 }
 };
 
-static classVariableInfo_t idPortalSky_typeInfo[] = {
-	{ NULL, 0 }
-};
-
 static classVariableInfo_t idAnimState_typeInfo[] = {
 	{ "bool", "idleAnim", (int)(&((idAnimState *)0)->idleAnim), sizeof( ((idAnimState *)0)->idleAnim ) },
 	{ "idStr", "state", (int)(&((idAnimState *)0)->state), sizeof( ((idAnimState *)0)->state ) },
@@ -6517,8 +6484,6 @@ static classVariableInfo_t idProjectile_projectileFlags_s_typeInfo[] = {
 //	{ "bool", "randomShaderSpin", (int)(&((idProjectile::projectileFlags_s *)0)->randomShaderSpin), sizeof( ((idProjectile::projectileFlags_s *)0)->randomShaderSpin ) },
 //	{ "bool", "isTracer", (int)(&((idProjectile::projectileFlags_s *)0)->isTracer), sizeof( ((idProjectile::projectileFlags_s *)0)->isTracer ) },
 //	{ "bool", "noSplashDamage", (int)(&((idProjectile::projectileFlags_s *)0)->noSplashDamage), sizeof( ((idProjectile::projectileFlags_s *)0)->noSplashDamage ) },
-//	{ "bool", "sticky", (int)(&((idProjectile::projectileFlags_s *)0)->sticky), sizeof( ((idProjectile::projectileFlags_s *)0)->sticky ) },
-//	{ "bool", "continuous_damage", (int)(&((idProjectile::projectileFlags_s *)0)->continuous_damage), sizeof( ((idProjectile::projectileFlags_s *)0)->continuous_damage ) },
 	{ NULL, 0 }
 };
 
@@ -6538,7 +6503,6 @@ static classVariableInfo_t idProjectile_typeInfo[] = {
 	{ "idPhysics_RigidBody", "physicsObj", (int)(&((idProjectile *)0)->physicsObj), sizeof( ((idProjectile *)0)->physicsObj ) },
 	{ "const idDeclParticle *", "smokeFly", (int)(&((idProjectile *)0)->smokeFly), sizeof( ((idProjectile *)0)->smokeFly ) },
 	{ "int", "smokeFlyTime", (int)(&((idProjectile *)0)->smokeFlyTime), sizeof( ((idProjectile *)0)->smokeFlyTime ) },
-	{ "idStr", "damageDefName", (int)(&((idProjectile *)0)->damageDefName), sizeof( ((idProjectile *)0)->damageDefName ) },
 	{ "projectileState_t", "state", (int)(&((idProjectile *)0)->state), sizeof( ((idProjectile *)0)->state ) },
 	{ "bool", "netSyncPhysics", (int)(&((idProjectile *)0)->netSyncPhysics), sizeof( ((idProjectile *)0)->netSyncPhysics ) },
 	{ NULL, 0 }
@@ -6597,15 +6561,10 @@ static classVariableInfo_t idDebris_typeInfo[] = {
 	{ "const idDeclParticle *", "smokeFly", (int)(&((idDebris *)0)->smokeFly), sizeof( ((idDebris *)0)->smokeFly ) },
 	{ "int", "smokeFlyTime", (int)(&((idDebris *)0)->smokeFlyTime), sizeof( ((idDebris *)0)->smokeFlyTime ) },
 	{ "const idSoundShader *", "sndBounce", (int)(&((idDebris *)0)->sndBounce), sizeof( ((idDebris *)0)->sndBounce ) },
-	{ "idStr", "mtr_collide", (int)(&((idDebris *)0)->mtr_collide), sizeof( ((idDebris *)0)->mtr_collide ) },
-	{ "int", "last_spraytime", (int)(&((idDebris *)0)->last_spraytime), sizeof( ((idDebris *)0)->last_spraytime ) },
-	{ "idStr", "fxCollide", (int)(&((idDebris *)0)->fxCollide), sizeof( ((idDebris *)0)->fxCollide ) },
-	{ "int", "nextCollideFxTime", (int)(&((idDebris *)0)->nextCollideFxTime), sizeof( ((idDebris *)0)->nextCollideFxTime ) },
 	{ NULL, 0 }
 };
 
 static classVariableInfo_t idWeapon_typeInfo[] = {
-	{ "float", "wm_hide_distance", (int)(&((idWeapon *)0)->wm_hide_distance), sizeof( ((idWeapon *)0)->wm_hide_distance ) },
 	{ "idScriptBool", "WEAPON_ATTACK", (int)(&((idWeapon *)0)->WEAPON_ATTACK), sizeof( ((idWeapon *)0)->WEAPON_ATTACK ) },
 	{ "idScriptBool", "WEAPON_RELOAD", (int)(&((idWeapon *)0)->WEAPON_RELOAD), sizeof( ((idWeapon *)0)->WEAPON_RELOAD ) },
 	{ "idScriptBool", "WEAPON_NETRELOAD", (int)(&((idWeapon *)0)->WEAPON_NETRELOAD), sizeof( ((idWeapon *)0)->WEAPON_NETRELOAD ) },
@@ -6732,7 +6691,6 @@ static classVariableInfo_t idWorldspawn_typeInfo[] = {
 };
 
 static classVariableInfo_t idItem_typeInfo[] = {
-	{ "bool", "noPickup", (int)(&((idItem *)0)->noPickup), sizeof( ((idItem *)0)->noPickup ) },
 	{ "idVec3", "orgOrigin", (int)(&((idItem *)0)->orgOrigin), sizeof( ((idItem *)0)->orgOrigin ) },
 	{ "bool", "spin", (int)(&((idItem *)0)->spin), sizeof( ((idItem *)0)->spin ) },
 	{ "bool", "pulse", (int)(&((idItem *)0)->pulse), sizeof( ((idItem *)0)->pulse ) },
@@ -6777,16 +6735,6 @@ static classVariableInfo_t idMoveablePDAItem_typeInfo[] = {
 	{ NULL, 0 }
 };
 
-static classVariableInfo_t idMoveableVideoCDItem_typeInfo[] = {
-	{ NULL, 0 }
-};
-
-static classVariableInfo_t idMoveableItemPowerup_typeInfo[] = {
-	{ "int", "time", (int)(&((idMoveableItemPowerup *)0)->time), sizeof( ((idMoveableItemPowerup *)0)->time ) },
-	{ "int", "type", (int)(&((idMoveableItemPowerup *)0)->type), sizeof( ((idMoveableItemPowerup *)0)->type ) },
-	{ NULL, 0 }
-};
-
 static classVariableInfo_t idItemRemover_typeInfo[] = {
 	{ NULL, 0 }
 };
@@ -6813,6 +6761,12 @@ static classVariableInfo_t screenBlob_t_typeInfo[] = {
 };
 
 static classVariableInfo_t idPlayerView_typeInfo[] = {
+	{ "screenBlob_t[8]", "screenBlobs", (int)(&((idPlayerView *)0)->screenBlobs), sizeof( ((idPlayerView *)0)->screenBlobs ) },
+	{ "int", "dvFinishTime", (int)(&((idPlayerView *)0)->dvFinishTime), sizeof( ((idPlayerView *)0)->dvFinishTime ) },
+	{ "const idMaterial *", "dvMaterial", (int)(&((idPlayerView *)0)->dvMaterial), sizeof( ((idPlayerView *)0)->dvMaterial ) },
+	{ "int", "kickFinishTime", (int)(&((idPlayerView *)0)->kickFinishTime), sizeof( ((idPlayerView *)0)->kickFinishTime ) },
+	{ "idAngles", "kickAngles", (int)(&((idPlayerView *)0)->kickAngles), sizeof( ((idPlayerView *)0)->kickAngles ) },
+	{ "bool", "bfgVision", (int)(&((idPlayerView *)0)->bfgVision), sizeof( ((idPlayerView *)0)->bfgVision ) },
 	{ "const idMaterial *", "tunnelMaterial", (int)(&((idPlayerView *)0)->tunnelMaterial), sizeof( ((idPlayerView *)0)->tunnelMaterial ) },
 	{ "const idMaterial *", "armorMaterial", (int)(&((idPlayerView *)0)->armorMaterial), sizeof( ((idPlayerView *)0)->armorMaterial ) },
 	{ "const idMaterial *", "berserkMaterial", (int)(&((idPlayerView *)0)->berserkMaterial), sizeof( ((idPlayerView *)0)->berserkMaterial ) },
@@ -6820,65 +6774,15 @@ static classVariableInfo_t idPlayerView_typeInfo[] = {
 	{ "const idMaterial *", "bloodSprayMaterial", (int)(&((idPlayerView *)0)->bloodSprayMaterial), sizeof( ((idPlayerView *)0)->bloodSprayMaterial ) },
 	{ "const idMaterial *", "bfgMaterial", (int)(&((idPlayerView *)0)->bfgMaterial), sizeof( ((idPlayerView *)0)->bfgMaterial ) },
 	{ "const idMaterial *", "lagoMaterial", (int)(&((idPlayerView *)0)->lagoMaterial), sizeof( ((idPlayerView *)0)->lagoMaterial ) },
-	{ "int", "dvFinishTime", (int)(&((idPlayerView *)0)->dvFinishTime), sizeof( ((idPlayerView *)0)->dvFinishTime ) },
-	{ "int", "kickFinishTime", (int)(&((idPlayerView *)0)->kickFinishTime), sizeof( ((idPlayerView *)0)->kickFinishTime ) },
-	{ "idAngles", "kickAngles", (int)(&((idPlayerView *)0)->kickAngles), sizeof( ((idPlayerView *)0)->kickAngles ) },
-	{ "bool", "bfgVision", (int)(&((idPlayerView *)0)->bfgVision), sizeof( ((idPlayerView *)0)->bfgVision ) },
+	{ "float", "lastDamageTime", (int)(&((idPlayerView *)0)->lastDamageTime), sizeof( ((idPlayerView *)0)->lastDamageTime ) },
 	{ "idVec4", "fadeColor", (int)(&((idPlayerView *)0)->fadeColor), sizeof( ((idPlayerView *)0)->fadeColor ) },
 	{ "idVec4", "fadeToColor", (int)(&((idPlayerView *)0)->fadeToColor), sizeof( ((idPlayerView *)0)->fadeToColor ) },
 	{ "idVec4", "fadeFromColor", (int)(&((idPlayerView *)0)->fadeFromColor), sizeof( ((idPlayerView *)0)->fadeFromColor ) },
 	{ "float", "fadeRate", (int)(&((idPlayerView *)0)->fadeRate), sizeof( ((idPlayerView *)0)->fadeRate ) },
 	{ "int", "fadeTime", (int)(&((idPlayerView *)0)->fadeTime), sizeof( ((idPlayerView *)0)->fadeTime ) },
-	{ "float", "lastDamageTime", (int)(&((idPlayerView *)0)->lastDamageTime), sizeof( ((idPlayerView *)0)->lastDamageTime ) },
-	{ "screenBlob_t[8]", "screenBlobs", (int)(&((idPlayerView *)0)->screenBlobs), sizeof( ((idPlayerView *)0)->screenBlobs ) },
 	{ "idAngles", "shakeAng", (int)(&((idPlayerView *)0)->shakeAng), sizeof( ((idPlayerView *)0)->shakeAng ) },
 	{ "idPlayer *", "player", (int)(&((idPlayerView *)0)->player), sizeof( ((idPlayerView *)0)->player ) },
 	{ "renderView_t", "view", (int)(&((idPlayerView *)0)->view), sizeof( ((idPlayerView *)0)->view ) },
-	{ "const idMaterial *", "blackMaterial", (int)(&((idPlayerView *)0)->blackMaterial), sizeof( ((idPlayerView *)0)->blackMaterial ) },
-	{ "const idMaterial *", "whiteMaterial", (int)(&((idPlayerView *)0)->whiteMaterial), sizeof( ((idPlayerView *)0)->whiteMaterial ) },
-	{ "const idMaterial *", "currentRenderMaterial", (int)(&((idPlayerView *)0)->currentRenderMaterial), sizeof( ((idPlayerView *)0)->currentRenderMaterial ) },
-	{ "const idMaterial *", "currentDepthMaterial", (int)(&((idPlayerView *)0)->currentDepthMaterial), sizeof( ((idPlayerView *)0)->currentDepthMaterial ) },
-	{ "const idMaterial *", "scratchMaterial", (int)(&((idPlayerView *)0)->scratchMaterial), sizeof( ((idPlayerView *)0)->scratchMaterial ) },
-	{ "const idMaterial *", "depthMaterial", (int)(&((idPlayerView *)0)->depthMaterial), sizeof( ((idPlayerView *)0)->depthMaterial ) },
-	{ "const idMaterial *", "normalsMaterial", (int)(&((idPlayerView *)0)->normalsMaterial), sizeof( ((idPlayerView *)0)->normalsMaterial ) },
-	{ "const idMaterial *", "softShadowsMaterial", (int)(&((idPlayerView *)0)->softShadowsMaterial), sizeof( ((idPlayerView *)0)->softShadowsMaterial ) },
-	{ "const idMaterial *", "edgeAAMaterial", (int)(&((idPlayerView *)0)->edgeAAMaterial), sizeof( ((idPlayerView *)0)->edgeAAMaterial ) },
-	{ "const idMaterial *", "hdrLumBaseMaterial", (int)(&((idPlayerView *)0)->hdrLumBaseMaterial), sizeof( ((idPlayerView *)0)->hdrLumBaseMaterial ) },
-	{ "const idMaterial *", "hdrLumAverageMaterial", (int)(&((idPlayerView *)0)->hdrLumAverageMaterial), sizeof( ((idPlayerView *)0)->hdrLumAverageMaterial ) },
-	{ "const idMaterial *", "hdrLumAdaptedMaterial", (int)(&((idPlayerView *)0)->hdrLumAdaptedMaterial), sizeof( ((idPlayerView *)0)->hdrLumAdaptedMaterial ) },
-	{ "const idMaterial *", "hdrBrightPass1Material", (int)(&((idPlayerView *)0)->hdrBrightPass1Material), sizeof( ((idPlayerView *)0)->hdrBrightPass1Material ) },
-	{ "const idMaterial *", "hdrBrightPass2Material", (int)(&((idPlayerView *)0)->hdrBrightPass2Material), sizeof( ((idPlayerView *)0)->hdrBrightPass2Material ) },
-	{ "const idMaterial *", "hdrBrightPass3Material", (int)(&((idPlayerView *)0)->hdrBrightPass3Material), sizeof( ((idPlayerView *)0)->hdrBrightPass3Material ) },
-	{ "const idMaterial *", "hdrBrightPass4Material", (int)(&((idPlayerView *)0)->hdrBrightPass4Material), sizeof( ((idPlayerView *)0)->hdrBrightPass4Material ) },
-	{ "const idMaterial *", "hdrBrightPass5Material", (int)(&((idPlayerView *)0)->hdrBrightPass5Material), sizeof( ((idPlayerView *)0)->hdrBrightPass5Material ) },
-	{ "const idMaterial *", "hdrBloomMaterial", (int)(&((idPlayerView *)0)->hdrBloomMaterial), sizeof( ((idPlayerView *)0)->hdrBloomMaterial ) },
-	{ "const idMaterial *", "hdrFlareMaterial", (int)(&((idPlayerView *)0)->hdrFlareMaterial), sizeof( ((idPlayerView *)0)->hdrFlareMaterial ) },
-	{ "const idMaterial *", "hdrGlareMaterial", (int)(&((idPlayerView *)0)->hdrGlareMaterial), sizeof( ((idPlayerView *)0)->hdrGlareMaterial ) },
-	{ "const idMaterial *", "hdrFinalMaterial", (int)(&((idPlayerView *)0)->hdrFinalMaterial), sizeof( ((idPlayerView *)0)->hdrFinalMaterial ) },
-	{ "const idMaterial *", "bloomMaterial", (int)(&((idPlayerView *)0)->bloomMaterial), sizeof( ((idPlayerView *)0)->bloomMaterial ) },
-	{ "const idMaterial *", "ssilMaterial", (int)(&((idPlayerView *)0)->ssilMaterial), sizeof( ((idPlayerView *)0)->ssilMaterial ) },
-	{ "const idMaterial *", "ssaoMaterial", (int)(&((idPlayerView *)0)->ssaoMaterial), sizeof( ((idPlayerView *)0)->ssaoMaterial ) },
-	{ "const idMaterial *", "sunShaftsMaterial", (int)(&((idPlayerView *)0)->sunShaftsMaterial), sizeof( ((idPlayerView *)0)->sunShaftsMaterial ) },
-	{ "const idMaterial *", "lensFlareMaterial", (int)(&((idPlayerView *)0)->lensFlareMaterial), sizeof( ((idPlayerView *)0)->lensFlareMaterial ) },
-	{ "const idMaterial *", "dofMaterial", (int)(&((idPlayerView *)0)->dofMaterial), sizeof( ((idPlayerView *)0)->dofMaterial ) },
-	{ "const idMaterial *", "motionBlurMaterial", (int)(&((idPlayerView *)0)->motionBlurMaterial), sizeof( ((idPlayerView *)0)->motionBlurMaterial ) },
-	{ "const idMaterial *", "colorGradingMaterial", (int)(&((idPlayerView *)0)->colorGradingMaterial), sizeof( ((idPlayerView *)0)->colorGradingMaterial ) },
-	{ "const idMaterial *", "screenFrostMaterial", (int)(&((idPlayerView *)0)->screenFrostMaterial), sizeof( ((idPlayerView *)0)->screenFrostMaterial ) },
-	{ "const idMaterial *", "celShadingMaterial", (int)(&((idPlayerView *)0)->celShadingMaterial), sizeof( ((idPlayerView *)0)->celShadingMaterial ) },
-	{ "const idMaterial *", "filmgrainMaterial", (int)(&((idPlayerView *)0)->filmgrainMaterial), sizeof( ((idPlayerView *)0)->filmgrainMaterial ) },
-	{ "const idMaterial *", "vignettingMaterial", (int)(&((idPlayerView *)0)->vignettingMaterial), sizeof( ((idPlayerView *)0)->vignettingMaterial ) },
-	{ "const idMaterial *", "tunnel2Material", (int)(&((idPlayerView *)0)->tunnel2Material), sizeof( ((idPlayerView *)0)->tunnel2Material ) },
-	{ "const idMaterial *", "adrenalineMaterial", (int)(&((idPlayerView *)0)->adrenalineMaterial), sizeof( ((idPlayerView *)0)->adrenalineMaterial ) },
-	{ "const idMaterial *", "explosionFXMaterial", (int)(&((idPlayerView *)0)->explosionFXMaterial), sizeof( ((idPlayerView *)0)->explosionFXMaterial ) },
-	{ "renderView_t", "hackedView", (int)(&((idPlayerView *)0)->hackedView), sizeof( ((idPlayerView *)0)->hackedView ) },
-	{ "idAngles", "prevViewAngles", (int)(&((idPlayerView *)0)->prevViewAngles), sizeof( ((idPlayerView *)0)->prevViewAngles ) },
-	{ "int", "prevTime", (int)(&((idPlayerView *)0)->prevTime), sizeof( ((idPlayerView *)0)->prevTime ) },
-	{ "bool", "bDepthRendered", (int)(&((idPlayerView *)0)->bDepthRendered), sizeof( ((idPlayerView *)0)->bDepthRendered ) },
-	{ "pvsHandle_t", "playerPVS", (int)(&((idPlayerView *)0)->playerPVS), sizeof( ((idPlayerView *)0)->playerPVS ) },
-	{ "bool", "bSoftShadows", (int)(&((idPlayerView *)0)->bSoftShadows), sizeof( ((idPlayerView *)0)->bSoftShadows ) },
-	{ "int", "screenHeight", (int)(&((idPlayerView *)0)->screenHeight), sizeof( ((idPlayerView *)0)->screenHeight ) },
-	{ "int", "screenWidth", (int)(&((idPlayerView *)0)->screenWidth), sizeof( ((idPlayerView *)0)->screenWidth ) },
-	{ "idVec2", "shiftScale", (int)(&((idPlayerView *)0)->shiftScale), sizeof( ((idPlayerView *)0)->shiftScale ) },
 	{ NULL, 0 }
 };
 
@@ -6944,8 +6848,6 @@ static classVariableInfo_t idInventory_typeInfo[] = {
 	{ "int", "onePickupTime", (int)(&((idInventory *)0)->onePickupTime), sizeof( ((idInventory *)0)->onePickupTime ) },
 	{ "idList < idItemInfo >", "pickupItemNames", (int)(&((idInventory *)0)->pickupItemNames), sizeof( ((idInventory *)0)->pickupItemNames ) },
 	{ "idList < idObjectiveInfo >", "objectiveNames", (int)(&((idInventory *)0)->objectiveNames), sizeof( ((idInventory *)0)->objectiveNames ) },
-	{ "int", "healthPackAmount", (int)(&((idInventory *)0)->healthPackAmount), sizeof( ((idInventory *)0)->healthPackAmount ) },
-	{ "int", "adrenalineAmount", (int)(&((idInventory *)0)->adrenalineAmount), sizeof( ((idInventory *)0)->adrenalineAmount ) },
 	{ NULL, 0 }
 };
 
@@ -7048,54 +6950,6 @@ static classVariableInfo_t idPlayer_typeInfo[] = {
 	{ "idVec3", "firstPersonViewOrigin", (int)(&((idPlayer *)0)->firstPersonViewOrigin), sizeof( ((idPlayer *)0)->firstPersonViewOrigin ) },
 	{ "idMat3", "firstPersonViewAxis", (int)(&((idPlayer *)0)->firstPersonViewAxis), sizeof( ((idPlayer *)0)->firstPersonViewAxis ) },
 	{ "idDragEntity", "dragEntity", (int)(&((idPlayer *)0)->dragEntity), sizeof( ((idPlayer *)0)->dragEntity ) },
-	{ "int", "nScreenFrostAlpha", (int)(&((idPlayer *)0)->nScreenFrostAlpha), sizeof( ((idPlayer *)0)->nScreenFrostAlpha ) },
-	{ "idItem *", "focusItem", (int)(&((idPlayer *)0)->focusItem), sizeof( ((idPlayer *)0)->focusItem ) },
-	{ "int", "itemPickupTime", (int)(&((idPlayer *)0)->itemPickupTime), sizeof( ((idPlayer *)0)->itemPickupTime ) },
-	{ "idAFEntity_Gibbable *", "focusCorpse", (int)(&((idPlayer *)0)->focusCorpse), sizeof( ((idPlayer *)0)->focusCorpse ) },
-	{ "int", "searchTimer", (int)(&((idPlayer *)0)->searchTimer), sizeof( ((idPlayer *)0)->searchTimer ) },
-	{ "idEntity *", "focusMoveable", (int)(&((idPlayer *)0)->focusMoveable), sizeof( ((idPlayer *)0)->focusMoveable ) },
-	{ "int", "focusMoveableId", (int)(&((idPlayer *)0)->focusMoveableId), sizeof( ((idPlayer *)0)->focusMoveableId ) },
-	{ "int", "focusMoveableTimer", (int)(&((idPlayer *)0)->focusMoveableTimer), sizeof( ((idPlayer *)0)->focusMoveableTimer ) },
-	{ "int", "adrenalineAmount", (int)(&((idPlayer *)0)->adrenalineAmount), sizeof( ((idPlayer *)0)->adrenalineAmount ) },
-	{ "int", "healthPackAmount", (int)(&((idPlayer *)0)->healthPackAmount), sizeof( ((idPlayer *)0)->healthPackAmount ) },
-	{ "int", "healthPackTimer", (int)(&((idPlayer *)0)->healthPackTimer), sizeof( ((idPlayer *)0)->healthPackTimer ) },
-	{ "int", "nextHealthRegen", (int)(&((idPlayer *)0)->nextHealthRegen), sizeof( ((idPlayer *)0)->nextHealthRegen ) },
-	{ "int", "prevHeatlh", (int)(&((idPlayer *)0)->prevHeatlh), sizeof( ((idPlayer *)0)->prevHeatlh ) },
-	{ "idVec3", "v3CrosshairPos", (int)(&((idPlayer *)0)->v3CrosshairPos), sizeof( ((idPlayer *)0)->v3CrosshairPos ) },
-	{ "bool", "bWATrace", (int)(&((idPlayer *)0)->bWATrace), sizeof( ((idPlayer *)0)->bWATrace ) },
-	{ "bool", "bWAIsSprinting", (int)(&((idPlayer *)0)->bWAIsSprinting), sizeof( ((idPlayer *)0)->bWAIsSprinting ) },
-	{ "bool", "bWAUseHideDist", (int)(&((idPlayer *)0)->bWAUseHideDist), sizeof( ((idPlayer *)0)->bWAUseHideDist ) },
-	{ "float", "fSpreadModifier", (int)(&((idPlayer *)0)->fSpreadModifier), sizeof( ((idPlayer *)0)->fSpreadModifier ) },
-	{ "idEntity *", "entChainsawed", (int)(&((idPlayer *)0)->entChainsawed), sizeof( ((idPlayer *)0)->entChainsawed ) },
-	{ "bool", "bViewModelsModified", (int)(&((idPlayer *)0)->bViewModelsModified), sizeof( ((idPlayer *)0)->bViewModelsModified ) },
-	{ "bool", "bIsZoomed", (int)(&((idPlayer *)0)->bIsZoomed), sizeof( ((idPlayer *)0)->bIsZoomed ) },
-	{ "float", "focusDistance", (int)(&((idPlayer *)0)->focusDistance), sizeof( ((idPlayer *)0)->focusDistance ) },
-	{ "bool", "bAmbientLightOn", (int)(&((idPlayer *)0)->bAmbientLightOn), sizeof( ((idPlayer *)0)->bAmbientLightOn ) },
-	{ "idStr", "szAmbientLightColor", (int)(&((idPlayer *)0)->szAmbientLightColor), sizeof( ((idPlayer *)0)->szAmbientLightColor ) },
-	{ "idStr", "szAmbientLightRadius", (int)(&((idPlayer *)0)->szAmbientLightRadius), sizeof( ((idPlayer *)0)->szAmbientLightRadius ) },
-	{ "bool", "bIRGogglesOn", (int)(&((idPlayer *)0)->bIRGogglesOn), sizeof( ((idPlayer *)0)->bIRGogglesOn ) },
-	{ "bool", "bHeadlightOn", (int)(&((idPlayer *)0)->bHeadlightOn), sizeof( ((idPlayer *)0)->bHeadlightOn ) },
-	{ "int", "nIRGogglesTime", (int)(&((idPlayer *)0)->nIRGogglesTime), sizeof( ((idPlayer *)0)->nIRGogglesTime ) },
-	{ "int", "nHeadlightTime", (int)(&((idPlayer *)0)->nHeadlightTime), sizeof( ((idPlayer *)0)->nHeadlightTime ) },
-	{ "int", "nBattery", (int)(&((idPlayer *)0)->nBattery), sizeof( ((idPlayer *)0)->nBattery ) },
-	{ "float", "fIntensity", (int)(&((idPlayer *)0)->fIntensity), sizeof( ((idPlayer *)0)->fIntensity ) },
-	{ "float[7]", "fIRBloomParms", (int)(&((idPlayer *)0)->fIRBloomParms), sizeof( ((idPlayer *)0)->fIRBloomParms ) },
-	{ "idEntity *", "music_suspense", (int)(&((idPlayer *)0)->music_suspense), sizeof( ((idPlayer *)0)->music_suspense ) },
-	{ "idEntity *", "music_combat", (int)(&((idPlayer *)0)->music_combat), sizeof( ((idPlayer *)0)->music_combat ) },
-	{ "float", "old_music_volume", (int)(&((idPlayer *)0)->old_music_volume), sizeof( ((idPlayer *)0)->old_music_volume ) },
-	{ "float", "new_music_volume", (int)(&((idPlayer *)0)->new_music_volume), sizeof( ((idPlayer *)0)->new_music_volume ) },
-	{ "bool", "use_combat_music", (int)(&((idPlayer *)0)->use_combat_music), sizeof( ((idPlayer *)0)->use_combat_music ) },
-	{ "bool", "combat_musicon", (int)(&((idPlayer *)0)->combat_musicon), sizeof( ((idPlayer *)0)->combat_musicon ) },
-	{ "float", "music_waittime", (int)(&((idPlayer *)0)->music_waittime), sizeof( ((idPlayer *)0)->music_waittime ) },
-	{ "float", "dashtime", (int)(&((idPlayer *)0)->dashtime), sizeof( ((idPlayer *)0)->dashtime ) },
-	{ "bool", "KeptInPlace", (int)(&((idPlayer *)0)->KeptInPlace), sizeof( ((idPlayer *)0)->KeptInPlace ) },
-	{ "int", "totalplaytime", (int)(&((idPlayer *)0)->totalplaytime), sizeof( ((idPlayer *)0)->totalplaytime ) },
-	{ "int", "nexttimeupdate", (int)(&((idPlayer *)0)->nexttimeupdate), sizeof( ((idPlayer *)0)->nexttimeupdate ) },
-	{ "int", "kills_amt", (int)(&((idPlayer *)0)->kills_amt), sizeof( ((idPlayer *)0)->kills_amt ) },
-	{ "int", "kills_amt_total", (int)(&((idPlayer *)0)->kills_amt_total), sizeof( ((idPlayer *)0)->kills_amt_total ) },
-	{ "int", "AccoladeKills", (int)(&((idPlayer *)0)->AccoladeKills), sizeof( ((idPlayer *)0)->AccoladeKills ) },
-	{ "int", "lastAccoladeCheck", (int)(&((idPlayer *)0)->lastAccoladeCheck), sizeof( ((idPlayer *)0)->lastAccoladeCheck ) },
-	{ "int", "nextAccoladeCheck", (int)(&((idPlayer *)0)->nextAccoladeCheck), sizeof( ((idPlayer *)0)->nextAccoladeCheck ) },
 	{ "jointHandle_t", "hipJoint", (int)(&((idPlayer *)0)->hipJoint), sizeof( ((idPlayer *)0)->hipJoint ) },
 	{ "jointHandle_t", "chestJoint", (int)(&((idPlayer *)0)->chestJoint), sizeof( ((idPlayer *)0)->chestJoint ) },
 	{ "jointHandle_t", "headJoint", (int)(&((idPlayer *)0)->headJoint), sizeof( ((idPlayer *)0)->headJoint ) },
@@ -7159,8 +7013,6 @@ static classVariableInfo_t idPlayer_typeInfo[] = {
 	{ "idStr", "pdaVideo", (int)(&((idPlayer *)0)->pdaVideo), sizeof( ((idPlayer *)0)->pdaVideo ) },
 	{ "idStr", "pdaVideoWave", (int)(&((idPlayer *)0)->pdaVideoWave), sizeof( ((idPlayer *)0)->pdaVideoWave ) },
 	{ "bool", "tipUp", (int)(&((idPlayer *)0)->tipUp), sizeof( ((idPlayer *)0)->tipUp ) },
-	{ "float", "lastStatsTime", (int)(&((idPlayer *)0)->lastStatsTime), sizeof( ((idPlayer *)0)->lastStatsTime ) },
-	{ "float", "lastCombosTime", (int)(&((idPlayer *)0)->lastCombosTime), sizeof( ((idPlayer *)0)->lastCombosTime ) },
 	{ "bool", "objectiveUp", (int)(&((idPlayer *)0)->objectiveUp), sizeof( ((idPlayer *)0)->objectiveUp ) },
 	{ "int", "lastDamageDef", (int)(&((idPlayer *)0)->lastDamageDef), sizeof( ((idPlayer *)0)->lastDamageDef ) },
 	{ "idVec3", "lastDamageDir", (int)(&((idPlayer *)0)->lastDamageDir), sizeof( ((idPlayer *)0)->lastDamageDir ) },
@@ -7378,10 +7230,6 @@ static classVariableInfo_t idMoveable_typeInfo[] = {
 	{ "bool", "canDamage", (int)(&((idMoveable *)0)->canDamage), sizeof( ((idMoveable *)0)->canDamage ) },
 	{ "int", "nextDamageTime", (int)(&((idMoveable *)0)->nextDamageTime), sizeof( ((idMoveable *)0)->nextDamageTime ) },
 	{ "int", "nextSoundTime", (int)(&((idMoveable *)0)->nextSoundTime), sizeof( ((idMoveable *)0)->nextSoundTime ) },
-	{ "idStr", "mtr_collide", (int)(&((idMoveable *)0)->mtr_collide), sizeof( ((idMoveable *)0)->mtr_collide ) },
-	{ "int", "last_spraytime", (int)(&((idMoveable *)0)->last_spraytime), sizeof( ((idMoveable *)0)->last_spraytime ) },
-	{ "const idDeclParticle *", "smokeFly", (int)(&((idMoveable *)0)->smokeFly), sizeof( ((idMoveable *)0)->smokeFly ) },
-	{ "int", "smokeFlyTime", (int)(&((idMoveable *)0)->smokeFlyTime), sizeof( ((idMoveable *)0)->smokeFlyTime ) },
 	{ NULL, 0 }
 };
 
@@ -7426,10 +7274,6 @@ static classVariableInfo_t idTarget_Damage_typeInfo[] = {
 };
 
 static classVariableInfo_t idTarget_SessionCommand_typeInfo[] = {
-	{ NULL, 0 }
-};
-
-static classVariableInfo_t idTarget_SaveGame_typeInfo[] = {
 	{ NULL, 0 }
 };
 
@@ -7783,8 +7627,6 @@ static classVariableInfo_t idAASFindAttackPosition_typeInfo[] = {
 };
 
 static classVariableInfo_t idAI_typeInfo[] = {
-	{ "int", "dormantTime", (int)(&((idAI *)0)->dormantTime), sizeof( ((idAI *)0)->dormantTime ) },
-	{ "bool", "isRandom", (int)(&((idAI *)0)->isRandom), sizeof( ((idAI *)0)->isRandom ) },
 	{ "idAAS *", "aas", (int)(&((idAI *)0)->aas), sizeof( ((idAI *)0)->aas ) },
 	{ "int", "travelFlags", (int)(&((idAI *)0)->travelFlags), sizeof( ((idAI *)0)->travelFlags ) },
 	{ "idMoveState", "move", (int)(&((idAI *)0)->move), sizeof( ((idAI *)0)->move ) },
@@ -8294,7 +8136,6 @@ static classTypeInfo_t classTypeInfo[] = {
 	{ "idForce", "idClass", sizeof(idForce), idForce_typeInfo },
 	{ "idForce_Constant", "idForce", sizeof(idForce_Constant), idForce_Constant_typeInfo },
 	{ "idForce_Drag", "idForce", sizeof(idForce_Drag), idForce_Drag_typeInfo },
-	{ "idForce_Grab", "idForce", sizeof(idForce_Grab), idForce_Grab_typeInfo },
 	{ "idForce_Field", "idForce", sizeof(idForce_Field), idForce_Field_typeInfo },
 	{ "idForce_Spring", "idForce", sizeof(idForce_Spring), idForce_Spring_typeInfo },
 	{ "impactInfo_t", "", sizeof(impactInfo_t), impactInfo_t_typeInfo },
@@ -8353,7 +8194,6 @@ static classTypeInfo_t classTypeInfo[] = {
 	{ "idDragEntity", "", sizeof(idDragEntity), idDragEntity_typeInfo },
 	{ "selectedTypeInfo_t", "", sizeof(selectedTypeInfo_t), selectedTypeInfo_t_typeInfo },
 	{ "idEditEntities", "", sizeof(idEditEntities), idEditEntities_typeInfo },
-	{ "idGrabEntity", "idEntity", sizeof(idGrabEntity), idGrabEntity_typeInfo },
 	{ "jointConversion_t", "", sizeof(jointConversion_t), jointConversion_t_typeInfo },
 	{ "afTouch_t", "", sizeof(afTouch_t), afTouch_t_typeInfo },
 	{ "idAF", "", sizeof(idAF), idAF_typeInfo },
@@ -8400,7 +8240,6 @@ static classTypeInfo_t classTypeInfo[] = {
 	{ "idFuncAASObstacle", "idEntity", sizeof(idFuncAASObstacle), idFuncAASObstacle_typeInfo },
 	{ "idFuncRadioChatter", "idEntity", sizeof(idFuncRadioChatter), idFuncRadioChatter_typeInfo },
 	{ "idPhantomObjects", "idEntity", sizeof(idPhantomObjects), idPhantomObjects_typeInfo },
-	{ "idPortalSky", "idEntity", sizeof(idPortalSky), idPortalSky_typeInfo },
 	{ "idAnimState", "", sizeof(idAnimState), idAnimState_typeInfo },
 	{ "idAttachInfo", "", sizeof(idAttachInfo), idAttachInfo_typeInfo },
 	{ "copyJoints_t", "", sizeof(copyJoints_t), copyJoints_t_typeInfo },
@@ -8422,8 +8261,6 @@ static classTypeInfo_t classTypeInfo[] = {
 	{ "idPDAItem", "idItem", sizeof(idPDAItem), idPDAItem_typeInfo },
 	{ "idMoveableItem", "idItem", sizeof(idMoveableItem), idMoveableItem_typeInfo },
 	{ "idMoveablePDAItem", "idMoveableItem", sizeof(idMoveablePDAItem), idMoveablePDAItem_typeInfo },
-	{ "idMoveableVideoCDItem", "idMoveableItem", sizeof(idMoveableVideoCDItem), idMoveableVideoCDItem_typeInfo },
-	{ "idMoveableItemPowerup", "idMoveableItem", sizeof(idMoveableItemPowerup), idMoveableItemPowerup_typeInfo },
 	{ "idItemRemover", "idEntity", sizeof(idItemRemover), idItemRemover_typeInfo },
 	{ "idObjectiveComplete", "idItemRemover", sizeof(idObjectiveComplete), idObjectiveComplete_typeInfo },
 	{ "screenBlob_t", "", sizeof(screenBlob_t), screenBlob_t_typeInfo },
@@ -8462,7 +8299,6 @@ static classTypeInfo_t classTypeInfo[] = {
 	{ "idTarget_Show", "idTarget", sizeof(idTarget_Show), idTarget_Show_typeInfo },
 	{ "idTarget_Damage", "idTarget", sizeof(idTarget_Damage), idTarget_Damage_typeInfo },
 	{ "idTarget_SessionCommand", "idTarget", sizeof(idTarget_SessionCommand), idTarget_SessionCommand_typeInfo },
-	{ "idTarget_SaveGame", "idTarget", sizeof(idTarget_SaveGame), idTarget_SaveGame_typeInfo },
 	{ "idTarget_EndLevel", "idTarget", sizeof(idTarget_EndLevel), idTarget_EndLevel_typeInfo },
 	{ "idTarget_WaitForButton", "idTarget", sizeof(idTarget_WaitForButton), idTarget_WaitForButton_typeInfo },
 	{ "idTarget_SetGlobalShaderTime", "idTarget", sizeof(idTarget_SetGlobalShaderTime), idTarget_SetGlobalShaderTime_typeInfo },

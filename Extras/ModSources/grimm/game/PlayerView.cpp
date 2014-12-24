@@ -36,6 +36,7 @@ idPlayerView::idPlayerView() {
 	blackMaterial			= declManager->FindMaterial( "_black" );
 	whiteMaterial			= declManager->FindMaterial( "_white" );
 	currentRenderMaterial	= declManager->FindMaterial( "_currentRender" );
+
 	scratchMaterial			= declManager->FindMaterial( "_scratch" );
 	depthMaterial			= declManager->FindMaterial( "render/depth" );
 	normalsMaterial			= declManager->FindMaterial( "render/normals" );
@@ -451,7 +452,7 @@ void idPlayerView::SingleView( const renderView_t *view ) {
 		hackedView.shaderParms[4] = shiftScale.x;
 		hackedView.shaderParms[5] = shiftScale.y;
 		gameRenderWorld->RenderScene( &portalView );
-		renderSystem->CaptureRenderToImage( "_currentRender" );
+		renderSystem->CaptureDepthToImage( "_currentDepth" );
 		hackedView.forceUpdate = true;	// FIX: for smoke particles not drawing when portalSky present
 	}
 	// <---sikk
@@ -479,7 +480,6 @@ void idPlayerView::Flash( idVec4 color, int time ) {
 	Fade( idVec4( 0.0f, 0.0f, 0.0f, 0.0f ), time );
 	fadeFromColor = colorWhite;
 }
-
 
 /*
 =================
@@ -751,7 +751,6 @@ idPlayerView::PostFX_SoftShadows
 void idPlayerView::PostFX_SoftShadows() {
 	bSoftShadows = true;
 	renderSystem->CaptureRenderToImage( "_currentRender" );
-	renderSystem->CaptureDepthToImage( "_currentDepth" );
 	RenderDepth( false );
 	// create shadow mask texture
 	renderSystem->SetColor4( 1.0f, 1.0f, 1.0f, 0.0f );
@@ -1106,7 +1105,6 @@ void idPlayerView::PostFX_SSIL() {
 	int	nWidth	= renderSystem->GetScreenWidth() / 2.0f;
 	int	nHeight	= renderSystem->GetScreenHeight() / 2.0f;
 	renderSystem->CaptureRenderToImage( "_currentRender" );
-	renderSystem->CaptureDepthToImage( "_currentDepth" );
 	RenderDepth( true );
 	RenderNormals( false );
 	renderSystem->CropRenderSize( nWidth, nHeight, true, true );
@@ -1139,7 +1137,6 @@ void idPlayerView::PostFX_SSAO() {
 	int	nWidth	= renderSystem->GetScreenWidth() / 2.0f;
 	int	nHeight	= renderSystem->GetScreenHeight() / 2.0f;
 	renderSystem->CaptureRenderToImage( "_currentRender" );
-	renderSystem->CaptureDepthToImage( "_currentDepth" );
 	RenderDepth( true );
 	renderSystem->CropRenderSize( nWidth, nHeight, true );
 	// sample occlusion using our depth buffer

@@ -1,5 +1,30 @@
-// Copyright (C) 2004 Id Software, Inc.
-//
+/*
+===========================================================================
+
+Doom 3 GPL Source Code
+Copyright (C) 1999-2011 id Software LLC, a ZeniMax Media company.
+
+This file is part of the Doom 3 GPL Source Code (?Doom 3 Source Code?).
+
+Doom 3 Source Code is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Doom 3 Source Code is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Doom 3 Source Code.  If not, see <http://www.gnu.org/licenses/>.
+
+In addition, the Doom 3 Source Code is also subject to certain additional terms. You should have received a copy of these additional terms immediately following the terms and conditions of the GNU General Public License which accompanied the Doom 3 Source Code.  If not, please request a copy in writing from id Software at the address below.
+
+If you have questions concerning this license or the applicable additional terms, you may contact in writing id Software LLC, c/o ZeniMax Media Inc., Suite 120, Rockville, Maryland 20850 USA.
+
+===========================================================================
+*/
 
 #ifndef __GAME_IK_H__
 #define __GAME_IK_H__
@@ -7,7 +32,7 @@
 /*
 ===============================================================================
 
-  IK base class with a simple fast two bone solver.
+IK base class with a simple fast two bone solver.
 
 ===============================================================================
 */
@@ -16,20 +41,20 @@
 
 class idIK {
 public:
-	idIK( void );
-	virtual					~idIK( void );
+	idIK(void);
+	virtual					~idIK(void);
 
-	void					Save( idSaveGame *savefile ) const;
-	void					Restore( idRestoreGame *savefile );
+	void					Save(idSaveGame *savefile) const;
+	void					Restore(idRestoreGame *savefile);
 
-	bool					IsInitialized( void ) const;
+	bool					IsInitialized(void) const;
 
-	virtual bool			Init( idEntity *self, const char *anim, const idVec3 &modelOffset );
-	virtual void			Evaluate( void );
-	virtual void			ClearJointMods( void );
+	virtual bool			Init(idEntity *self, const char *anim, const idVec3 &modelOffset);
+	virtual void			Evaluate(void);
+	virtual void			ClearJointMods(void);
 
-	bool					SolveTwoBones( const idVec3 &startPos, const idVec3 &endPos, const idVec3 &dir, float len0, float len1, idVec3 &jointPos );
-	float					GetBoneAxis( const idVec3 &startPos, const idVec3 &endPos, const idVec3 &dir, idMat3 &axis );
+	bool					SolveTwoBones(const idVec3 &startPos, const idVec3 &endPos, const idVec3 &dir, float len0, float len1, idVec3 &jointPos);
+	float					GetBoneAxis(const idVec3 &startPos, const idVec3 &endPos, const idVec3 &dir, idMat3 &axis);
 
 protected:
 	bool					initialized;
@@ -40,11 +65,10 @@ protected:
 	idVec3					modelOffset;
 };
 
-
 /*
 ===============================================================================
 
-  IK controller for a walking character with an arbitrary number of legs.
+IK controller for a walking character with an arbitrary number of legs.
 
 ===============================================================================
 */
@@ -52,23 +76,23 @@ protected:
 class idIK_Walk : public idIK {
 public:
 
-	idIK_Walk( void );
-	virtual					~idIK_Walk( void );
+	idIK_Walk(void);
+	virtual					~idIK_Walk(void);
 
-	void					Save( idSaveGame *savefile ) const;
-	void					Restore( idRestoreGame *savefile );
+	void					Save(idSaveGame *savefile) const;
+	void					Restore(idRestoreGame *savefile);
 
-	virtual bool			Init( idEntity *self, const char *anim, const idVec3 &modelOffset );
-	virtual void			Evaluate( void );
-	virtual void			ClearJointMods( void );
+	virtual bool			Init(idEntity *self, const char *anim, const idVec3 &modelOffset);
+	virtual void			Evaluate(void);
+	virtual void			ClearJointMods(void);
 
-	void					EnableAll( void );
-	void					DisableAll( void );
-	void					EnableLeg( int num );
-	void					DisableLeg( int num );
+	void					EnableAll(void);
+	void					DisableAll(void);
+	void					EnableLeg(int num);
+	void					DisableLeg(int num);
 
 private:
-	static const int		MAX_LEGS		= 8;
+	static const int		MAX_LEGS = 8;
 
 	idClipModel 			*footModel;
 
@@ -111,11 +135,10 @@ private:
 	idVec3					waistOffset;
 };
 
-
 /*
 ===============================================================================
 
-  IK controller for reaching a position with an arm or leg.
+IK controller for reaching a position with an arm or leg.
 
 ===============================================================================
 */
@@ -123,19 +146,19 @@ private:
 class idIK_Reach : public idIK {
 public:
 
-	idIK_Reach( void );
-	virtual					~idIK_Reach( void );
+	idIK_Reach(void);
+	virtual					~idIK_Reach(void);
 
-	void					Save( idSaveGame *savefile ) const;
-	void					Restore( idRestoreGame *savefile );
+	void					Save(idSaveGame *savefile) const;
+	void					Restore(idRestoreGame *savefile);
 
-	virtual bool			Init( idEntity *self, const char *anim, const idVec3 &modelOffset );
-	virtual void			Evaluate( void );
-	virtual void			ClearJointMods( void );
+	virtual bool			Init(idEntity *self, const char *anim, const idVec3 &modelOffset);
+	virtual void			Evaluate(void);
+	virtual void			ClearJointMods(void);
 
 private:
 
-	static const int		MAX_ARMS	= 2;
+	static const int		MAX_ARMS = 2;
 
 	int						numArms;
 	int						enabledArms;

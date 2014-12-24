@@ -6,7 +6,6 @@
 
 #include "Game_local.h"
 
-
 /*
 ===============================================================================
 
@@ -29,7 +28,6 @@ EVENT( EV_Activate,			idItem::Event_Trigger )
 EVENT( EV_RespawnItem,		idItem::Event_Respawn )
 EVENT( EV_RespawnFx,		idItem::Event_RespawnFx )
 END_CLASS
-
 
 /*
 ================
@@ -364,7 +362,6 @@ bool idItem::Pickup( idPlayer *player ) {
 	}
 	// play pickup sound
 	// grimm --> SND_CHANNEL_ITEM chokes somehow on items sometimes, let's see how it works out on the player entity.
-	//StartSound( "snd_acquire", SND_CHANNEL_ITEM, 0, false, NULL );
 	StartSound( "snd_acquire", SND_CHANNEL_ITEM, 0, true, NULL );
 	// grimm <--
 	// trigger our targets
